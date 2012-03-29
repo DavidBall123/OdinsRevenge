@@ -1,0 +1,10 @@
+Content\Hero\Walking.xnb
+Content\Backgrounds\Sun.xnb
+Content\Hero\Hero.xnb
+Content\Backgrounds\Clouds1.xnb
+Content\Backgrounds\Clouds2.xnb
+Content\Backgrounds\GreyBirdFly.xnb
+Content\Backgrounds\Midday.xnb
+Content\Backgrounds\Night.xnb
+Content\Backgrounds\Sunset.xnb
+Content\Backgrounds\Level1.xnb

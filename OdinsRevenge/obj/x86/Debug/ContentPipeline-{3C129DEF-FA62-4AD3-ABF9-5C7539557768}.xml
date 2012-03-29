@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
+  <Asset Type="Pipeline:BuildItemCollection">
+    <Item>
+      <Source>Hero\Walking.png</Source>
+      <Name>Hero\Walking</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Hero\Walking.xnb</Output>
+      <Time>2012-03-25T16:22:54.295+11:00</Time>
+    </Item>
+    <Item>
+      <Source>Backgrounds\Sun.png</Source>
+      <Name>Backgrounds\Sun</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Backgrounds\Sun.xnb</Output>
+      <Time>2012-03-25T16:41:28.529+11:00</Time>
+    </Item>
+    <Item>
+      <Source>Hero\Hero.png</Source>
+      <Name>Hero\Hero</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Hero\Hero.xnb</Output>
+      <Time>2012-03-25T21:11:30.91+11:00</Time>
+    </Item>
+    <Item>
+      <Source>Backgrounds\Clouds1.png</Source>
+      <Name>Backgrounds\Clouds1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Backgrounds\Clouds1.xnb</Output>
+      <Time>2012-03-29T21:10:54.5146+11:00</Time>
+    </Item>
+    <Item>
+      <Source>Backgrounds\Clouds2.png</Source>
+      <Name>Backgrounds\Clouds2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Backgrounds\Clouds2.xnb</Output>
+      <Time>2012-03-29T21:10:54.5146+11:00</Time>
+    </Item>
+    <Item>
+      <Source>Backgrounds\GreyBirdFly.png</Source>
+      <Name>Backgrounds\GreyBirdFly</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Backgrounds\GreyBirdFly.xnb</Output>
+      <Time>2012-03-29T19:22:53.4146+11:00</Time>
+    </Item>
+    <Item>
+      <Source>Backgrounds\Midday.png</Source>
+      <Name>Backgrounds\Midday</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Backgrounds\Midday.xnb</Output>
+      <Time>2012-03-29T21:35:11.507+11:00</Time>
+    </Item>
+    <Item>
+      <Source>Backgrounds\Night.png</Source>
+      <Name>Backgrounds\Night</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Backgrounds\Night.xnb</Output>
+      <Time>2012-03-29T21:35:11.508+11:00</Time>
+    </Item>
+    <Item>
+      <Source>Backgrounds\Sunset.png</Source>
+      <Name>Backgrounds\Sunset</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Backgrounds\Sunset.xnb</Output>
+      <Time>2012-03-29T21:35:11.509+11:00</Time>
+    </Item>
+    <Item>
+      <Source>Backgrounds\Level1.png</Source>
+      <Name>Backgrounds\Level1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Backgrounds\Level1.xnb</Output>
+      <Time>2012-03-29T21:37:27.817+11:00</Time>
+    </Item>
+    <BuildSuccessful>true</BuildSuccessful>
+    <Settings>
+      <ContentProjectGUID>{3C129DEF-FA62-4AD3-ABF9-5C7539557768}</ContentProjectGUID>
+      <TargetPlatform>Windows</TargetPlatform>
+      <TargetProfile>Reach</TargetProfile>
+      <BuildConfiguration>Debug</BuildConfiguration>
+      <CompressContent>false</CompressContent>
+      <RootDirectory>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevengeContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\</OutputDirectory>
+    </Settings>
+    <Assemblies>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
+        <Value>2011-06-02T18:48:34+10:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll</Key>
+        <Value>2011-06-02T18:48:34+10:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
+        <Value>2011-06-02T18:48:34+10:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
+        <Value>2011-06-02T18:48:34+10:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
+        <Value>2011-06-02T18:48:34+10:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
+        <Value>2011-06-02T18:48:34+10:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2011-09-24T17:46:52.3974+10:00</Value>
+      </Assembly>
+    </Assemblies>
+  </Asset>
+</XnaContent>
