@@ -12,7 +12,7 @@ namespace OdinsRevenge
         int iViewPortWidth = 800;
         int iViewPortHeight = 600;
 
-        int groundWidth = 0; 
+        int groundWidth = 1200; 
         int groundHeight = 600;
 
         double groundOffset;
