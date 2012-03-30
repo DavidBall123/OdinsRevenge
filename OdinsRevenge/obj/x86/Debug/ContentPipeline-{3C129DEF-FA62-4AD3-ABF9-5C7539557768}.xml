@@ -109,6 +109,15 @@
       <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Backgrounds\Clouds3.xnb</Output>
       <Time>2012-03-30T15:45:45.558+11:00</Time>
     </Item>
+    <Item>
+      <Source>Backgrounds\Stars.png</Source>
+      <Name>Backgrounds\Stars</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Backgrounds\Stars.xnb</Output>
+      <Time>2012-03-30T16:53:07.382+11:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{3C129DEF-FA62-4AD3-ABF9-5C7539557768}</ContentProjectGUID>

@@ -73,7 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnimationClasses\Animation.cs" />
-    <Compile Include="Ground.cs" />
+    <Compile Include="BackGround.cs" />
     <Compile Include="OnScreenObjects\BaseAnimatedOnScreenObjects.cs" />
     <Compile Include="AnimationClasses\AnimationBase.cs" />
     <Compile Include="AnimationClasses\PlayerrAnimation.cs" />

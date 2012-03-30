@@ -39,6 +39,7 @@ namespace OdinsRevenge
 
         Ground ground;
         Ground ocean1;
+        Ground stars; 
 
         bool day;
         bool night; 
@@ -52,7 +53,7 @@ namespace OdinsRevenge
         #region Player variables
 
         Player player;
-        float playerMoveSpeed;
+
         bool playerFacingRight = true;
         bool walking = false; 
         PlayerAnimation walkingAnimation = new PlayerAnimation();
@@ -88,7 +89,6 @@ namespace OdinsRevenge
         protected override void Initialize()
         {
             player = new Player();
-            playerMoveSpeed = 4.0f;
             sun = new Sun();
             bird = new BaseAnimatedOnScreenObjects();
             cloud1 = new BaseStaticOnScreenObjects();
@@ -98,7 +98,7 @@ namespace OdinsRevenge
             staticObjectsList = new List<BaseStaticOnScreenObjects>(); 
             ground = new Ground(Content, "Backgrounds\\Level1");
             ocean1 = new Ground(Content, "Backgrounds\\Ocean1");
-            
+            stars = new Ground(Content, "Backgrounds\\Stars"); 
          
             
             base.Initialize();
@@ -133,11 +133,6 @@ namespace OdinsRevenge
             bird.Initialize(Content.Load<Texture2D>("Backgrounds\\GreyBirdFly"), postion, birdAnimation);
             
             LoadClouds();
-            
-            
-
-            
-
 
         }
 
@@ -193,16 +188,11 @@ namespace OdinsRevenge
             currentKeyboardState = Keyboard.GetState();
             
             // Allows the game to exit
-            
-
             UpdatePlayer(gameTime);
             player.Update(gameTime);
             sun.Update(gameTime);
             UpdateBird(); 
             bird.Update(gameTime);
-                      
-
-            
             previousKeyboardState = currentKeyboardState;
 
             base.Update(gameTime);
@@ -214,9 +204,6 @@ namespace OdinsRevenge
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-
-            
-
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
@@ -230,6 +217,10 @@ namespace OdinsRevenge
             sun.Draw(spriteBatch); 
             walking = false;
             bird.Draw(spriteBatch);
+            if (night == true)
+            {
+                stars.Draw(spriteBatch);
+            }
             DrawStaticObjects(spriteBatch);
             spriteBatch.End(); 
 
@@ -255,7 +246,8 @@ namespace OdinsRevenge
                 //player.PlayerPosition.X -= playerMoveSpeed;
                 if (previousKeyboardState.IsKeyDown(Keys.Left))
                 {
-                    ground.GroundOffset = ground.GroundOffset - 5;
+                    ground.GroundOffset = ground.GroundOffset - 1;
+                    stars.GroundOffset = stars.GroundOffset - 1;
                 }
                 playerFacingRight = false;
                 walking = true;
@@ -266,6 +258,7 @@ namespace OdinsRevenge
                 if (previousKeyboardState.IsKeyDown(Keys.Right))
                 {
                     ground.GroundOffset = ground.GroundOffset + 5;
+                    stars.GroundOffset = stars.GroundOffset + 1;
                 }
                 playerFacingRight = true;
                 walking = true;
@@ -337,7 +330,7 @@ namespace OdinsRevenge
             
             foreach (BaseStaticOnScreenObjects e in staticObjectsList)
             {
-                if (e.Position.X >= -50)
+                if (e.Position.X >= -150)
                 {
                     e.Position.X--; 
                     e.Draw(spriteBatch); 
