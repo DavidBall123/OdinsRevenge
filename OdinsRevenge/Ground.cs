@@ -45,11 +45,11 @@ namespace OdinsRevenge
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(background, new Rectangle(-1 * (int)groundOffset,0,groundWidth, iViewPortHeight), Color.White);
+            spriteBatch.Draw(background, new Rectangle(-1 * (int)groundOffset, 0, groundWidth, iViewPortHeight), Color.White);
 
             if (groundOffset > groundWidth - iViewPortWidth)
             {
-                spriteBatch.Draw(background, new Rectangle((-1 * (int)groundOffset) + groundWidth, 0,iViewPortWidth, groundHeight), Color.White);
+                spriteBatch.Draw(background, new Rectangle((-1 * (int)groundOffset) + groundWidth, 0,groundWidth, iViewPortHeight), Color.White);
             }
         } 
 

@@ -100,7 +100,7 @@ namespace OdinsRevenge
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            Vector2 playerPostion = new Vector2(GraphicsDevice.Viewport.TitleSafeArea.X, 435);
+            Vector2 playerPostion = new Vector2(300, 435);
             walkingTexture = Content.Load<Texture2D>("Hero\\Walking");
             walkingAnimation.Initialize(walkingTexture, Vector2.Zero, 86, 109, 4, 100, Color.White, 0.8f, true);
             player.Initialize(Content.Load<Texture2D>("Hero\\Hero"), playerPostion, walkingAnimation);
@@ -201,20 +201,20 @@ namespace OdinsRevenge
 
             if (currentKeyboardState.IsKeyDown(Keys.Left))
             {
-                player.PlayerPosition.X -= playerMoveSpeed;
-                if (player.PlayerPosition.X > 0 && player.PlayerPosition.X < 50 || previousKeyboardState.IsKeyDown(Keys.Left))
+                //player.PlayerPosition.X -= playerMoveSpeed;
+                if (previousKeyboardState.IsKeyDown(Keys.Left))
                 {
-                    ground.GroundOffset = ground.GroundOffset - 1;
+                    ground.GroundOffset = ground.GroundOffset - 5;
                 }
                 playerFacingRight = false;
                 walking = true;
             }
             if (currentKeyboardState.IsKeyDown(Keys.Right) )
             {
-                player.PlayerPosition.X += playerMoveSpeed;
-                if (player.PlayerPosition.X > 750 && player.PlayerPosition.X < 800 || previousKeyboardState.IsKeyDown(Keys.Right))
+                //player.PlayerPosition.X += playerMoveSpeed;
+                if (previousKeyboardState.IsKeyDown(Keys.Right))
                 {
-                    ground.GroundOffset = ground.GroundOffset + 1;
+                    ground.GroundOffset = ground.GroundOffset + 5;
                 }
                 playerFacingRight = true;
                 walking = true;
