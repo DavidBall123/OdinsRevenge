@@ -4,47 +4,42 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace OdinsRevenge
 {
-    class Sun
+    class Sun : BaseStaticOnScreenObjects
     {
-        Texture2D sunTexture;
-        Vector2 sunPosition;
-
+       
         public float SunHeight
         {
-            get { return sunPosition.Y; } 
+            get { return Position.Y; } 
         }
 
         public void Initialize(Texture2D sun)
         {
-            sunTexture = sun; 
-            sunPosition.X = -100;
-            sunPosition.Y = 450; 
+            objectTexture = sun; 
+            Position.X = -100;
+            Position.Y = 450; 
         }
 
         public void Update(GameTime gameTime)
         {
-            if (gameTime.TotalGameTime.Seconds < 20 && sunPosition.Y > -10)
+            if (gameTime.TotalGameTime.Seconds < 20 && Position.Y > -10)
             {
-                sunPosition.X = sunPosition.X + 1;
-                sunPosition.Y = sunPosition.Y + -1;
+                Position.X = Position.X + 1;
+                Position.Y = Position.Y + -1;
             }
             else if (gameTime.TotalGameTime.Seconds > 30)
             {
-                sunPosition.X = sunPosition.X + 1;
-                sunPosition.Y = sunPosition.Y + +1;
+                Position.X = Position.X + 1;
+                Position.Y = Position.Y + +1;
             }
 
             if (gameTime.TotalGameTime.Seconds > 55)
             {
-                sunPosition.X = -100;
-                sunPosition.Y = 450; 
+                Position.X = -100;
+                Position.Y = 450; 
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(sunTexture, sunPosition, null, Color.White, 0f, Vector2.Zero, 0.8f, SpriteEffects.None, 0f);
-        }
+       
         
     }
 }

@@ -74,9 +74,10 @@
   <ItemGroup>
     <Compile Include="AnimationClasses\Animation.cs" />
     <Compile Include="Ground.cs" />
-    <Compile Include="OnScreenObjects\BaseOnScreenObjects.cs" />
+    <Compile Include="OnScreenObjects\BaseAnimatedOnScreenObjects.cs" />
     <Compile Include="AnimationClasses\AnimationBase.cs" />
     <Compile Include="AnimationClasses\PlayerrAnimation.cs" />
+    <Compile Include="OnScreenObjects\BaseStaticOnScreenObjects.cs" />
     <Compile Include="ParallaxinBackground.cs" />
     <Compile Include="OnScreenObjects\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

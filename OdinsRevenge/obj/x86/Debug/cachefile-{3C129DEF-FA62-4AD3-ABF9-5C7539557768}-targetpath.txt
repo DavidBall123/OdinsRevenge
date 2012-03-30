@@ -9,3 +9,4 @@ Content\Backgrounds\Night.xnb
 Content\Backgrounds\Sunset.xnb
 Content\Backgrounds\Level1.xnb
 Content\Backgrounds\Ocean1.xnb
+Content\Backgrounds\Clouds3.xnb

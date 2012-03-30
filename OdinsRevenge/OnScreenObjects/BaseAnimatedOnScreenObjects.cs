@@ -4,11 +4,11 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace OdinsRevenge
 {
-    class BaseOnScreenObjects
+    class BaseAnimatedOnScreenObjects
     {
         // Texture represetning a object standing still 
-        protected Texture2D Texture;
-        protected Animation Animation;
+        protected Texture2D texture;
+        protected Animation animation;
 
         // Position of the object relative to the upper left side of the screen
         public Vector2 Position;
@@ -22,33 +22,33 @@ namespace OdinsRevenge
         // Width of the Object
         public int Width
         {
-            get { return Texture.Width; }
+            get { return texture.Width; }
         }
 
         // Height of the 
         public int Height
         {
-            get { return Texture.Height; }
+            get { return texture.Height; }
         }
 
         // Width of the object 
         public int AnimationWidth
         {
-            get { return Animation.FrameWidth; }
+            get { return animation.FrameWidth; }
         }
 
         // Get the height of the object
         public int AnimationHeight
         {
-            get { return Animation.FrameHeight; }
+            get { return animation.FrameHeight; }
         }
 
 
 
-        public void Initialize(Texture2D texture, Vector2 position, Animation animate)
+        public void Initialize(Texture2D Texture, Vector2 position, Animation animate)
         {
-            Texture = texture;
-            Animation = animate;
+            texture = Texture;
+            animation = animate;
 
             Position = position;
 
@@ -61,8 +61,8 @@ namespace OdinsRevenge
 
         public void Update(GameTime gameTime)
         {
-            Animation.Position = Position;
-            Animation.Update(gameTime);
+            animation.Position = Position;
+            animation.Update(gameTime);
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace OdinsRevenge
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            Animation.Draw(spriteBatch);
+            animation.Draw(spriteBatch);
 
         }
     }

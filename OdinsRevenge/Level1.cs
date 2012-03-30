@@ -26,12 +26,22 @@ namespace OdinsRevenge
         Texture2D sunSetLevel1;
         Texture2D nightLevel1;
 
-        Animation Animation = new Animation();
-        Texture2D Texture;
-        BaseOnScreenObjects bird;
+        Animation birdAnimation = new Animation();
+        Texture2D birdTexture;
+        
+        BaseAnimatedOnScreenObjects bird;
+        BaseStaticOnScreenObjects cloud1;
+        BaseStaticOnScreenObjects cloud2;
+        BaseStaticOnScreenObjects cloud3;
+        List<BaseAnimatedOnScreenObjects> animatedObjectsList;
+        List<BaseStaticOnScreenObjects> staticObjectsList; 
+
 
         Ground ground;
         Ground ocean1;
+
+        bool day;
+        bool night; 
         
 
         Sun sun; 
@@ -80,9 +90,15 @@ namespace OdinsRevenge
             player = new Player();
             playerMoveSpeed = 4.0f;
             sun = new Sun();
-            bird = new BaseOnScreenObjects();
+            bird = new BaseAnimatedOnScreenObjects();
+            cloud1 = new BaseStaticOnScreenObjects();
+            cloud2 = new BaseStaticOnScreenObjects();
+            cloud3 = new BaseStaticOnScreenObjects(); 
+            animatedObjectsList = new List<BaseAnimatedOnScreenObjects>();
+            staticObjectsList = new List<BaseStaticOnScreenObjects>(); 
             ground = new Ground(Content, "Backgrounds\\Level1");
             ocean1 = new Ground(Content, "Backgrounds\\Ocean1");
+            
          
             
             base.Initialize();
@@ -111,13 +127,46 @@ namespace OdinsRevenge
             sunSetLevel1 = Content.Load<Texture2D>("Backgrounds\\Sunset");
             nightLevel1 = Content.Load<Texture2D>("Backgrounds\\Night");
 
-            Vector2 Postion = new Vector2(800, 200);
-            Texture = Content.Load<Texture2D>("Backgrounds\\GreyBirdFly");
-            Animation.Initialize(Texture, Vector2.Zero, 33, 29, 4, 100, Color.White, 0.8f, true);
-            bird.Initialize(Content.Load<Texture2D>("Backgrounds\\GreyBirdFly"), Postion, Animation);
+            Vector2 postion = new Vector2(800, 200);
+            birdTexture = Content.Load<Texture2D>("Backgrounds\\GreyBirdFly");
+            birdAnimation.Initialize(birdTexture, Vector2.Zero, 33, 29, 4, 100, Color.White, 0.8f, true);
+            bird.Initialize(Content.Load<Texture2D>("Backgrounds\\GreyBirdFly"), postion, birdAnimation);
+            
+            LoadClouds();
+            
+            
 
             
 
+
+        }
+
+        /// <summary>
+        /// Methods loads the cloud content
+        /// </summary>
+
+        private void LoadClouds()
+        {
+            Vector2 cloudPosition = new Vector2(); 
+            Random rand1 = new Random();
+            
+            cloudPosition.X = rand1.Next(800, 2000);
+            cloudPosition.Y = rand1.Next(0, 200); 
+
+            cloud1.Initialize(Content.Load<Texture2D>("Backgrounds\\Clouds1"), cloudPosition);
+            staticObjectsList.Add(cloud1);
+
+            cloudPosition.X = rand1.Next(800, 2000);
+            cloudPosition.Y = rand1.Next(0, 200);
+
+            cloud2.Initialize(Content.Load<Texture2D>("Backgrounds\\Clouds2"), cloudPosition);
+            staticObjectsList.Add(cloud2);
+
+            cloudPosition.X = rand1.Next(800, 2000);
+            cloudPosition.Y = rand1.Next(0, 200);
+
+            cloud3.Initialize(Content.Load<Texture2D>("Backgrounds\\Clouds3"), cloudPosition);
+            staticObjectsList.Add(cloud3);
 
         }
 
@@ -176,10 +225,12 @@ namespace OdinsRevenge
             ocean1.Draw(spriteBatch);
             
             DrawBackground();
+
             player.Draw(spriteBatch, playerFacingRight, walking);
             sun.Draw(spriteBatch); 
             walking = false;
             bird.Draw(spriteBatch);
+            DrawStaticObjects(spriteBatch);
             spriteBatch.End(); 
 
             base.Draw(gameTime);
@@ -235,14 +286,13 @@ namespace OdinsRevenge
 
         private void UpdateBird()
         {
-            if (bird.Position.X >= -50)
+            if (bird.Position.X >= -50 && day==true)
             {
                 bird.Position.X = bird.Position.X - 1;
             }
-            else
+            else   
             {
                 Random rand1 = new Random();
-                Random rand2 = new Random();
 
                 bird.Position.X = rand1.Next(900, 1400);
                 bird.Position.Y = rand1.Next(50, 250);
@@ -259,17 +309,47 @@ namespace OdinsRevenge
         {
             if (sun.SunHeight == -10)
             {
+                day = true;
+                night = false;
                 spriteBatch.Draw(middayLevel1, Vector2.Zero, Color.White);
             }
             else if (sun.SunHeight > 400)
             {
+                day = false;
+                night = true;
                 spriteBatch.Draw(nightLevel1, Vector2.Zero, Color.White);
             }
             else
             {
+                day = true;
+                night = false;
                 spriteBatch.Draw(sunSetLevel1, Vector2.Zero, Color.White);
             }
             
+        }
+
+        /// <summary>
+        /// Draws all the objects inside the static object list
+        /// </summary>
+
+        private void DrawStaticObjects(SpriteBatch spriteBatch)
+        {
+            
+            foreach (BaseStaticOnScreenObjects e in staticObjectsList)
+            {
+                if (e.Position.X >= -50)
+                {
+                    e.Position.X--; 
+                    e.Draw(spriteBatch); 
+                }
+                else
+                {
+                    Random rand1 = new Random();
+                    e.Position.X = rand1.Next(800, 2000);
+                    e.Position.Y = rand1.Next(0, 200);
+                }
+            }
+
         }
     }
 }
