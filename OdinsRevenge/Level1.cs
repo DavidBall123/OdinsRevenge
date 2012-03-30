@@ -31,6 +31,8 @@ namespace OdinsRevenge
         Bird bird;
 
         Ground ground;
+        Ground ocean1;
+        
 
         Sun sun; 
        
@@ -80,6 +82,9 @@ namespace OdinsRevenge
             sun = new Sun();
             bird = new Bird();
             ground = new Ground(Content, "Backgrounds\\Level1");
+            ocean1 = new Ground(Content, "Backgrounds\\Ocean1");
+         
+            
             base.Initialize();
 
          
@@ -168,6 +173,8 @@ namespace OdinsRevenge
             spriteBatch.Begin();
             //spriteBatch.Draw(middayLevel1, Vector2.Zero, Color.White); 
             ground.Draw(spriteBatch);
+            ocean1.Draw(spriteBatch);
+            
             DrawBackground();
             player.Draw(spriteBatch, playerFacingRight, walking);
             sun.Draw(spriteBatch); 
