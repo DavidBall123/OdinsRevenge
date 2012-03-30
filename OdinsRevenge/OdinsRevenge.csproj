@@ -74,7 +74,7 @@
   <ItemGroup>
     <Compile Include="AnimationClasses\Animation.cs" />
     <Compile Include="Ground.cs" />
-    <Compile Include="OnScreenObjects\Bird.cs" />
+    <Compile Include="OnScreenObjects\BaseOnScreenObjects.cs" />
     <Compile Include="AnimationClasses\AnimationBase.cs" />
     <Compile Include="AnimationClasses\PlayerrAnimation.cs" />
     <Compile Include="ParallaxinBackground.cs" />

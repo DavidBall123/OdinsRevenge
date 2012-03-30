@@ -26,9 +26,9 @@ namespace OdinsRevenge
         Texture2D sunSetLevel1;
         Texture2D nightLevel1;
 
-        Animation birdAnimation = new Animation();
-        Texture2D birdTexture;
-        Bird bird;
+        Animation Animation = new Animation();
+        Texture2D Texture;
+        BaseOnScreenObjects bird;
 
         Ground ground;
         Ground ocean1;
@@ -80,7 +80,7 @@ namespace OdinsRevenge
             player = new Player();
             playerMoveSpeed = 4.0f;
             sun = new Sun();
-            bird = new Bird();
+            bird = new BaseOnScreenObjects();
             ground = new Ground(Content, "Backgrounds\\Level1");
             ocean1 = new Ground(Content, "Backgrounds\\Ocean1");
          
@@ -111,10 +111,10 @@ namespace OdinsRevenge
             sunSetLevel1 = Content.Load<Texture2D>("Backgrounds\\Sunset");
             nightLevel1 = Content.Load<Texture2D>("Backgrounds\\Night");
 
-            Vector2 birdPostion = new Vector2(800, 200);
-            birdTexture = Content.Load<Texture2D>("Backgrounds\\GreyBirdFly");
-            birdAnimation.Initialize(birdTexture, Vector2.Zero, 33, 29, 4, 100, Color.White, 0.8f, true);
-            bird.Initialize(Content.Load<Texture2D>("Backgrounds\\GreyBirdFly"), birdPostion, birdAnimation);
+            Vector2 Postion = new Vector2(800, 200);
+            Texture = Content.Load<Texture2D>("Backgrounds\\GreyBirdFly");
+            Animation.Initialize(Texture, Vector2.Zero, 33, 29, 4, 100, Color.White, 0.8f, true);
+            bird.Initialize(Content.Load<Texture2D>("Backgrounds\\GreyBirdFly"), Postion, Animation);
 
             
 
@@ -228,24 +228,24 @@ namespace OdinsRevenge
         }
 
         /// <summary>
-        /// If the bird is still on the screen it moves it across it, otherwise
-        /// it will randomly teleport the bird somewhere to the right of the screen
+        /// If the  is still on the screen it moves it across it, otherwise
+        /// it will randomly teleport the  somewhere to the right of the screen
         /// </summary>
 
 
         private void UpdateBird()
         {
-            if (bird.BirdPosition.X >= -50)
+            if (bird.Position.X >= -50)
             {
-                bird.BirdPosition.X = bird.BirdPosition.X - 1;
+                bird.Position.X = bird.Position.X - 1;
             }
             else
             {
                 Random rand1 = new Random();
                 Random rand2 = new Random();
 
-                bird.BirdPosition.X = rand1.Next(900, 1400);
-                bird.BirdPosition.Y = rand1.Next(50, 250);
+                bird.Position.X = rand1.Next(900, 1400);
+                bird.Position.Y = rand1.Next(50, 250);
             }
         }
 
