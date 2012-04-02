@@ -28,25 +28,28 @@ namespace OdinsRevenge
 
         Animation birdAnimation = new Animation();
         Texture2D birdTexture;
+
+        Animation boatAnimation = new Animation();
+        Texture2D boatTexture; 
         
         BaseAnimatedOnScreenObjects bird;
+        BaseAnimatedOnScreenObjects boat; 
+
         BaseStaticOnScreenObjects cloud1;
         BaseStaticOnScreenObjects cloud2;
         BaseStaticOnScreenObjects cloud3;
+
         List<BaseAnimatedOnScreenObjects> animatedObjectsList;
         List<BaseStaticOnScreenObjects> staticObjectsList; 
-
-
+        
         Ground ground;
         Ground ocean1;
         Ground stars; 
 
         bool day;
         bool night; 
-        
 
         Sun sun; 
-       
 
         #endregion 
 
@@ -91,6 +94,7 @@ namespace OdinsRevenge
             player = new Player();
             sun = new Sun();
             bird = new BaseAnimatedOnScreenObjects();
+            boat = new BaseAnimatedOnScreenObjects(); 
             cloud1 = new BaseStaticOnScreenObjects();
             cloud2 = new BaseStaticOnScreenObjects();
             cloud3 = new BaseStaticOnScreenObjects(); 
@@ -127,10 +131,17 @@ namespace OdinsRevenge
             sunSetLevel1 = Content.Load<Texture2D>("Backgrounds\\Sunset");
             nightLevel1 = Content.Load<Texture2D>("Backgrounds\\Night");
 
-            Vector2 postion = new Vector2(800, 200);
+            Vector2 position = new Vector2(800, 200);
             birdTexture = Content.Load<Texture2D>("Backgrounds\\GreyBirdFly");
             birdAnimation.Initialize(birdTexture, Vector2.Zero, 33, 29, 4, 100, Color.White, 0.8f, true);
-            bird.Initialize(Content.Load<Texture2D>("Backgrounds\\GreyBirdFly"), postion, birdAnimation);
+            bird.Initialize(birdTexture, position, birdAnimation);
+
+            position.X = -150;
+            position.Y = 350;
+
+            boatTexture = Content.Load<Texture2D>("Backgrounds\\Boat");
+            boatAnimation.Initialize(boatTexture, Vector2.Zero, 63, 69, 4, 100, Color.White, 0.8f, true);
+            boat.Initialize(boatTexture, position, boatAnimation);
             
             LoadClouds();
 
@@ -146,19 +157,19 @@ namespace OdinsRevenge
             Random rand1 = new Random();
             
             cloudPosition.X = rand1.Next(800, 2000);
-            cloudPosition.Y = rand1.Next(0, 200); 
+            cloudPosition.Y = rand1.Next(0, 300); 
 
             cloud1.Initialize(Content.Load<Texture2D>("Backgrounds\\Clouds1"), cloudPosition);
             staticObjectsList.Add(cloud1);
 
             cloudPosition.X = rand1.Next(800, 2000);
-            cloudPosition.Y = rand1.Next(0, 200);
+            cloudPosition.Y = rand1.Next(0, 300);
 
             cloud2.Initialize(Content.Load<Texture2D>("Backgrounds\\Clouds2"), cloudPosition);
             staticObjectsList.Add(cloud2);
 
             cloudPosition.X = rand1.Next(800, 2000);
-            cloudPosition.Y = rand1.Next(0, 200);
+            cloudPosition.Y = rand1.Next(0, 300);
 
             cloud3.Initialize(Content.Load<Texture2D>("Backgrounds\\Clouds3"), cloudPosition);
             staticObjectsList.Add(cloud3);
@@ -181,18 +192,15 @@ namespace OdinsRevenge
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                this.Exit();
-
-                       
-            currentKeyboardState = Keyboard.GetState();
             
-            // Allows the game to exit
+            currentKeyboardState = Keyboard.GetState();
             UpdatePlayer(gameTime);
             player.Update(gameTime);
             sun.Update(gameTime);
-            UpdateBird(); 
+            UpdateBird();
+            UpdateBoat(); 
             bird.Update(gameTime);
+            boat.Update(gameTime);
             previousKeyboardState = currentKeyboardState;
 
             base.Update(gameTime);
@@ -204,19 +212,16 @@ namespace OdinsRevenge
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-
-            // TODO: Add your drawing code here
+                        
             spriteBatch.Begin();
-            //spriteBatch.Draw(middayLevel1, Vector2.Zero, Color.White); 
             ground.Draw(spriteBatch);
             ocean1.Draw(spriteBatch);
-            
             DrawBackground();
-
             player.Draw(spriteBatch, playerFacingRight, walking);
-            sun.Draw(spriteBatch); 
+            sun.Draw(spriteBatch);
             walking = false;
             bird.Draw(spriteBatch);
+            boat.Draw(spriteBatch);
             if (night == true)
             {
                 stars.Draw(spriteBatch);
@@ -272,7 +277,7 @@ namespace OdinsRevenge
         }
 
         /// <summary>
-        /// If the  is still on the screen it moves it across it, otherwise
+        /// If the bird  is still on the screen it moves it across it, otherwise
         /// it will randomly teleport the  somewhere to the right of the screen
         /// </summary>
 
@@ -289,6 +294,27 @@ namespace OdinsRevenge
 
                 bird.Position.X = rand1.Next(900, 1400);
                 bird.Position.Y = rand1.Next(50, 250);
+            }
+        }
+
+        /// <summary>
+        /// If the boat  is still on the screen it moves it across it, otherwise
+        /// it will randomly teleport the  somewhere to the right of the screen
+        /// </summary>
+
+
+        private void UpdateBoat()
+        {
+            if (boat.Position.X <= 950)
+            {
+                boat.Position.X = boat.Position.X + 1;
+            }
+            else
+            {
+                Random rand1 = new Random();
+
+                boat.Position.X = rand1.Next(-1100, -400);
+                
             }
         }
 
@@ -339,7 +365,7 @@ namespace OdinsRevenge
                 {
                     Random rand1 = new Random();
                     e.Position.X = rand1.Next(800, 2000);
-                    e.Position.Y = rand1.Next(0, 200);
+                    e.Position.Y = rand1.Next(0, 300);
                 }
             }
 

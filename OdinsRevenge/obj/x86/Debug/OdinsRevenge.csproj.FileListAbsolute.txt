@@ -17,3 +17,4 @@ C:\Users\David\Documents\school\Game Program & design\OdinsRevenge\OdinsRevenge\
 C:\Users\David\Documents\school\Game Program & design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Backgrounds\Ocean1.xnb
 C:\Users\David\Documents\school\Game Program & design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Backgrounds\Clouds3.xnb
 C:\Users\David\Documents\school\Game Program & design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Backgrounds\Stars.xnb
+C:\Users\David\Documents\school\Game Program & design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Backgrounds\Boat.xnb
