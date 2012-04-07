@@ -9,7 +9,8 @@ namespace OdinsRevenge
     public abstract class AnimationBase
     {
         public virtual void Draw(SpriteBatch spriteBatch) { }
-        public virtual void Draw(SpriteBatch spriteBatch, bool faceRight) { }
+        public virtual void Draw(SpriteBatch spriteBatch, Direction direction) { }
+        
         
         
     }

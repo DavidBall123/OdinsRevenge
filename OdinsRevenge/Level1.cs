@@ -56,11 +56,18 @@ namespace OdinsRevenge
         #region Player variables
 
         Player player;
-
-        bool playerFacingRight = true;
-        bool walking = false; 
+        
         PlayerAnimation walkingAnimation = new PlayerAnimation();
         Texture2D walkingTexture;
+
+        Direction direction = new Direction();
+        Walking walking = new Walking();
+        Jumping jump = new Jumping(); 
+
+        float roofHeight = 350;
+        float groundLevel = 435;
+
+        bool jumpInMotion = false; 
         
         #endregion 
 
@@ -81,6 +88,8 @@ namespace OdinsRevenge
             graphics.PreferMultiSampling = true;
             graphics.PreferredBackBufferWidth = 800;
             graphics.PreferredBackBufferHeight = 600;
+            
+            
         }
 
         /// <summary>
@@ -102,7 +111,9 @@ namespace OdinsRevenge
             staticObjectsList = new List<BaseStaticOnScreenObjects>(); 
             ground = new Ground(Content, "Backgrounds\\Level1");
             ocean1 = new Ground(Content, "Backgrounds\\Ocean1");
-            stars = new Ground(Content, "Backgrounds\\Stars"); 
+            stars = new Ground(Content, "Backgrounds\\Stars");
+            direction = Direction.Right;
+            walking = Walking.Standing; 
          
             
             base.Initialize();
@@ -192,9 +203,9 @@ namespace OdinsRevenge
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            
             currentKeyboardState = Keyboard.GetState();
-            UpdatePlayer(gameTime);
+            Input(gameTime);
+            Movement();
             player.Update(gameTime);
             sun.Update(gameTime);
             UpdateBird();
@@ -217,9 +228,8 @@ namespace OdinsRevenge
             ground.Draw(spriteBatch);
             ocean1.Draw(spriteBatch);
             DrawBackground();
-            player.Draw(spriteBatch, playerFacingRight, walking);
+            player.Draw(spriteBatch, direction, walking);
             sun.Draw(spriteBatch);
-            walking = false;
             bird.Draw(spriteBatch);
             boat.Draw(spriteBatch);
             if (night == true)
@@ -237,7 +247,7 @@ namespace OdinsRevenge
         /// </summary>
         /// <param name="gameTime"></param>
 
-        private void UpdatePlayer(GameTime gameTime)
+        private void Input(GameTime gameTime)
         {
             #region GamePad
    
@@ -245,35 +255,33 @@ namespace OdinsRevenge
             #endregion
              
             #region Keyboard
-
+            //
+             
             if (currentKeyboardState.IsKeyDown(Keys.Left))
             {
-                //player.PlayerPosition.X -= playerMoveSpeed;
-                if (previousKeyboardState.IsKeyDown(Keys.Left))
-                {
-                    ground.GroundOffset = ground.GroundOffset - 1;
-                    stars.GroundOffset = stars.GroundOffset - 1;
-                }
-                playerFacingRight = false;
-                walking = true;
+                direction = Direction.Left;
+                walking = Walking.Walking;
+                
             }
-            if (currentKeyboardState.IsKeyDown(Keys.Right) )
+            else if (currentKeyboardState.IsKeyDown(Keys.Right))
             {
-                //player.PlayerPosition.X += playerMoveSpeed;
-                if (previousKeyboardState.IsKeyDown(Keys.Right))
-                {
-                    ground.GroundOffset = ground.GroundOffset + 5;
-                    stars.GroundOffset = stars.GroundOffset + 1;
-                }
-                playerFacingRight = true;
-                walking = true;
+                direction = Direction.Right;
+                walking = Walking.Walking;
+            }
+            else
+            {
+                walking = Walking.Standing;
             }
 
+            if (currentKeyboardState.IsKeyDown(Keys.Space))
+            {
+                jumpInMotion = true;
+            }
+            
+   
             #endregion
 
-            // Make sure that the player does not go out of bounds
-            player.PlayerPosition.X = MathHelper.Clamp(player.PlayerPosition.X, 0, GraphicsDevice.Viewport.Width - player.Width);
-            player.PlayerPosition.Y = MathHelper.Clamp(player.PlayerPosition.Y, 0, GraphicsDevice.Viewport.Height - player.Height);
+         
         }
 
         /// <summary>
@@ -352,8 +360,7 @@ namespace OdinsRevenge
         /// </summary>
 
         private void DrawStaticObjects(SpriteBatch spriteBatch)
-        {
-            
+        {   
             foreach (BaseStaticOnScreenObjects e in staticObjectsList)
             {
                 if (e.Position.X >= -150)
@@ -368,7 +375,116 @@ namespace OdinsRevenge
                     e.Position.Y = rand1.Next(0, 300);
                 }
             }
+        }
 
+        /// <summary>
+        /// controls the movement on the player
+        /// </summary>
+
+        private void Movement()
+        {
+            // check to see if the player is on solid ground
+            // if he is not then place him into a falling state
+
+            if (jumpInMotion == false)
+            {
+                if (player.PlayerPosition.Y != groundLevel)
+                {
+
+                    jump= Jumping.Falling;
+                }
+            }
+        
+            if (jump == Jumping.Falling)
+            {
+                Falling(); 
+            }
+
+            if (jumpInMotion == true && jump != Jumping.Falling)
+            {
+                Jump();
+            }
+
+            switch (direction)
+            {
+                case Direction.Left:
+                    MoveLeft();
+                    break; 
+                case Direction.Right:
+                    MoveRight();
+                    break;
+            }
+
+           
+        }
+
+      
+        private void MoveRight()
+        {
+            if (previousKeyboardState.IsKeyDown(Keys.Right))
+            {
+                ground.GroundOffset = ground.GroundOffset + 5;
+                stars.GroundOffset = stars.GroundOffset + 1;
+                if (jumpInMotion == true && jump != Jumping.Falling)
+                {
+                    Jump();
+                }
+            }
+        }
+        /// <summary>
+        /// moves the player to the left of the screen 
+        /// </summary>
+
+        private void MoveLeft()
+        {
+            
+            if (previousKeyboardState.IsKeyDown(Keys.Left))
+            {
+                ground.GroundOffset = ground.GroundOffset - 5;
+                stars.GroundOffset = stars.GroundOffset - 1;
+                if (jumpInMotion == true && jump != Jumping.Falling)
+                {
+                    Jump();
+                }
+
+            }
+        }
+
+        /// <summary>
+        /// Method controls upwards jumps
+        /// </summary>
+
+        private void Jump()
+        {   
+            
+            if (player.PlayerPosition.Y > roofHeight)
+            {
+                player.PlayerPosition.Y = player.PlayerPosition.Y - 5;
+            }
+            else
+            {
+                jump = Jumping.Falling;
+            }
+                      
+        }
+
+      
+
+        private void Falling()
+        {
+            
+            if (player.PlayerPosition.Y <= groundLevel)
+            {
+                player.PlayerPosition.Y = player.PlayerPosition.Y + 10;
+            }
+            else
+            {
+                player.PlayerPosition.Y = groundLevel;
+                jumpInMotion = false;
+                jump = Jumping.Stationary;
+                walking = Walking.Standing; 
+
+            }
         }
     }
 }

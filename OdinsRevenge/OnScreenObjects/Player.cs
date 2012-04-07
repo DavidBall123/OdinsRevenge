@@ -4,15 +4,18 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace OdinsRevenge
 {
-    class Player
+    class Player 
     {
 
-        // Texture represetning a player standing still 
+        
         Texture2D playerTexture;
         PlayerAnimation walkingAnimation; 
 
         // Position of the Player relative to the upper left side of the screen
         public Vector2 PlayerPosition;
+
+        // Vector used for jumps
+        Vector2 startingPosition = Vector2.Zero; 
 
         // State of the player
         bool active;
@@ -26,11 +29,12 @@ namespace OdinsRevenge
             get { return playerTexture.Width; }
         }
 
-        // Get the height of the player
+        // Height of the  object
         public int Height
         {
             get { return playerTexture.Height; }
         }
+        
 
         // Get the width of the player 
         public int WalkingAnimationWidth
@@ -66,6 +70,7 @@ namespace OdinsRevenge
             walkingAnimation.Position = PlayerPosition;
             walkingAnimation.Update(gameTime);
         }
+        
 
         /// <summary>
         /// Draws the player
@@ -75,27 +80,43 @@ namespace OdinsRevenge
         /// <param name="spriteBatch"></param>
         /// <param name="playerFacingRight"></param>
 
-        public void Draw(SpriteBatch spriteBatch, bool playerFacingRight, bool walking)
+        public void Draw(SpriteBatch spriteBatch, Direction direction, Walking action)
         {
-
-            if (walking == false)
+            switch (action)
             {
-                if (playerFacingRight == true)
-                {
-                     spriteBatch.Draw(playerTexture, PlayerPosition, null, Color.White, 0f, Vector2.Zero, 0.8f, SpriteEffects.None, 0f);
-                }
-                else
-                {
-                    spriteBatch.Draw(playerTexture, PlayerPosition, null, Color.White, 0f, Vector2.Zero, 0.8f, SpriteEffects.FlipHorizontally, 0f);
-                }
-            }
-            else if (walking == true)
-            {
-                walkingAnimation.Draw(spriteBatch, playerFacingRight);
+                case Walking.Standing:
+                    DrawStanding(spriteBatch, direction);
+                    break;
+                case Walking.Walking:
+                    DrawAnimation(spriteBatch, direction);
+                    break;
             }
 
+        }
 
+        private void DrawAnimation(SpriteBatch spriteBatch, Direction direction)
+        {
+            walkingAnimation.Draw(spriteBatch, direction);
+        }
 
+        
+
+        /// <summary>
+        /// The draw method for when the player is standing still 
+        /// </summary>
+        /// <param name="spriteBatch"></param>
+        /// <param name="direction"></param>
+
+        private void DrawStanding(SpriteBatch spriteBatch, Direction direction)
+        {
+            if (direction == Direction.Right)
+            {
+                spriteBatch.Draw(playerTexture, PlayerPosition, null, Color.White, 0f, Vector2.Zero, 0.8f, SpriteEffects.None, 0f);
+            }
+            else
+            {
+                spriteBatch.Draw(playerTexture, PlayerPosition, null, Color.White, 0f, Vector2.Zero, 0.8f, SpriteEffects.FlipHorizontally, 0f);
+            }
         }
     }
 }

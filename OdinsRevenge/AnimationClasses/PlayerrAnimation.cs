@@ -8,19 +8,14 @@ namespace OdinsRevenge
     class PlayerAnimation : Animation 
     {
         
-     
-
-        // Width of a given frame
-        
-        
 
         // Draw the Animation Strip
-        public override void Draw(SpriteBatch spriteBatch, bool faceRight)
+        public override void Draw(SpriteBatch spriteBatch, Direction direction)
         {
             // Only draw the animation when we are active
             if (Active)
             {
-                if (faceRight == false)
+                if (direction == Direction.Left)
                 {
                     Texture2D tempForFlip; 
                     tempForFlip = Flip(spriteStrip, false, true);
