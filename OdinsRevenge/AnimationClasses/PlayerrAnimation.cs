@@ -6,8 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace OdinsRevenge
 {
     class PlayerAnimation : Animation 
-    {
-        
+    {   
 
         // Draw the Animation Strip
         public override void Draw(SpriteBatch spriteBatch, Direction direction)

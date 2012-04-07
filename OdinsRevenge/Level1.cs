@@ -60,9 +60,13 @@ namespace OdinsRevenge
         PlayerAnimation walkingAnimation = new PlayerAnimation();
         Texture2D walkingTexture;
 
+        PlayerAnimation strikingAnimation = new PlayerAnimation();
+        Texture2D strikingTexture;
+
         Direction direction = new Direction();
-        Walking walking = new Walking();
-        Jumping jump = new Jumping(); 
+        PlayerActions action = new PlayerActions();
+        Jumping jump = new Jumping();
+        
 
         float roofHeight = 350;
         float groundLevel = 435;
@@ -113,7 +117,7 @@ namespace OdinsRevenge
             ocean1 = new Ground(Content, "Backgrounds\\Ocean1");
             stars = new Ground(Content, "Backgrounds\\Stars");
             direction = Direction.Right;
-            walking = Walking.Standing; 
+            action = PlayerActions.Standing; 
          
             
             base.Initialize();
@@ -133,8 +137,10 @@ namespace OdinsRevenge
             // TODO: use this.Content to load your game content here
             Vector2 playerPostion = new Vector2(300, 435);
             walkingTexture = Content.Load<Texture2D>("Hero\\Walking");
+            strikingTexture = Content.Load<Texture2D>("Hero\\HeroStriking"); 
             walkingAnimation.Initialize(walkingTexture, Vector2.Zero, 86, 109, 4, 100, Color.White, 0.8f, true);
-            player.Initialize(Content.Load<Texture2D>("Hero\\Hero"), playerPostion, walkingAnimation);
+            strikingAnimation.Initialize(strikingTexture, Vector2.Zero, 150, 150, 6, 100, Color.White, 0.8f, true);
+            player.Initialize(Content.Load<Texture2D>("Hero\\Hero"), playerPostion, walkingAnimation, strikingAnimation);
             
             
             sun.Initialize(Content.Load<Texture2D>("Backgrounds\\Sun")); 
@@ -228,7 +234,7 @@ namespace OdinsRevenge
             ground.Draw(spriteBatch);
             ocean1.Draw(spriteBatch);
             DrawBackground();
-            player.Draw(spriteBatch, direction, walking);
+            player.Draw(spriteBatch, direction, action);
             sun.Draw(spriteBatch);
             bird.Draw(spriteBatch);
             boat.Draw(spriteBatch);
@@ -260,23 +266,30 @@ namespace OdinsRevenge
             if (currentKeyboardState.IsKeyDown(Keys.Left))
             {
                 direction = Direction.Left;
-                walking = Walking.Walking;
+                action = PlayerActions.Walking;
                 
             }
             else if (currentKeyboardState.IsKeyDown(Keys.Right))
             {
                 direction = Direction.Right;
-                walking = Walking.Walking;
+                action = PlayerActions.Walking;
             }
             else
             {
-                walking = Walking.Standing;
+                action = PlayerActions.Standing;
             }
 
             if (currentKeyboardState.IsKeyDown(Keys.Space))
             {
                 jumpInMotion = true;
             }
+
+            if (currentKeyboardState.IsKeyDown(Keys.LeftControl))
+            {
+                action = PlayerActions.Striking;
+            }
+            
+            
             
    
             #endregion
@@ -482,7 +495,7 @@ namespace OdinsRevenge
                 player.PlayerPosition.Y = groundLevel;
                 jumpInMotion = false;
                 jump = Jumping.Stationary;
-                walking = Walking.Standing; 
+                action = PlayerActions.Standing; 
 
             }
         }

@@ -12,3 +12,4 @@ Content\Backgrounds\Ocean1.xnb
 Content\Backgrounds\Clouds3.xnb
 Content\Backgrounds\Stars.xnb
 Content\Backgrounds\Boat.xnb
+Content\Hero\HeroStriking.xnb

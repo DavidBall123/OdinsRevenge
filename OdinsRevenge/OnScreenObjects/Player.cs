@@ -6,10 +6,9 @@ namespace OdinsRevenge
 {
     class Player 
     {
-
-        
         Texture2D playerTexture;
-        PlayerAnimation walkingAnimation; 
+        PlayerAnimation walkingAnimation;
+        PlayerAnimation strikingAnimation;
 
         // Position of the Player relative to the upper left side of the screen
         public Vector2 PlayerPosition;
@@ -48,12 +47,13 @@ namespace OdinsRevenge
             get { return walkingAnimation.FrameHeight; }
         }
 
-    
+       
 
-        public void Initialize(Texture2D texture, Vector2 position, PlayerAnimation walkingAnimate)
+        public void Initialize(Texture2D texture, Vector2 position, PlayerAnimation walkingAnimate, PlayerAnimation strikingAnimate)
         {
             playerTexture = texture;
-            walkingAnimation = walkingAnimate; 
+            walkingAnimation = walkingAnimate;
+            strikingAnimation = strikingAnimate;
 
             // Set the starting position of the player around the middle of the screen and to the back
             PlayerPosition = position;
@@ -69,6 +69,8 @@ namespace OdinsRevenge
         {
             walkingAnimation.Position = PlayerPosition;
             walkingAnimation.Update(gameTime);
+            strikingAnimation.Position = PlayerPosition;
+            strikingAnimation.Update(gameTime); 
         }
         
 
@@ -80,18 +82,27 @@ namespace OdinsRevenge
         /// <param name="spriteBatch"></param>
         /// <param name="playerFacingRight"></param>
 
-        public void Draw(SpriteBatch spriteBatch, Direction direction, Walking action)
+        public void Draw(SpriteBatch spriteBatch, Direction direction, PlayerActions walking)
         {
-            switch (action)
+            switch (walking)
             {
-                case Walking.Standing:
+                case PlayerActions.Standing:
                     DrawStanding(spriteBatch, direction);
                     break;
-                case Walking.Walking:
+                case PlayerActions.Walking:
                     DrawAnimation(spriteBatch, direction);
                     break;
+                case PlayerActions.Striking:
+                    DrawStriking(spriteBatch, direction);
+                    break; 
+                    
             }
 
+        }
+
+        private void DrawStriking(SpriteBatch spriteBatch, Direction direction)
+        {
+            strikingAnimation.Draw(spriteBatch, direction); 
         }
 
         private void DrawAnimation(SpriteBatch spriteBatch, Direction direction)

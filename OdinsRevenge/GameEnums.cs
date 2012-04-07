@@ -11,16 +11,24 @@ namespace OdinsRevenge
         Right
     }
 
-    public enum Walking
+    public enum PlayerActions
     {
+        Striking,
         Standing,
         Walking,
     }
 
     public enum Jumping
     {
+
         Stationary,
         Falling
+    }
+
+    public enum Actions
+    {
+        
+        Nothing
     }
    
 }

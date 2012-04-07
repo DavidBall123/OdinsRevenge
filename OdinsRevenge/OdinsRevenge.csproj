@@ -80,7 +80,7 @@
     <Compile Include="OnScreenObjects\BaseStaticOnScreenObjects.cs" />
     <Compile Include="ParallaxinBackground.cs" />
     <Compile Include="OnScreenObjects\Player.cs" />
-    <Compile Include="PlayerStates.cs" />
+    <Compile Include="GameEnums.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Level1.cs" />
