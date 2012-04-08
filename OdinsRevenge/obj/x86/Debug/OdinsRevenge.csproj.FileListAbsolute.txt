@@ -19,3 +19,8 @@ C:\Users\David\Documents\school\Game Program & design\OdinsRevenge\OdinsRevenge\
 C:\Users\David\Documents\school\Game Program & design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Backgrounds\Stars.xnb
 C:\Users\David\Documents\school\Game Program & design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Backgrounds\Boat.xnb
 C:\Users\David\Documents\school\Game Program & design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Hero\HeroStriking.xnb
+C:\Users\David\Documents\school\Game Program & design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\gamefont.xnb
+C:\Users\David\Documents\school\Game Program & design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\menufont.xnb
+C:\Users\David\Documents\school\Game Program & design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\background.xnb
+C:\Users\David\Documents\school\Game Program & design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\blank.xnb
+C:\Users\David\Documents\school\Game Program & design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\gradient.xnb

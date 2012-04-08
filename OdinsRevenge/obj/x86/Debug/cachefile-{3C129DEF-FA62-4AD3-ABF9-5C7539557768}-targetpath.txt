@@ -13,3 +13,8 @@ Content\Backgrounds\Clouds3.xnb
 Content\Backgrounds\Stars.xnb
 Content\Backgrounds\Boat.xnb
 Content\Hero\HeroStriking.xnb
+Content\gamefont.xnb
+Content\menufont.xnb
+Content\background.xnb
+Content\blank.xnb
+Content\gradient.xnb

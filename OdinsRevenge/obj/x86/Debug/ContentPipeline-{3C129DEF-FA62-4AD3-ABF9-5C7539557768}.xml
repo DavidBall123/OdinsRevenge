@@ -134,7 +134,52 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Hero\HeroStriking.xnb</Output>
-      <Time>2012-04-08T09:32:29.3972+10:00</Time>
+      <Time>2012-04-08T09:37:28.3622+10:00</Time>
+    </Item>
+    <Item>
+      <Source>gamefont.spritefont</Source>
+      <Name>gamefont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\gamefont.xnb</Output>
+      <Time>2012-04-08T19:43:38.7192+10:00</Time>
+    </Item>
+    <Item>
+      <Source>menufont.spritefont</Source>
+      <Name>menufont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\menufont.xnb</Output>
+      <Time>2012-04-08T18:56:46.9192+10:00</Time>
+    </Item>
+    <Item>
+      <Source>background.png</Source>
+      <Name>background</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\background.xnb</Output>
+      <Time>2012-04-08T19:57:56.2642+10:00</Time>
+    </Item>
+    <Item>
+      <Source>blank.png</Source>
+      <Name>blank</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\blank.xnb</Output>
+      <Time>2012-04-08T19:57:56.2672+10:00</Time>
+    </Item>
+    <Item>
+      <Source>gradient.png</Source>
+      <Name>gradient</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\gradient.xnb</Output>
+      <Time>2012-04-08T19:58:35.6792+10:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

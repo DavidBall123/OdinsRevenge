@@ -73,18 +73,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnimationClasses\Animation.cs" />
-    <Compile Include="BackGround.cs" />
+    <Compile Include="Game Management\BackGround.cs" />
+    <Compile Include="Game Management\GameScreen.cs" />
+    <Compile Include="Game Management\InputState.cs" />
+    <Compile Include="Game Management\ScreenManager.cs" />
+    <Compile Include="game.cs" />
     <Compile Include="OnScreenObjects\BaseAnimatedOnScreenObjects.cs" />
     <Compile Include="AnimationClasses\AnimationBase.cs" />
     <Compile Include="AnimationClasses\PlayerrAnimation.cs" />
     <Compile Include="OnScreenObjects\BaseStaticOnScreenObjects.cs" />
-    <Compile Include="ParallaxinBackground.cs" />
+    <Compile Include="Game Management\ParallaxinBackground.cs" />
     <Compile Include="OnScreenObjects\Player.cs" />
-    <Compile Include="GameEnums.cs" />
+    <Compile Include="Game Management\GameEnums.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Level1.cs" />
+    <Compile Include="Screens\BackgroundScreen.cs" />
+    <Compile Include="Screens\GameplayScreen.cs" />
+    <Compile Include="Screens\Level1.cs" />
     <Compile Include="OnScreenObjects\Sun.cs" />
+    <Compile Include="Screens\LoadingScreen.cs" />
+    <Compile Include="Screens\MainMenuScreen.cs" />
+    <Compile Include="Screens\MenuEntry.cs" />
+    <Compile Include="Screens\MenuScreen.cs" />
+    <Compile Include="Screens\MessageBoxScreen.cs" />
+    <Compile Include="Screens\OptionsMenuScreen.cs" />
+    <Compile Include="Screens\PlayerIndexEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
@@ -125,6 +137,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
   <!--

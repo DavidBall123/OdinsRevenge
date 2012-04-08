@@ -86,13 +86,12 @@ namespace OdinsRevenge
 
         public Level1()
         {
-            graphics = new GraphicsDeviceManager(this);
+           /* graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             graphics.IsFullScreen = false;
             graphics.PreferMultiSampling = true;
             graphics.PreferredBackBufferWidth = 800;
-            graphics.PreferredBackBufferHeight = 600;
-            
+            graphics.PreferredBackBufferHeight = 600;*/
             
         }
 
