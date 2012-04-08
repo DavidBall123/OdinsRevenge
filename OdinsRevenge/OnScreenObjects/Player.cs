@@ -1,20 +1,28 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace OdinsRevenge
 {
-    class Player 
+    class Player
     {
-        Texture2D playerTexture;
-        PlayerAnimation walkingAnimation;
-        PlayerAnimation strikingAnimation;
+
+        #region variables and properites 
+        private Texture2D playerTexture;
+        private PlayerAnimation walkingAnimation;
+        private PlayerAnimation strikingAnimation;
+        private Direction direction;
+        private PlayerActions action;
+        private bool jumpInMotion;
+        private Jumping jump = new Jumping();
+        private OdinLevels levelController; 
 
         // Position of the Player relative to the upper left side of the screen
         public Vector2 PlayerPosition;
 
         // Vector used for jumps
-        Vector2 startingPosition = Vector2.Zero; 
+        Vector2 startingPosition = Vector2.Zero;
 
         // State of the player
         bool active;
@@ -33,7 +41,7 @@ namespace OdinsRevenge
         {
             get { return playerTexture.Height; }
         }
-        
+
 
         // Get the width of the player 
         public int WalkingAnimationWidth
@@ -47,13 +55,39 @@ namespace OdinsRevenge
             get { return walkingAnimation.FrameHeight; }
         }
 
-       
 
-        public void Initialize(Texture2D texture, Vector2 position, PlayerAnimation walkingAnimate, PlayerAnimation strikingAnimate)
+        // Stores the direction the player is facing 
+        public Direction Direction
+        {
+            set { direction = value; }
+        }
+
+        //Stores the current action the player is performing
+        public PlayerActions Action
+        {
+            set { action = value; }
+        }
+
+        public bool JumpInMotion
+        {
+            set { jumpInMotion = value; }
+        }
+
+        public Jumping Jump
+        {
+            set { jump = value; } 
+        }
+
+        
+
+#endregion 
+
+        public void Initialize(Texture2D texture, Vector2 position, PlayerAnimation walkingAnimate, PlayerAnimation strikingAnimate, OdinLevels LevelController)
         {
             playerTexture = texture;
             walkingAnimation = walkingAnimate;
             strikingAnimation = strikingAnimate;
+            levelController = LevelController; 
 
             // Set the starting position of the player around the middle of the screen and to the back
             PlayerPosition = position;
@@ -70,9 +104,11 @@ namespace OdinsRevenge
             walkingAnimation.Position = PlayerPosition;
             walkingAnimation.Update(gameTime);
             strikingAnimation.Position = PlayerPosition;
-            strikingAnimation.Update(gameTime); 
+            strikingAnimation.Update(gameTime);
+            Movement();
         }
-        
+
+        #region Drawing methods
 
         /// <summary>
         /// Draws the player
@@ -82,35 +118,44 @@ namespace OdinsRevenge
         /// <param name="spriteBatch"></param>
         /// <param name="playerFacingRight"></param>
 
-        public void Draw(SpriteBatch spriteBatch, Direction direction, PlayerActions walking)
+        public void Draw(SpriteBatch spriteBatch)
         {
-            switch (walking)
+            switch (action)
             {
                 case PlayerActions.Standing:
                     DrawStanding(spriteBatch, direction);
                     break;
                 case PlayerActions.Walking:
-                    DrawAnimation(spriteBatch, direction);
+                    DrawAnimation(spriteBatch);
                     break;
                 case PlayerActions.Striking:
-                    DrawStriking(spriteBatch, direction);
-                    break; 
-                    
+                    DrawStriking(spriteBatch);
+                    break;
             }
 
         }
 
-        private void DrawStriking(SpriteBatch spriteBatch, Direction direction)
+        /// <summary>
+        /// Draws the striking animation
+        /// </summary>
+        /// <param name="spriteBatch"></param>
+
+        private void DrawStriking(SpriteBatch spriteBatch)
         {
-            strikingAnimation.Draw(spriteBatch, direction); 
+            strikingAnimation.Draw(spriteBatch, direction);
         }
 
-        private void DrawAnimation(SpriteBatch spriteBatch, Direction direction)
+        /// <summary>
+        /// Draws the player walking 
+        /// </summary>
+        /// <param name="spriteBatch"></param>
+
+        private void DrawAnimation(SpriteBatch spriteBatch)
         {
             walkingAnimation.Draw(spriteBatch, direction);
         }
 
-        
+
 
         /// <summary>
         /// The draw method for when the player is standing still 
@@ -129,5 +174,126 @@ namespace OdinsRevenge
                 spriteBatch.Draw(playerTexture, PlayerPosition, null, Color.White, 0f, Vector2.Zero, 0.8f, SpriteEffects.FlipHorizontally, 0f);
             }
         }
+
+
+        #endregion
+
+
+        #region Movement methods
+
+        /// <summary>
+        /// controls the movement on the player
+        /// </summary>
+
+        private void Movement()
+        {
+            // check to see if the player is on solid ground
+            // if he is not then place him into a falling state
+
+            if (jumpInMotion == false)
+            {
+                if (PlayerPosition.Y != levelController.GroundLevel)
+                {
+
+                    jump = Jumping.Falling;
+                }
+            }
+
+            if (jump == Jumping.Falling)
+            {
+                Falling();
+            }
+
+            if (jumpInMotion == true && jump != Jumping.Falling)
+            {
+                PlayerJump();
+            }
+
+            switch (direction)
+            {
+                case Direction.Left:
+                    MoveLeft();
+                    break;
+                case Direction.Right:
+                    MoveRight();
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// When the player is not at ground level and not jumping
+        /// he is brought back down to ground level. 
+        /// </summary>
+
+        private void Falling()
+        {
+
+            if (PlayerPosition.Y <= levelController.GroundLevel)
+            {
+                PlayerPosition.Y = PlayerPosition.Y + 10;
+            }
+            else
+            {
+                PlayerPosition.Y = levelController.GroundLevel;
+                jumpInMotion = false;
+                jump = Jumping.Stationary;
+                action = PlayerActions.Standing;
+
+            }
+        }
+
+        /// <summary>
+        /// When a jump commences a player moves upwards until he hits
+        /// the predefined jump height (roofHeight). When he reaches this height
+        /// his jumping action is turned to falling. 
+        /// </summary>
+
+        private void PlayerJump()
+        {
+
+            if (PlayerPosition.Y > levelController.RoofHeight)
+            {
+                PlayerPosition.Y = PlayerPosition.Y - 5;
+            }
+            else
+            {
+                jump = Jumping.Falling;
+            }
+        }
+
+        private void MoveRight()
+        {
+            if (levelController.PreviousKeyboardState.IsKeyDown(Keys.Right))
+            {
+                levelController.Ground.GroundOffset = levelController.Ground.GroundOffset + 5;
+                levelController.Stars.GroundOffset = levelController.Stars.GroundOffset + 1;
+                if (jumpInMotion == true && jump != Jumping.Falling)
+                {
+                    PlayerJump();
+                }
+            }
+            
+        }
+        /// <summary>
+        /// moves the player to the left of the screen 
+        /// </summary>
+
+        private void MoveLeft()
+        {
+
+            if (levelController.PreviousKeyboardState.IsKeyDown(Keys.Left))
+            {
+                levelController.Ground.GroundOffset = levelController.Ground.GroundOffset - 5;
+                levelController.Stars.GroundOffset = levelController.Stars.GroundOffset - 1;
+                if (jumpInMotion == true && jump != Jumping.Falling)
+                {
+                    PlayerJump();
+                }
+            }
+
+            
+        }
+
     }
+    #endregion
 }

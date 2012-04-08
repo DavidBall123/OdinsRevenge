@@ -45,7 +45,7 @@ namespace OdinsRevenge
 
 
 
-        public void Initialize(Texture2D Texture, Vector2 position, Animation animate)
+        public virtual void Initialize(Texture2D Texture, Vector2 position, Animation animate)
         {
             texture = Texture;
             animation = animate;
@@ -59,10 +59,14 @@ namespace OdinsRevenge
 
         }
 
-        public void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime)
         {
             animation.Position = Position;
             animation.Update(gameTime);
+        }
+
+        public virtual void Update(GameTime gameTime, bool day)
+        {
         }
 
         /// <summary>
@@ -71,7 +75,7 @@ namespace OdinsRevenge
         /// <param name="spriteBatch"></param>
         /// <param name="objectFacingRight"></param>
 
-        public void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
             animation.Draw(spriteBatch);
 

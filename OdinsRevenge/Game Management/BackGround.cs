@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace OdinsRevenge
 {
-    class Ground
+    class BackGround
     {
         Texture2D background;
 
@@ -36,7 +36,7 @@ namespace OdinsRevenge
 
         //constructor
 
-        public Ground(ContentManager content, string sBackGround)
+        public BackGround(ContentManager content, string sBackGround)
         {
             background = content.Load<Texture2D>(sBackGround);
             groundWidth = background.Width;

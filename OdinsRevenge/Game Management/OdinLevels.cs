@@ -1,0 +1,213 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Threading;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+
+namespace OdinsRevenge
+{
+    class OdinLevels : GameScreen
+    {
+        #region Player variables
+
+        protected Player player = new Player();
+
+        protected PlayerAnimation walkingAnimation = new PlayerAnimation();
+        protected Texture2D walkingTexture;
+
+        protected PlayerAnimation strikingAnimation = new PlayerAnimation();
+        protected Texture2D strikingTexture;
+
+        
+
+        #endregion
+
+        #region background & graphic variables
+
+        protected ContentManager content;
+        protected SpriteFont gameFont;
+
+        protected Vector2 position = new Vector2(800, 200);
+
+        protected bool day;
+        protected bool night;
+        protected Sun sun = new Sun();
+
+        protected BackGround ground;
+        protected BackGround stars;
+
+        protected BaseStaticOnScreenObjects cloud1 = new BaseStaticOnScreenObjects();
+        protected BaseStaticOnScreenObjects cloud2 = new BaseStaticOnScreenObjects();
+        protected BaseStaticOnScreenObjects cloud3 = new BaseStaticOnScreenObjects();
+        protected List<BaseStaticOnScreenObjects> cloudList = new List<BaseStaticOnScreenObjects>();
+
+
+        protected Random random = new Random();
+
+        protected float pauseAlpha;
+
+        private float groundLevel = 435;
+        private float roofHeight = 350;
+
+        protected Texture2D middayLevel1;
+        protected Texture2D sunSetLevel1;
+        protected Texture2D nightLevel1;
+
+        private KeyboardState previousKeyBoardState; 
+
+        #endregion
+
+        #region Properties
+
+        public float GroundLevel
+        {
+            get { return groundLevel; } 
+        }
+
+        public float RoofHeight
+        {
+            get { return roofHeight; } 
+        }
+
+        public BackGround Ground
+        {
+            get { return ground; }
+            set { ground = value; }
+        }
+
+        public BackGround Stars
+        {
+            get { return ground; } 
+            set { stars = value; }
+        }
+
+        public KeyboardState PreviousKeyboardState
+        {
+            get { return previousKeyBoardState; }
+        }
+
+
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Methods loads the cloud content
+        /// </summary>
+
+        protected void LoadClouds()
+        {
+            Vector2 cloudPosition = new Vector2();
+            Random rand1 = new Random();
+
+            cloudPosition.X = rand1.Next(800, 2000);
+            cloudPosition.Y = rand1.Next(0, 300);
+
+            cloud1.Initialize(content.Load<Texture2D>("Backgrounds\\Clouds1"), cloudPosition);
+            cloudList.Add(cloud1);
+
+            cloudPosition.X = rand1.Next(800, 2000);
+            cloudPosition.Y = rand1.Next(0, 300);
+
+            cloud2.Initialize(content.Load<Texture2D>("Backgrounds\\Clouds2"), cloudPosition);
+            cloudList.Add(cloud2);
+
+            cloudPosition.X = rand1.Next(800, 2000);
+            cloudPosition.Y = rand1.Next(0, 300);
+
+            cloud3.Initialize(content.Load<Texture2D>("Backgrounds\\Clouds3"), cloudPosition);
+            cloudList.Add(cloud3);
+
+        }
+        /// <summary>
+        /// method controls what background to draw based on the position of the sun
+        /// 
+        /// The sun class controls the location of the sun 
+        /// </summary>
+
+        protected void DrawBackground(SpriteBatch spriteBatch)
+        {
+            if (sun.SunHeight == -10)
+            {
+                day = true;
+                night = false;
+                spriteBatch.Draw(middayLevel1, Vector2.Zero, Color.White);
+            }
+            else if (sun.SunHeight > 400)
+            {
+                day = false;
+                night = true;
+                spriteBatch.Draw(nightLevel1, Vector2.Zero, Color.White);
+            }
+            else
+            {
+                day = true;
+                night = false;
+                spriteBatch.Draw(sunSetLevel1, Vector2.Zero, Color.White);
+            }
+
+        }
+
+        /// <summary>
+        /// Lets the game respond to player input. Unlike the Update method,
+        /// this will only be called when the gameplay screen is active.
+        /// </summary>
+        public override void HandleInput(InputState input)
+        {
+            if (input == null)
+                throw new ArgumentNullException("input");
+
+            // Look up inputs for the active player profile.
+            int playerIndex = (int)ControllingPlayer.Value;
+
+            KeyboardState currentKeyboardState = input.CurrentKeyboardStates[playerIndex];
+
+
+            // The game pauses either if the user presses the pause button, or if
+            // they unplug the active gamepad. This requires us to keep track of
+            // whether a gamepad was ever plugged in, because we don't want to pause
+            // on PC if they are playing with a keyboard and have no gamepad at all!
+
+            if (input.IsPauseGame(ControllingPlayer))
+            {
+                // ScreenManager.AddScreen(new PauseMenuScreen(), ControllingPlayer);
+            }
+            else
+            {
+                // add my keyboard stuff here 
+                if (currentKeyboardState.IsKeyDown(Keys.Left))
+                {
+                    player.Direction = Direction.Left;
+                    player.Action = PlayerActions.Walking;
+                    
+
+                }
+                else if (currentKeyboardState.IsKeyDown(Keys.Right))
+                {
+                    player.Direction = Direction.Right;
+                    player.Action = PlayerActions.Walking;
+                }
+                else
+                {
+                    player.Action = PlayerActions.Standing;
+                }
+
+                if (currentKeyboardState.IsKeyDown(Keys.Space))
+                {
+                    player.JumpInMotion = true;
+                }
+
+                if (currentKeyboardState.IsKeyDown(Keys.LeftControl))
+                {
+                    player.Action = PlayerActions.Striking;
+                }
+                previousKeyBoardState = currentKeyboardState; 
+            }
+        }
+
+    }
+#endregion
+}
