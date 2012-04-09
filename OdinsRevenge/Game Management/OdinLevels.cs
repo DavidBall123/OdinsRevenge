@@ -8,18 +8,22 @@ using Microsoft.Xna.Framework.Input;
 
 namespace OdinsRevenge
 {
-    class OdinLevels : GameScreen
+    abstract class  OdinLevels : GameScreen
     {
         #region Player variables
 
         protected Player player = new Player();
 
         protected PlayerAnimation walkingAnimation = new PlayerAnimation();
-        protected Texture2D walkingTexture;
-
         protected PlayerAnimation strikingAnimation = new PlayerAnimation();
+        protected PlayerAnimation spellCastingAnimation = new PlayerAnimation(); 
+        
+        protected Texture2D walkingTexture;
         protected Texture2D strikingTexture;
+        protected Texture2D spellCastingTexture;
 
+        protected Texture2D powerOfThorTexture; 
+        protected Dictionary<string, Texture2D> spells = new Dictionary<string,Texture2D>();
         
 
         #endregion
@@ -95,8 +99,61 @@ namespace OdinsRevenge
         #region Methods
 
         /// <summary>
+        /// Load graphics content for the game.
+        /// </summary>
+        public override void LoadContent()
+        {
+            if (content == null)
+                content = new ContentManager(ScreenManager.Game.Services, "Content");
+
+            gameFont = content.Load<SpriteFont>("gamefont");
+
+            sun.Initialize(content.Load<Texture2D>("Backgrounds\\Sun"));
+
+            middayLevel1 = content.Load<Texture2D>("Backgrounds\\Midday");
+            sunSetLevel1 = content.Load<Texture2D>("Backgrounds\\Sunset");
+            nightLevel1 = content.Load<Texture2D>("Backgrounds\\Night");
+
+            ground = new BackGround(content, "Backgrounds\\Level1");
+            stars = new BackGround(content, "Backgrounds\\Stars");
+
+            LevelSpecificContent(); 
+
+            Vector2 playerPostion = new Vector2(300, 435);
+
+            walkingTexture = content.Load<Texture2D>("Hero\\Walking");
+            strikingTexture = content.Load<Texture2D>("Hero\\HeroStriking");
+            spellCastingTexture = content.Load<Texture2D>("Hero\\HeroSpellCasting");
+
+            powerOfThorTexture = content.Load<Texture2D>("Spells\\LightningSix"); 
+            spells.Add("Power of Thor", powerOfThorTexture); 
+
+            walkingAnimation.Initialize(walkingTexture, Vector2.Zero, 86, 109, 4, 100, Color.White, 0.8f, true);
+            strikingAnimation.Initialize(strikingTexture, Vector2.Zero, 150, 150, 6, 100, Color.White, 0.8f, true);
+            spellCastingAnimation.Initialize(spellCastingTexture, Vector2.Zero, 85, 131, 2, 250, Color.White, 0.8f, true);
+
+            player.Initialize(content.Load<Texture2D>("Hero\\Hero"), playerPostion, walkingAnimation, strikingAnimation, spellCastingAnimation, spells, this);
+
+            player.Direction = Direction.Right;
+            player.Action = PlayerActions.Standing;
+
+
+
+            LoadClouds();
+
+            // once the load has finished, we use ResetElapsedTime to tell the game's
+            // timing mechanism that we have just finished a very long frame, and that
+            // it should not try to catch up.
+            ScreenManager.Game.ResetElapsedTime();
+        }
+
+        protected abstract void LevelSpecificContent(); 
+        
+
+        /// <summary>
         /// Methods loads the cloud content
         /// </summary>
+        
 
         protected void LoadClouds()
         {
@@ -203,6 +260,10 @@ namespace OdinsRevenge
                 if (currentKeyboardState.IsKeyDown(Keys.LeftControl))
                 {
                     player.Action = PlayerActions.Striking;
+                }
+                else if (currentKeyboardState.IsKeyDown(Keys.LeftAlt))
+                {
+                    player.Action = PlayerActions.SpellCasting;
                 }
                 previousKeyBoardState = currentKeyboardState; 
             }

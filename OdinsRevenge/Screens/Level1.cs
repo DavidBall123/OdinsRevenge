@@ -52,27 +52,14 @@ namespace OdinsRevenge
             
         }
 
-
         /// <summary>
-        /// Load graphics content for the game.
+        /// Loads content specific to the level 
         /// </summary>
-        public override void LoadContent()
+
+
+        protected override void LevelSpecificContent()
         {
-            if (content == null)
-                content = new ContentManager(ScreenManager.Game.Services, "Content");
-
-            gameFont = content.Load<SpriteFont>("gamefont");
-
-            sun.Initialize(content.Load<Texture2D>("Backgrounds\\Sun")); 
-
-            middayLevel1 = content.Load<Texture2D>("Backgrounds\\Midday");
-            sunSetLevel1 = content.Load<Texture2D>("Backgrounds\\Sunset");
-            nightLevel1 = content.Load<Texture2D>("Backgrounds\\Night");
-
-            ground = new BackGround(content, "Backgrounds\\Level1");
             ocean1 = new BackGround(content, "Backgrounds\\Ocean1");
-            stars = new BackGround(content, "Backgrounds\\Stars");
-
 
             birdTexture = content.Load<Texture2D>("Backgrounds\\GreyBirdFly");
             birdAnimation.Initialize(birdTexture, Vector2.Zero, 33, 29, 4, 100, Color.White, 0.8f, true);
@@ -84,26 +71,6 @@ namespace OdinsRevenge
             boatTexture = content.Load<Texture2D>("Backgrounds\\Boat");
             boatAnimation.Initialize(boatTexture, Vector2.Zero, 63, 69, 4, 100, Color.White, 0.8f, true);
             boat.Initialize(boatTexture, position, boatAnimation);
-
-
-            Vector2 playerPostion = new Vector2(300, 435);
-            walkingTexture = content.Load<Texture2D>("Hero\\Walking");
-            strikingTexture = content.Load<Texture2D>("Hero\\HeroStriking");
-            walkingAnimation.Initialize(walkingTexture, Vector2.Zero, 86, 109, 4, 100, Color.White, 0.8f, true);
-            strikingAnimation.Initialize(strikingTexture, Vector2.Zero, 150, 150, 6, 100, Color.White, 0.8f, true);
-            player.Initialize(content.Load<Texture2D>("Hero\\Hero"), playerPostion, walkingAnimation, strikingAnimation, this);
-
-            player.Direction = Direction.Right;
-            player.Action = PlayerActions.Standing; 
-            
-
-
-            LoadClouds();
-
-            // once the load has finished, we use ResetElapsedTime to tell the game's
-            // timing mechanism that we have just finished a very long frame, and that
-            // it should not try to catch up.
-            ScreenManager.Game.ResetElapsedTime();
         }
 
        

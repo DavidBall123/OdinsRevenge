@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic; 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -12,11 +13,13 @@ namespace OdinsRevenge
         private Texture2D playerTexture;
         private PlayerAnimation walkingAnimation;
         private PlayerAnimation strikingAnimation;
+        private PlayerAnimation spellCastingAnimation;
         private Direction direction;
         private PlayerActions action;
         private bool jumpInMotion;
         private Jumping jump = new Jumping();
         private OdinLevels levelController; 
+        private Dictionary<string, Texture2D> spells; 
 
         // Position of the Player relative to the upper left side of the screen
         public Vector2 PlayerPosition;
@@ -29,6 +32,8 @@ namespace OdinsRevenge
 
         // Amount of hit points that player has
         int health;
+
+        int mana; 
 
         // Get the width of the player 
         public int Width
@@ -82,12 +87,14 @@ namespace OdinsRevenge
 
 #endregion 
 
-        public void Initialize(Texture2D texture, Vector2 position, PlayerAnimation walkingAnimate, PlayerAnimation strikingAnimate, OdinLevels LevelController)
+        public void Initialize(Texture2D texture, Vector2 position, PlayerAnimation walkingAnimate, PlayerAnimation strikingAnimate, PlayerAnimation spellAnimate, Dictionary<string, Texture2D> spellsDict, OdinLevels LevelController)
         {
             playerTexture = texture;
             walkingAnimation = walkingAnimate;
             strikingAnimation = strikingAnimate;
+            spellCastingAnimation = spellAnimate;
             levelController = LevelController; 
+            spells = spellsDict; 
 
             // Set the starting position of the player around the middle of the screen and to the back
             PlayerPosition = position;
@@ -97,6 +104,8 @@ namespace OdinsRevenge
 
             // Set the player health
             health = 100;
+
+            mana = 100; 
         }
 
         public void Update(GameTime gameTime)
@@ -105,6 +114,8 @@ namespace OdinsRevenge
             walkingAnimation.Update(gameTime);
             strikingAnimation.Position = PlayerPosition;
             strikingAnimation.Update(gameTime);
+            spellCastingAnimation.Position = PlayerPosition;
+            spellCastingAnimation.Update(gameTime); 
             Movement();
         }
 
@@ -131,7 +142,23 @@ namespace OdinsRevenge
                 case PlayerActions.Striking:
                     DrawStriking(spriteBatch);
                     break;
+                case PlayerActions.SpellCasting:
+                    DrawSpellCasting(spriteBatch);
+                    break;
             }
+
+        }
+
+        /// <summary>
+        /// Draws the player casting a spell
+        /// </summary>
+        /// <param name="spriteBatch"></param>
+
+        private void DrawSpellCasting(SpriteBatch spriteBatch)
+        {
+            
+            spellCastingAnimation.Draw(spriteBatch, direction);
+            spriteBatch.Draw(spells["Power of Thor"], new Vector2(0,0), Color.White); 
 
         }
 

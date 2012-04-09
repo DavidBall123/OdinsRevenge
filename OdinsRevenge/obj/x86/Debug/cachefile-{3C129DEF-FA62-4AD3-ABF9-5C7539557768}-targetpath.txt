@@ -18,3 +18,10 @@ Content\menufont.xnb
 Content\background.xnb
 Content\blank.xnb
 Content\gradient.xnb
+Content\Hero\HeroSpellCasting.xnb
+Content\Spells\LightningOne.xnb
+Content\Spells\LightningTwo.xnb
+Content\Spells\LightningThree.xnb
+Content\Spells\LightningFour.xnb
+Content\Spells\LightningFive.xnb
+Content\Spells\LightningSix.xnb

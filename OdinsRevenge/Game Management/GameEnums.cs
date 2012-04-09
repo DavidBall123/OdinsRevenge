@@ -14,6 +14,7 @@ namespace OdinsRevenge
     public enum PlayerActions
     {
         Striking,
+        SpellCasting, 
         Standing,
         Walking,
     }
