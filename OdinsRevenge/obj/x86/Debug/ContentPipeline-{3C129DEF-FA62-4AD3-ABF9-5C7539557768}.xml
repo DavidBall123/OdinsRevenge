@@ -188,7 +188,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Hero\HeroSpellCasting.xnb</Output>
-      <Time>2012-04-09T10:14:21.2432+10:00</Time>
+      <Time>2012-04-09T11:03:14.4562+10:00</Time>
     </Item>
     <Item>
       <Source>Spells\LightningOne.png</Source>
@@ -197,7 +197,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Spells\LightningOne.xnb</Output>
-      <Time>2012-04-09T10:37:00.9862+10:00</Time>
+      <Time>2012-04-09T11:03:14.4682+10:00</Time>
     </Item>
     <Item>
       <Source>Spells\LightningTwo.png</Source>
@@ -206,7 +206,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Spells\LightningTwo.xnb</Output>
-      <Time>2012-04-09T10:51:10.6812+10:00</Time>
+      <Time>2012-04-09T11:03:14.4722+10:00</Time>
     </Item>
     <Item>
       <Source>Spells\LightningThree.png</Source>
@@ -215,7 +215,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Spells\LightningThree.xnb</Output>
-      <Time>2012-04-09T10:55:07.6112+10:00</Time>
+      <Time>2012-04-09T11:03:14.4712+10:00</Time>
     </Item>
     <Item>
       <Source>Spells\LightningFour.png</Source>
@@ -224,7 +224,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Spells\LightningFour.xnb</Output>
-      <Time>2012-04-09T10:56:43.3652+10:00</Time>
+      <Time>2012-04-09T11:03:14.4632+10:00</Time>
     </Item>
     <Item>
       <Source>Spells\LightningFive.png</Source>
@@ -233,7 +233,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Spells\LightningFive.xnb</Output>
-      <Time>2012-04-09T10:59:11.2362+10:00</Time>
+      <Time>2012-04-09T11:03:14.4622+10:00</Time>
     </Item>
     <Item>
       <Source>Spells\LightningSix.png</Source>
@@ -242,7 +242,25 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Spells\LightningSix.xnb</Output>
-      <Time>2012-04-09T11:00:22.7552+10:00</Time>
+      <Time>2012-04-09T11:03:14.4702+10:00</Time>
+    </Item>
+    <Item>
+      <Source>Hero\Bar.png</Source>
+      <Name>Hero\Bar</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Hero\Bar.xnb</Output>
+      <Time>2012-04-12T07:44:13.9892+10:00</Time>
+    </Item>
+    <Item>
+      <Source>Hero\HealthBar.png</Source>
+      <Name>Hero\HealthBar</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Hero\HealthBar.xnb</Output>
+      <Time>2012-04-12T20:20:59.7342+10:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

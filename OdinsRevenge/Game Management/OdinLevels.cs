@@ -24,6 +24,9 @@ namespace OdinsRevenge
 
         protected Texture2D powerOfThorTexture; 
         protected Dictionary<string, Texture2D> spells = new Dictionary<string,Texture2D>();
+
+        protected HealthBar healthBar = new HealthBar();
+        
         
 
         #endregion
@@ -42,9 +45,9 @@ namespace OdinsRevenge
         protected BackGround ground;
         protected BackGround stars;
 
-        protected BaseStaticOnScreenObjects cloud1 = new BaseStaticOnScreenObjects();
-        protected BaseStaticOnScreenObjects cloud2 = new BaseStaticOnScreenObjects();
-        protected BaseStaticOnScreenObjects cloud3 = new BaseStaticOnScreenObjects();
+        protected cloud cloud1 = new cloud();
+        protected cloud cloud2 = new cloud();
+        protected cloud cloud3 = new cloud();
         protected List<BaseStaticOnScreenObjects> cloudList = new List<BaseStaticOnScreenObjects>();
 
 
@@ -133,6 +136,10 @@ namespace OdinsRevenge
             spellCastingAnimation.Initialize(spellCastingTexture, Vector2.Zero, 85, 131, 2, 250, Color.White, 0.8f, true);
 
             player.Initialize(content.Load<Texture2D>("Hero\\Hero"), playerPostion, walkingAnimation, strikingAnimation, spellCastingAnimation, spells, this);
+
+            Vector2 healthBarPosition = new Vector2(20,20);
+            healthBar.Initialize(content.Load<Texture2D>("Hero\\Bar"), content.Load<Texture2D>("Hero\\HealthBar"), healthBarPosition); 
+            
 
             player.Direction = Direction.Right;
             player.Action = PlayerActions.Standing;

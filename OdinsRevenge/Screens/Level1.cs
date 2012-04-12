@@ -112,6 +112,7 @@ namespace OdinsRevenge
                 sun.Update(gameTime);
                 boat.Update(gameTime);
                 player.Update(gameTime);
+                healthBar.Update(player.health); 
             }
         }
 
@@ -140,6 +141,7 @@ namespace OdinsRevenge
             DrawClouds(spriteBatch);
             boat.Draw(spriteBatch);
             player.Draw(spriteBatch);
+            healthBar.Draw(spriteBatch);
             spriteBatch.End();
 
             // If the game is transitioning on or off, fade it out to black.

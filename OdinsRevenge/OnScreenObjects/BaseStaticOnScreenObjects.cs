@@ -4,37 +4,49 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace OdinsRevenge
 {
-    class BaseStaticOnScreenObjects
+    public abstract class BaseStaticOnScreenObjects 
     {
-        // Animation representing the object
-        public Texture2D objectTexture;
+        
+        protected Texture2D firstTexture;
+        protected Texture2D secondTexture; 
+
 
         // Position of the object relative to the upper left side of the screen
         public Vector2 Position;
 
         // State of the object
-        public bool Active;
-
-        // Amount of hit points that object has
-        public int Health;
+        protected bool Active;
 
         // Get the width of the object ship
         public int Width
         {
-            get { return objectTexture.Width; }
+            get { return firstTexture.Width; }
         }
 
         // Get the height of the object ship
         public int Height
         {
-            get { return objectTexture.Height; }
+            get { return firstTexture.Height; }
         }
 
+        protected GraphicsDevice graphicsDevice;
 
-
-        public void Initialize(Texture2D texture, Vector2 position)
+        public virtual void Initialize(Texture2D texture, Vector2 position)
         {
-            objectTexture = texture;
+            firstTexture = texture;
+            
+            // Set the starting position of the object around the middle of the screen and to the back
+            Position = position;
+
+            // Set the object to be active
+            Active = true;
+            
+        }
+
+        public virtual void Initialize(Texture2D texture, Texture2D texture2, Vector2 position)
+        {
+            firstTexture = texture;
+            secondTexture = texture2;
 
             // Set the starting position of the object around the middle of the screen and to the back
             Position = position;
@@ -42,10 +54,7 @@ namespace OdinsRevenge
             // Set the object to be active
             Active = true;
 
-            // Set the object health
-            Health = 100;
         }
-
      
         /// <summary>
         /// Base draw class
@@ -53,9 +62,13 @@ namespace OdinsRevenge
         /// <param name="spriteBatch"></param>
         /// <param name="objectFacingRight"></param>
 
-        public void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(objectTexture, Position, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(firstTexture, Position, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
         }
+
+
+
+        
     }
 }

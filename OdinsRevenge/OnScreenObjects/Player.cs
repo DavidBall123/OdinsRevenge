@@ -31,7 +31,7 @@ namespace OdinsRevenge
         bool active;
 
         // Amount of hit points that player has
-        int health;
+        public int health;
 
         int mana; 
 
@@ -103,7 +103,7 @@ namespace OdinsRevenge
             active = true;
 
             // Set the player health
-            health = 100;
+            health = 50;
 
             mana = 100; 
         }
