@@ -14,7 +14,7 @@ namespace OdinsRevenge
 
         public void Initialize(Texture2D sun)
         {
-            firstTexture = sun; 
+            objectTexture = sun; 
             Position.X = -100;
             Position.Y = 450; 
         }

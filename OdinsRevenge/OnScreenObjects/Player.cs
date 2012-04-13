@@ -33,7 +33,7 @@ namespace OdinsRevenge
         // Amount of hit points that player has
         public int health;
 
-        int mana; 
+        public int mana; 
 
         // Get the width of the player 
         public int Width
@@ -105,7 +105,7 @@ namespace OdinsRevenge
             // Set the player health
             health = 50;
 
-            mana = 100; 
+            mana = 50; 
         }
 
         public void Update(GameTime gameTime)

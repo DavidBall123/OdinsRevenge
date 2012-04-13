@@ -26,6 +26,7 @@ namespace OdinsRevenge
         protected Dictionary<string, Texture2D> spells = new Dictionary<string,Texture2D>();
 
         protected HealthBar healthBar = new HealthBar();
+        protected ManaBar manaBar = new ManaBar(); 
         
         
 
@@ -138,7 +139,10 @@ namespace OdinsRevenge
             player.Initialize(content.Load<Texture2D>("Hero\\Hero"), playerPostion, walkingAnimation, strikingAnimation, spellCastingAnimation, spells, this);
 
             Vector2 healthBarPosition = new Vector2(20,20);
-            healthBar.Initialize(content.Load<Texture2D>("Hero\\Bar"), content.Load<Texture2D>("Hero\\HealthBar"), healthBarPosition); 
+            healthBar.Initialize(content.Load<Texture2D>("Hero\\Bar"), content.Load<Texture2D>("Hero\\HealthBar"), healthBarPosition);
+
+            Vector2 manaBarPosition = new Vector2(20, 80);
+            manaBar.Initialize(content.Load<Texture2D>("Hero\\Bar"), content.Load<Texture2D>("Hero\\ManaBar"), manaBarPosition);
             
 
             player.Direction = Direction.Right;

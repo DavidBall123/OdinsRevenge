@@ -6,9 +6,9 @@ namespace OdinsRevenge
 {
     public abstract class BaseStaticOnScreenObjects 
     {
+
+        protected Texture2D objectTexture;
         
-        protected Texture2D firstTexture;
-        protected Texture2D secondTexture; 
 
 
         // Position of the object relative to the upper left side of the screen
@@ -20,20 +20,20 @@ namespace OdinsRevenge
         // Get the width of the object ship
         public int Width
         {
-            get { return firstTexture.Width; }
+            get { return objectTexture.Width; }
         }
 
         // Get the height of the object ship
         public int Height
         {
-            get { return firstTexture.Height; }
+            get { return objectTexture.Height; }
         }
 
         protected GraphicsDevice graphicsDevice;
 
         public virtual void Initialize(Texture2D texture, Vector2 position)
         {
-            firstTexture = texture;
+            objectTexture = texture;
             
             // Set the starting position of the object around the middle of the screen and to the back
             Position = position;
@@ -43,18 +43,7 @@ namespace OdinsRevenge
             
         }
 
-        public virtual void Initialize(Texture2D texture, Texture2D texture2, Vector2 position)
-        {
-            firstTexture = texture;
-            secondTexture = texture2;
 
-            // Set the starting position of the object around the middle of the screen and to the back
-            Position = position;
-
-            // Set the object to be active
-            Active = true;
-
-        }
      
         /// <summary>
         /// Base draw class
@@ -64,7 +53,7 @@ namespace OdinsRevenge
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(firstTexture, Position, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(objectTexture, Position, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
         }
 
 

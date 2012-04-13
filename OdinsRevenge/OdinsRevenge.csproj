@@ -88,6 +88,7 @@
     <Compile Include="OnScreenObjects\Boat.cs" />
     <Compile Include="OnScreenObjects\cloud.cs" />
     <Compile Include="OnScreenObjects\HealthBar.cs" />
+    <Compile Include="OnScreenObjects\ManaBar.cs" />
     <Compile Include="OnScreenObjects\StatusBar.cs" />
     <Compile Include="OnScreenObjects\Player.cs" />
     <Compile Include="Game Management\GameEnums.cs" />

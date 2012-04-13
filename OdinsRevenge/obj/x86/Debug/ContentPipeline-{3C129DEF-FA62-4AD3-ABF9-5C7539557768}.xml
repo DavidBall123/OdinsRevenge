@@ -251,7 +251,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Hero\Bar.xnb</Output>
-      <Time>2012-04-12T07:44:13.9892+10:00</Time>
+      <Time>2012-04-12T20:56:02.7082+10:00</Time>
     </Item>
     <Item>
       <Source>Hero\HealthBar.png</Source>
@@ -260,7 +260,16 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Hero\HealthBar.xnb</Output>
-      <Time>2012-04-12T20:20:59.7342+10:00</Time>
+      <Time>2012-04-12T20:56:02.7092+10:00</Time>
+    </Item>
+    <Item>
+      <Source>Hero\ManaBar.png</Source>
+      <Name>Hero\ManaBar</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Hero\ManaBar.xnb</Output>
+      <Time>2012-04-14T08:59:03.9888+10:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
