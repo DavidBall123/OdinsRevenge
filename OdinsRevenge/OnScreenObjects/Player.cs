@@ -28,7 +28,7 @@ namespace OdinsRevenge
         Vector2 startingPosition = Vector2.Zero;
 
         // State of the player
-        bool active;
+        //bool active;
 
         // Amount of hit points that player has
         public int health;
@@ -65,12 +65,14 @@ namespace OdinsRevenge
         public Direction Direction
         {
             set { direction = value; }
+            get { return direction; }
         }
 
         //Stores the current action the player is performing
         public PlayerActions Action
         {
             set { action = value; }
+            get { return action; }
         }
 
         public bool JumpInMotion
@@ -100,7 +102,7 @@ namespace OdinsRevenge
             PlayerPosition = position;
 
             // Set the player to be active
-            active = true;
+            //active = true;
 
             // Set the player health
             health = 50;
@@ -292,8 +294,10 @@ namespace OdinsRevenge
         {
             if (levelController.PreviousKeyboardState.IsKeyDown(Keys.Right))
             {
-                levelController.Ground.GroundOffset = levelController.Ground.GroundOffset + 5;
+                levelController.Ground.GroundOffset = levelController.Ground.GroundOffset + 1;
                 levelController.Stars.GroundOffset = levelController.Stars.GroundOffset + 1;
+                 
+                
                 if (jumpInMotion == true && jump != Jumping.Falling)
                 {
                     PlayerJump();
@@ -310,7 +314,7 @@ namespace OdinsRevenge
 
             if (levelController.PreviousKeyboardState.IsKeyDown(Keys.Left))
             {
-                levelController.Ground.GroundOffset = levelController.Ground.GroundOffset - 5;
+                levelController.Ground.GroundOffset = levelController.Ground.GroundOffset - 1;
                 levelController.Stars.GroundOffset = levelController.Stars.GroundOffset - 1;
                 if (jumpInMotion == true && jump != Jumping.Falling)
                 {

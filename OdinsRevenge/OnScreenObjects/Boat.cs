@@ -7,7 +7,7 @@ namespace OdinsRevenge
     class Boat : BaseAnimatedOnScreenObjects
     {
 
-        public virtual void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             animation.Position = Position;
             animation.Update(gameTime);
@@ -24,13 +24,24 @@ namespace OdinsRevenge
         {
             if (Position.X <= 950)
             {
-                Position.X = Position.X + 1;
+                if (levelController.Player.Direction == Direction.Left && levelController.Player.Action == PlayerActions.Walking)
+                {
+                    position.X = position.X + 1f;
+                }
+                else if (levelController.Player.Direction == Direction.Right && levelController.Player.Action == PlayerActions.Walking)
+                {
+                    position.X = position.X + 0.3f;
+                }
+                else
+                {
+                    position.X = position.X + 1;
+                }
             }
             else
             {
                 Random rand1 = new Random();
 
-                Position.X = rand1.Next(-1100, -400);
+                position.X = rand1.Next(-1100, -400);
 
             }
         }

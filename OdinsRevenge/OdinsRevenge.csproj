@@ -86,7 +86,9 @@
     <Compile Include="Game Management\ParallaxinBackground.cs" />
     <Compile Include="OnScreenObjects\Bird.cs" />
     <Compile Include="OnScreenObjects\Boat.cs" />
-    <Compile Include="OnScreenObjects\cloud.cs" />
+    <Compile Include="OnScreenObjects\Cloud.cs" />
+    <Compile Include="OnScreenObjects\DayEnemy1.cs" />
+    <Compile Include="OnScreenObjects\Enemies.cs" />
     <Compile Include="OnScreenObjects\HealthBar.cs" />
     <Compile Include="OnScreenObjects\ManaBar.cs" />
     <Compile Include="OnScreenObjects\StatusBar.cs" />

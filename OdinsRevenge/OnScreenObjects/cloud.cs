@@ -5,7 +5,7 @@ using System.Text;
 
 namespace OdinsRevenge
 {
-    class cloud : BaseStaticOnScreenObjects
+    class Cloud : BaseStaticOnScreenObjects
     {
     }
 }

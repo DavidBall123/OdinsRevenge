@@ -12,7 +12,9 @@ namespace OdinsRevenge
     {
         #region Player variables
 
-        protected Player player = new Player();
+        private Player player = new Player();
+
+       
 
         protected PlayerAnimation walkingAnimation = new PlayerAnimation();
         protected PlayerAnimation strikingAnimation = new PlayerAnimation();
@@ -26,7 +28,9 @@ namespace OdinsRevenge
         protected Dictionary<string, Texture2D> spells = new Dictionary<string,Texture2D>();
 
         protected HealthBar healthBar = new HealthBar();
-        protected ManaBar manaBar = new ManaBar(); 
+        protected ManaBar manaBar = new ManaBar();
+
+        protected Vector2 playerPostion;
         
         
 
@@ -46,9 +50,9 @@ namespace OdinsRevenge
         protected BackGround ground;
         protected BackGround stars;
 
-        protected cloud cloud1 = new cloud();
-        protected cloud cloud2 = new cloud();
-        protected cloud cloud3 = new cloud();
+        protected Cloud cloud1 = new Cloud();
+        protected Cloud cloud2 = new Cloud();
+        protected Cloud cloud3 = new Cloud();
         protected List<BaseStaticOnScreenObjects> cloudList = new List<BaseStaticOnScreenObjects>();
 
 
@@ -96,6 +100,13 @@ namespace OdinsRevenge
             get { return previousKeyBoardState; }
         }
 
+        public Player Player
+        {
+            get { return player; }
+            set { player = value; }
+        }
+        
+
 
 
         #endregion
@@ -121,22 +132,20 @@ namespace OdinsRevenge
             ground = new BackGround(content, "Backgrounds\\Level1");
             stars = new BackGround(content, "Backgrounds\\Stars");
 
-            LevelSpecificContent(); 
-
-            Vector2 playerPostion = new Vector2(300, 435);
+            playerPostion = new Vector2(300, 435);
 
             walkingTexture = content.Load<Texture2D>("Hero\\Walking");
             strikingTexture = content.Load<Texture2D>("Hero\\HeroStriking");
             spellCastingTexture = content.Load<Texture2D>("Hero\\HeroSpellCasting");
 
-            powerOfThorTexture = content.Load<Texture2D>("Spells\\LightningSix"); 
-            spells.Add("Power of Thor", powerOfThorTexture); 
+            powerOfThorTexture = content.Load<Texture2D>("Spells\\LightningSix");
+            spells.Add("Power of Thor", powerOfThorTexture);
 
             walkingAnimation.Initialize(walkingTexture, Vector2.Zero, 86, 109, 4, 100, Color.White, 0.8f, true);
             strikingAnimation.Initialize(strikingTexture, Vector2.Zero, 150, 150, 6, 100, Color.White, 0.8f, true);
             spellCastingAnimation.Initialize(spellCastingTexture, Vector2.Zero, 85, 131, 2, 250, Color.White, 0.8f, true);
 
-            player.Initialize(content.Load<Texture2D>("Hero\\Hero"), playerPostion, walkingAnimation, strikingAnimation, spellCastingAnimation, spells, this);
+            LevelSpecificContent(); 
 
             Vector2 healthBarPosition = new Vector2(20,20);
             healthBar.Initialize(content.Load<Texture2D>("Hero\\Bar"), content.Load<Texture2D>("Hero\\HealthBar"), healthBarPosition);
@@ -174,19 +183,19 @@ namespace OdinsRevenge
             cloudPosition.X = rand1.Next(800, 2000);
             cloudPosition.Y = rand1.Next(0, 300);
 
-            cloud1.Initialize(content.Load<Texture2D>("Backgrounds\\Clouds1"), cloudPosition);
+            cloud1.Initialize(content.Load<Texture2D>("Backgrounds\\Clouds1"), cloudPosition, this);
             cloudList.Add(cloud1);
 
             cloudPosition.X = rand1.Next(800, 2000);
             cloudPosition.Y = rand1.Next(0, 300);
 
-            cloud2.Initialize(content.Load<Texture2D>("Backgrounds\\Clouds2"), cloudPosition);
+            cloud2.Initialize(content.Load<Texture2D>("Backgrounds\\Clouds2"), cloudPosition, this);
             cloudList.Add(cloud2);
 
             cloudPosition.X = rand1.Next(800, 2000);
             cloudPosition.Y = rand1.Next(0, 300);
 
-            cloud3.Initialize(content.Load<Texture2D>("Backgrounds\\Clouds3"), cloudPosition);
+            cloud3.Initialize(content.Load<Texture2D>("Backgrounds\\Clouds3"), cloudPosition, this);
             cloudList.Add(cloud3);
 
         }

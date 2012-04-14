@@ -20,14 +20,17 @@ using Microsoft.Xna.Framework.Input;
 namespace OdinsRevenge
 {
   
-    class Level1 : OdinLevels
+    sealed class Level1 : OdinLevels
     {
         #region background & graphic variables
 
-      
+        // variables to control the bird
+
         Bird bird = new Bird();
         Animation birdAnimation = new Animation();
         Texture2D birdTexture;
+
+        // variables to contorl the boat
 
         Boat boat = new Boat(); 
         Animation boatAnimation = new Animation();
@@ -37,7 +40,19 @@ namespace OdinsRevenge
 
         #endregion
 
-       
+        #region Enemey Variables
+
+        DayEnemy1 dayEnemy1 = new DayEnemy1();
+        Animation dayEnemey1WalkingAnimation = new Animation();
+        Texture2D dayEnemey1WalkingTexture; 
+
+        #endregion
+
+        #region Properties
+
+      
+
+        #endregion
 
         #region Initialization
 
@@ -59,18 +74,30 @@ namespace OdinsRevenge
 
         protected override void LevelSpecificContent()
         {
+                       
+
+            Player.Initialize(content.Load<Texture2D>("Hero\\Hero"), playerPostion, walkingAnimation, strikingAnimation, spellCastingAnimation, spells, this);
+            
             ocean1 = new BackGround(content, "Backgrounds\\Ocean1");
 
             birdTexture = content.Load<Texture2D>("Backgrounds\\GreyBirdFly");
             birdAnimation.Initialize(birdTexture, Vector2.Zero, 33, 29, 4, 100, Color.White, 0.8f, true);
-            bird.Initialize(birdTexture, position, birdAnimation);
+            bird.Initialize(birdTexture, position, birdAnimation, this);
 
             position.X = -150;
             position.Y = 350;
 
             boatTexture = content.Load<Texture2D>("Backgrounds\\Boat");
             boatAnimation.Initialize(boatTexture, Vector2.Zero, 63, 69, 4, 100, Color.White, 0.8f, true);
-            boat.Initialize(boatTexture, position, boatAnimation);
+            boat.Initialize(boatTexture, position, boatAnimation, this);
+
+            position.X = 900;
+            position.Y = 440;
+
+            dayEnemey1WalkingTexture = content.Load<Texture2D>("DayEnemy1\\DayEnemy1Walking");
+            dayEnemey1WalkingAnimation.Initialize(dayEnemey1WalkingTexture, Vector2.Zero, 49, 71, 4, 100, Color.White, 1f, true);
+            dayEnemy1.Initialize(dayEnemey1WalkingTexture, position, dayEnemey1WalkingAnimation, this);
+            
         }
 
        
@@ -111,9 +138,10 @@ namespace OdinsRevenge
                 bird.Update(gameTime, day);
                 sun.Update(gameTime);
                 boat.Update(gameTime);
-                player.Update(gameTime);
-                healthBar.Update(player.health);
-                manaBar.Update(player.mana); 
+                Player.Update(gameTime);
+                healthBar.Update(Player.health);
+                manaBar.Update(Player.mana);
+                dayEnemy1.Update(gameTime); 
             }
         }
 
@@ -141,7 +169,8 @@ namespace OdinsRevenge
             bird.Draw(spriteBatch);
             DrawClouds(spriteBatch);
             boat.Draw(spriteBatch);
-            player.Draw(spriteBatch);
+            Player.Draw(spriteBatch);
+            dayEnemy1.Draw(spriteBatch); 
             healthBar.Draw(spriteBatch);
             manaBar.Draw(spriteBatch); 
             spriteBatch.End();
@@ -155,8 +184,6 @@ namespace OdinsRevenge
             }
         }
 
-     
-       
 
         /// <summary>
         /// Draws the coulds

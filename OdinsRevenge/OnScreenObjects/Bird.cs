@@ -23,14 +23,25 @@ namespace OdinsRevenge
         {
             if (Position.X >= -50 && day == true)
             {
-                Position.X = Position.X - 1;
+                if (levelController.Player.Direction == Direction.Left && levelController.Player.Action == PlayerActions.Walking)
+                {
+                    position.X = position.X - 0.5f;
+                }
+                else if (levelController.Player.Direction == Direction.Right && levelController.Player.Action == PlayerActions.Walking)
+                {
+                    position.X = position.X - 1.3f;
+                }
+                else
+                {
+                    position.X = position.X - 1;
+                }
             }
             else
             {
                 Random rand1 = new Random();
 
-                Position.X = rand1.Next(900, 1400);
-                Position.Y = rand1.Next(50, 250);
+                position.X = rand1.Next(900, 1400);
+                position.Y = rand1.Next(50, 250);
             }
         }
     }

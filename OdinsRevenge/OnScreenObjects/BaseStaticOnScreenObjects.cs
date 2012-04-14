@@ -4,11 +4,11 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace OdinsRevenge
 {
-    public abstract class BaseStaticOnScreenObjects 
+    class BaseStaticOnScreenObjects 
     {
 
         protected Texture2D objectTexture;
-        
+        protected OdinLevels levelController; 
 
 
         // Position of the object relative to the upper left side of the screen
@@ -29,11 +29,12 @@ namespace OdinsRevenge
             get { return objectTexture.Height; }
         }
 
-        protected GraphicsDevice graphicsDevice;
+        
 
-        public virtual void Initialize(Texture2D texture, Vector2 position)
+        public virtual void Initialize(Texture2D texture, Vector2 position, OdinLevels LevelController)
         {
             objectTexture = texture;
+            levelController = LevelController;
             
             // Set the starting position of the object around the middle of the screen and to the back
             Position = position;

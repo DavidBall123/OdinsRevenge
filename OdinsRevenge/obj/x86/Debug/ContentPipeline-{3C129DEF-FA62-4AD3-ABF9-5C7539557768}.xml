@@ -269,7 +269,16 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Hero\ManaBar.xnb</Output>
-      <Time>2012-04-14T08:59:03.9888+10:00</Time>
+      <Time>2012-04-14T09:06:10.1978+10:00</Time>
+    </Item>
+    <Item>
+      <Source>DayEnemy1\DayEnemy1Walking.png</Source>
+      <Name>DayEnemy1\DayEnemy1Walking</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\DayEnemy1\DayEnemy1Walking.xnb</Output>
+      <Time>2012-04-14T09:38:56.3168+10:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

@@ -9,9 +9,17 @@ namespace OdinsRevenge
         // Texture represetning a object standing still 
         protected Texture2D texture;
         protected Animation animation;
+        protected Vector2 position;
+        protected OdinLevels levelController; 
 
         // Position of the object relative to the upper left side of the screen
-        public Vector2 Position;
+        
+        public Vector2 Position
+        {
+            get { return position; }
+            set { position = value; }
+        }
+
 
         // State of the object
         protected bool active;
@@ -45,10 +53,11 @@ namespace OdinsRevenge
 
 
 
-        public virtual void Initialize(Texture2D Texture, Vector2 position, Animation animate)
+        public virtual void Initialize(Texture2D Texture, Vector2 position, Animation animate, OdinLevels LevelController)
         {
             texture = Texture;
             animation = animate;
+            levelController = LevelController; 
 
             Position = position;
 
