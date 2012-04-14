@@ -4,9 +4,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace OdinsRevenge
 {
-    class BaseAnimatedOnScreenObjects
+    abstract class BaseAnimatedOnScreenObjects
     {
-        // Texture represetning a object standing still 
+        
         protected Texture2D texture;
         protected Animation animation;
         protected Vector2 position;
@@ -65,8 +65,13 @@ namespace OdinsRevenge
             active = true;
 
             // Set the object health
-
         }
+
+        public virtual void Initialize(Texture2D Texture, Vector2 postion, Animation AttackAnimation, Animation WalkingAnimation, OdinLevels LevelController) 
+        {
+        }
+
+        
 
         public virtual void Update(GameTime gameTime)
         {

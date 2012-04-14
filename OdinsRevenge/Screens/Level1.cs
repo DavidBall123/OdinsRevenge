@@ -44,7 +44,10 @@ namespace OdinsRevenge
 
         DayEnemy1 dayEnemy1 = new DayEnemy1();
         Animation dayEnemey1WalkingAnimation = new Animation();
-        Texture2D dayEnemey1WalkingTexture; 
+        Texture2D dayEnemey1WalkingTexture;
+
+        Animation dayEnemy1AttackAnimation = new Animation();
+        Texture2D dayEnemey1AttackTexture; 
 
         #endregion
 
@@ -73,9 +76,7 @@ namespace OdinsRevenge
 
 
         protected override void LevelSpecificContent()
-        {
-                       
-
+        {                       
             Player.Initialize(content.Load<Texture2D>("Hero\\Hero"), playerPostion, walkingAnimation, strikingAnimation, spellCastingAnimation, spells, this);
             
             ocean1 = new BackGround(content, "Backgrounds\\Ocean1");
@@ -96,7 +97,10 @@ namespace OdinsRevenge
 
             dayEnemey1WalkingTexture = content.Load<Texture2D>("DayEnemy1\\DayEnemy1Walking");
             dayEnemey1WalkingAnimation.Initialize(dayEnemey1WalkingTexture, Vector2.Zero, 49, 71, 4, 100, Color.White, 1f, true);
-            dayEnemy1.Initialize(dayEnemey1WalkingTexture, position, dayEnemey1WalkingAnimation, this);
+
+            dayEnemey1AttackTexture = content.Load<Texture2D>("DayEnemy1\\DayEnemy1Attack");
+            dayEnemy1AttackAnimation.Initialize(dayEnemey1AttackTexture, Vector2.Zero, 83, 90, 6, 100, Color.White, 1f, true);
+            dayEnemy1.Initialize(dayEnemey1WalkingTexture, position, dayEnemy1AttackAnimation, dayEnemey1WalkingAnimation, this);
             
         }
 

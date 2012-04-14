@@ -278,7 +278,16 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\DayEnemy1\DayEnemy1Walking.xnb</Output>
-      <Time>2012-04-14T09:38:56.3168+10:00</Time>
+      <Time>2012-04-14T11:18:18.1528+10:00</Time>
+    </Item>
+    <Item>
+      <Source>DayEnemy1\DayEnemy1Attack.png</Source>
+      <Name>DayEnemy1\DayEnemy1Attack</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\DayEnemy1\DayEnemy1Attack.xnb</Output>
+      <Time>2012-04-14T12:05:59.7718+10:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

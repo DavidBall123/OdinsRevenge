@@ -6,10 +6,30 @@ namespace OdinsRevenge
 {
     class Enemies : BaseAnimatedOnScreenObjects
     {
+        protected Animation attackAnimation = new Animation();
+        protected Animation walkingAnimation = new Animation();
+        
+
+        public override void Initialize(Texture2D Texture, Vector2 position, Animation AttackAnimation, Animation WalkingAnimation, OdinLevels LevelController)
+        {
+            Position = position;
+            levelController = LevelController;
+            texture = Texture;
+            attackAnimation = AttackAnimation;
+            walkingAnimation = WalkingAnimation; 
+        }
+
         public override void Update(GameTime gameTime)
         {
-            animation.Position = Position;
-            animation.Update(gameTime);
+
+            
+
+            attackAnimation.Position = Position;
+            attackAnimation.Update(gameTime);
+
+            walkingAnimation.Position = Position;
+            walkingAnimation.Update(gameTime);
+
             UpdateEnemy();
         }
 
