@@ -11,8 +11,8 @@ namespace OdinsRevenge
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            int distance; 
-
+            int distance;
+            DrawHitBox(spriteBatch); 
             distance = (int)levelController.Player.PlayerPosition.X - (int)Position.X;
             
             if (distance > ATTACK && distance < TOO_FAR)
