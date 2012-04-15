@@ -29,8 +29,9 @@ namespace OdinsRevenge
         protected ManaBar manaBar = new ManaBar();
         protected EnergyBar energyBar = new EnergyBar(); 
 
-
         protected Vector2 playerPostion;
+
+        protected int playerHit = 0; 
         
         #endregion
 
@@ -59,7 +60,7 @@ namespace OdinsRevenge
         protected float pauseAlpha;
 
         private float groundLevel = 435;
-        private float roofHeight = 350;
+        private float roofHeight = 250;
 
         protected Texture2D middayLevel1;
         protected Texture2D sunSetLevel1;

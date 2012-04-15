@@ -28,6 +28,9 @@ namespace OdinsRevenge
         float attackingScale = 1.3f; 
         private int bw = 2; // Border width
         Texture2D borderLine;
+        private bool playerHit;
+
+       
 
         // Position of the Player relative to the upper left side of the screen
         public Vector2 PlayerPosition;
@@ -39,11 +42,29 @@ namespace OdinsRevenge
         //bool active;
 
         // Amount of hit points that player has
-        public int health;
+        private int health;
 
-        public int mana;
+        public int Health
+        {
+            get { return health; }
+            set { health = value; }
+        }
 
-        public double energy;
+        private int mana;
+
+        public int Mana
+        {
+            get { return mana; }
+            set { mana = value; }
+        }
+
+        private double energy;
+
+        public double Energy
+        {
+            get { return energy; }
+            set { energy = value; }
+        }
 
         // Gets the hitbox
 
@@ -102,6 +123,12 @@ namespace OdinsRevenge
             set { jump = value; } 
         }
 
+        public bool PlayerHit
+        {
+            get { return playerHit; }
+            set { playerHit = value; }
+        } 
+
         
 
 #endregion 
@@ -122,9 +149,10 @@ namespace OdinsRevenge
             //active = true;
 
             // Set the player health
-            health = 50;
+            health = 100;
+            playerHit = false; 
 
-            mana = 50; 
+            mana = 100; 
 
             energy = 100;
 
@@ -178,50 +206,66 @@ namespace OdinsRevenge
             spriteBatch.Draw(borderLine, new Rectangle(playerHitBox.Left, playerHitBox.Top, playerHitBox.Width, bw), Color.Purple);
             spriteBatch.Draw(borderLine, new Rectangle(playerHitBox.Left, playerHitBox.Bottom, playerHitBox.Width, bw), Color.Purple);
 
-            if (attacking == false)
+            if (playerHit == true)
             {
-                switch (action)
-                {
-                    case PlayerActions.Standing:
-                        DrawStanding(spriteBatch, direction);
-                        break;
-                    case PlayerActions.Walking:
-                        DrawAnimation(spriteBatch);
-                        break;
-                    case PlayerActions.Striking:
-                        if (energy >= 100)
-                        {
-                            attacking = true;
-                            DrawStriking(spriteBatch);
-                            energy = 0;
-
-                        }
-                        else
-                        {
-                            DrawStanding(spriteBatch, direction);
-                        }
-                        break;
-                    case PlayerActions.SpellCasting:
-                        DrawSpellCasting(spriteBatch);
-                        break;
-                }
+                PlayerAttacked();
+                DrawStanding(spriteBatch, direction); 
             }
             else
             {
-                if (attackCounter < 60)
+                if (attacking == false)
                 {
-                    DrawStriking(spriteBatch);
-                    attackCounter++;
+                    CheckPlayerAction(spriteBatch);
                 }
                 else
                 {
-                    attackCounter = 0;
-                    attacking = false; 
+                    PlayerAttack(spriteBatch);
                 }
-
             }
                
 
+        }
+
+        private void PlayerAttack(SpriteBatch spriteBatch)
+        {
+            if (attackCounter < 60)
+            {
+                DrawStriking(spriteBatch);
+                attackCounter++;
+            }
+            else
+            {
+                attackCounter = 0;
+                attacking = false;
+            }
+        }
+
+        private void CheckPlayerAction(SpriteBatch spriteBatch)
+        {
+            switch (action)
+            {
+                case PlayerActions.Standing:
+                    DrawStanding(spriteBatch, direction);
+                    break;
+                case PlayerActions.Walking:
+                    DrawAnimation(spriteBatch);
+                    break;
+                case PlayerActions.Striking:
+                    if (energy >= 100)
+                    {
+                        attacking = true;
+                        DrawStriking(spriteBatch);
+                        energy = 0;
+                    }
+                    else
+                    {
+                        DrawStanding(spriteBatch, direction);
+                    }
+                    break;
+                case PlayerActions.SpellCasting:
+                    DrawSpellCasting(spriteBatch);
+                    break;
+            }
         }
 
         /// <summary>
@@ -332,7 +376,7 @@ namespace OdinsRevenge
 
             if (PlayerPosition.Y <= levelController.GroundLevel)
             {
-                PlayerPosition.Y = PlayerPosition.Y + 10;
+                PlayerPosition.Y = PlayerPosition.Y + 1;
             }
             else
             {
@@ -355,12 +399,34 @@ namespace OdinsRevenge
 
             if (PlayerPosition.Y > levelController.RoofHeight)
             {
-                PlayerPosition.Y = PlayerPosition.Y - 5;
+                PlayerPosition.Y = PlayerPosition.Y - 2;
             }
             else
             {
                 jump = Jumping.Falling;
             }
+        }
+
+        private void PlayerAttacked()
+        {
+            if (PlayerPosition.Y > levelController.RoofHeight)
+            {
+                PlayerPosition.Y = PlayerPosition.Y - 2;
+            }
+            else
+            {
+                jump = Jumping.Falling;
+            }
+            levelController.Ground.GroundOffset = levelController.Ground.GroundOffset - 5;
+
+            //if (direction == Direction.Left)
+            //{
+            //    levelController.Ground.GroundOffset = levelController.Ground.GroundOffset - 5;
+            //}
+            //else
+            //{
+            //    levelController.Ground.GroundOffset = levelController.Ground.GroundOffset + 5;
+            //}
         }
 
         private void MoveRight()

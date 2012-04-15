@@ -20,6 +20,13 @@ namespace OdinsRevenge
 
         private bool death;
         private bool dying;
+        private bool attacking;
+
+        public bool Attacking
+        {
+            get { return attacking; }
+            set { attacking = value; }
+        }
 
         public bool Dying
         {
@@ -87,14 +94,28 @@ namespace OdinsRevenge
 
         protected virtual void UpdateEnemy()
         {
-            
-            if (levelController.Player.Direction == Direction.Left && levelController.Player.Action == PlayerActions.Walking)
+
+            if (levelController.Player.Direction == Direction.Left && levelController.Player.Action == PlayerActions.Walking || levelController.Player.Direction == Direction.Right && levelController.Player.PlayerHit == true)
             {
-                position.X = position.X + 0.1f;
+                if (levelController.Player.PlayerHit == true)
+                {
+                    position.X = position.X + 1;
+                }
+                else
+                {
+                    position.X = position.X + 0.1f;
+                }
             }
-            else if (levelController.Player.Direction == Direction.Right && levelController.Player.Action == PlayerActions.Walking)
+            else if (levelController.Player.Direction == Direction.Right && levelController.Player.Action == PlayerActions.Walking || levelController.Player.Direction == Direction.Left && levelController.Player.PlayerHit == true)
             {
-                position.X = position.X - 1.3f;
+                if (levelController.Player.PlayerHit == true)
+                {
+                    position.X = position.X - 2.0f;
+                }
+                else
+                {
+                    position.X = position.X - 1.3f;
+                }
             }
             else
             {

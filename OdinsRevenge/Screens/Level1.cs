@@ -140,11 +140,20 @@ namespace OdinsRevenge
                 sun.Update(gameTime);
                 boat.Update(gameTime);
                 Player.Update(gameTime);
-                healthBar.Update(Player.health);
-                manaBar.Update(Player.mana);
-                energyBar.Update(Player.energy); 
+                healthBar.Update(Player.Health);
+                manaBar.Update(Player.Mana);
+                energyBar.Update(Player.Energy); 
                 UpdateDayEnemy1(gameTime);
-                DetectCollision(); 
+                DetectCollision();
+                if (playerHit > 0)
+                {
+                    player.PlayerHit = true;
+                    playerHit--;
+                }
+                else
+                {
+                    player.PlayerHit = false;
+                }
                
                
             }
@@ -276,10 +285,17 @@ namespace OdinsRevenge
                 {
                     if (player.Action == PlayerActions.Striking)
                     {
-                        dayEnemey1List[i].Health = 0; 
+                        dayEnemey1List[i].Health = 0;
                     }
-                }
-                    
+                    else if (dayEnemey1List[i].Dying == false && dayEnemey1List[i].Attacking == true || dayEnemey1List[i].Death == false && dayEnemey1List[i].Attacking == true) 
+                    {
+                        if (playerHit == 0)
+                        {
+                            player.Health = player.Health - 10;
+                            playerHit = 80;
+                        }
+                    }
+                }   
             }
 
         }
