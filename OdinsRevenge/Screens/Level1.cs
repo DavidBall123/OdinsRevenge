@@ -78,7 +78,7 @@ namespace OdinsRevenge
 
         protected override void LevelSpecificContent()
         {                       
-            Player.Initialize(content.Load<Texture2D>("Hero\\Hero"), playerPostion, walkingAnimation, strikingAnimation, spellCastingAnimation, spells, this);
+            Player.Initialize(content.Load<Texture2D>("Hero\\Hero"), playerPostion, walkingAnimation, strikingAnimation, spellCastingAnimation, deathAnimation, spells, this);
             
             ocean1 = new BackGround(content, "Backgrounds\\Ocean1");
 
@@ -283,7 +283,7 @@ namespace OdinsRevenge
             {
                 if (player.HitBox.Intersects(dayEnemey1List[i].HitBox))
                 {
-                    if (player.Action == PlayerActions.Striking)
+                    if (player.Attacking == true)
                     {
                         dayEnemey1List[i].Health = 0;
                     }

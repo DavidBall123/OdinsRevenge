@@ -307,6 +307,15 @@
       <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\DayEnemy1\DayEnemy1Death.xnb</Output>
       <Time>2012-04-15T16:44:53.543+10:00</Time>
     </Item>
+    <Item>
+      <Source>Hero\HeroDeath.png</Source>
+      <Name>Hero\HeroDeath</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Hero\HeroDeath.xnb</Output>
+      <Time>2012-04-15T19:50:06.019+10:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{3C129DEF-FA62-4AD3-ABF9-5C7539557768}</ContentProjectGUID>

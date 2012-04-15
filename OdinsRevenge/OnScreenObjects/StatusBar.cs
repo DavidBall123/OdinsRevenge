@@ -43,12 +43,8 @@ namespace OdinsRevenge
             barPerct = ((double)barNumber / 100) * secondTexture.Width; //PUT THIS INTO CONSTANTS 
 
             Rectangle rect = new Rectangle(20,20,(int)barPerct,26);
-
-            spriteBatch.Draw(firstTexture, Position, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
             spriteBatch.Draw(secondTexture, rect, Color.White);
-            //spriteBatch.Draw(secondTexture, Position, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
-            
-
+            spriteBatch.Draw(firstTexture, Position, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
         }
     }
 }

@@ -16,11 +16,13 @@ namespace OdinsRevenge
 
         protected PlayerAnimation walkingAnimation = new PlayerAnimation();
         protected PlayerAnimation strikingAnimation = new PlayerAnimation();
-        protected PlayerAnimation spellCastingAnimation = new PlayerAnimation(); 
+        protected PlayerAnimation spellCastingAnimation = new PlayerAnimation();
+        protected PlayerAnimation deathAnimation = new PlayerAnimation(); 
         
         protected Texture2D walkingTexture;
         protected Texture2D strikingTexture;
         protected Texture2D spellCastingTexture;
+        protected Texture2D deathTexture; 
 
         protected Texture2D powerOfThorTexture; 
         protected Dictionary<string, Texture2D> spells = new Dictionary<string,Texture2D>();
@@ -133,6 +135,7 @@ namespace OdinsRevenge
             walkingTexture = content.Load<Texture2D>("Hero\\Walking");
             strikingTexture = content.Load<Texture2D>("Hero\\HeroStriking");
             spellCastingTexture = content.Load<Texture2D>("Hero\\HeroSpellCasting");
+            deathTexture = content.Load<Texture2D>("Hero\\HeroDeath");
 
             powerOfThorTexture = content.Load<Texture2D>("Spells\\LightningSix");
             spells.Add("Power of Thor", powerOfThorTexture);
@@ -140,16 +143,17 @@ namespace OdinsRevenge
             walkingAnimation.Initialize(walkingTexture, Vector2.Zero, 86, 109, 4, 100, Color.White, 0.8f, true);
             strikingAnimation.Initialize(strikingTexture, Vector2.Zero, 150, 150, 6, 100, Color.White, 0.8f, true);
             spellCastingAnimation.Initialize(spellCastingTexture, Vector2.Zero, 85, 131, 2, 250, Color.White, 0.8f, true);
+            deathAnimation.Initialize(deathTexture, Vector2.Zero, 91, 100, 5, 250, Color.White, 0.8f, true);
 
             LevelSpecificContent(); 
 
             Vector2 healthBarPosition = new Vector2(20,20);
             healthBar.Initialize(content.Load<Texture2D>("Hero\\Bar"), content.Load<Texture2D>("Hero\\HealthBar"), healthBarPosition);
 
-            Vector2 manaBarPosition = new Vector2(20, 80);
+            Vector2 manaBarPosition = new Vector2(20, 60);
             manaBar.Initialize(content.Load<Texture2D>("Hero\\Bar"), content.Load<Texture2D>("Hero\\ManaBar"), manaBarPosition);
 
-            Vector2 eneryBarPosition = new Vector2(20, 120);
+            Vector2 eneryBarPosition = new Vector2(20, 100);
             energyBar.Initialize(content.Load<Texture2D>("Hero\\Bar"), content.Load<Texture2D>("Hero\\EnergyBar"), manaBarPosition);
             
 

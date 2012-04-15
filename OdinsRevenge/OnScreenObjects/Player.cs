@@ -14,6 +14,7 @@ namespace OdinsRevenge
         private PlayerAnimation walkingAnimation;
         private PlayerAnimation strikingAnimation;
         private PlayerAnimation spellCastingAnimation;
+        private PlayerAnimation deathAnimation; 
         private Direction direction;
         private PlayerActions action;
         private bool jumpInMotion;
@@ -21,6 +22,10 @@ namespace OdinsRevenge
         private OdinLevels levelController; 
         private Dictionary<string, Texture2D> spells;
         private bool attacking;
+        private bool dying = false;
+        private bool dead = false; 
+
+       
         private int attackCounter;
         private Rectangle playerHitBox;
         private Texture2D playerHitBoxTexture;
@@ -127,18 +132,24 @@ namespace OdinsRevenge
         {
             get { return playerHit; }
             set { playerHit = value; }
-        } 
+        }
 
+        public bool Attacking
+        {
+            get { return attacking; }
+            set { attacking = value; }
+        }
         
 
 #endregion 
 
-        public void Initialize(Texture2D texture, Vector2 position, PlayerAnimation walkingAnimate, PlayerAnimation strikingAnimate, PlayerAnimation spellAnimate, Dictionary<string, Texture2D> spellsDict, OdinLevels LevelController)
+        public void Initialize(Texture2D texture, Vector2 position, PlayerAnimation walkingAnimate, PlayerAnimation strikingAnimate, PlayerAnimation spellAnimate, PlayerAnimation deathAnimate, Dictionary<string, Texture2D> spellsDict, OdinLevels LevelController)
         {
             playerTexture = texture;
             walkingAnimation = walkingAnimate;
             strikingAnimation = strikingAnimate;
             spellCastingAnimation = spellAnimate;
+            deathAnimation = deathAnimate;
             levelController = LevelController; 
             spells = spellsDict; 
 
@@ -148,12 +159,10 @@ namespace OdinsRevenge
             // Set the player to be active
             //active = true;
 
-            // Set the player health
-            health = 100;
+            // Set the player attributes
+            health = 10;
             playerHit = false; 
-
             mana = 100; 
-
             energy = 100;
 
             // load the players hitbox
@@ -166,26 +175,35 @@ namespace OdinsRevenge
 
         public void Update(GameTime gameTime)
         {
-            if (action == PlayerActions.Striking)
+            if (health <= 0)
             {
-                playerHitBox = new Rectangle((int)(PlayerPosition.X - 30), (int)(PlayerPosition.Y), (int)(Width * attackingScale), (int)(Height * attackingScale));
+                dying = true; 
             }
-            else
+            if (dead == false || dying == false)
             {
-                playerHitBox = new Rectangle((int)(PlayerPosition.X - 30), (int)(PlayerPosition.Y), (int)(Width * playerScale), (int)(Height * playerScale));
-            }
+                if (attacking == true)
+                {
+                    playerHitBox = new Rectangle((int)(PlayerPosition.X - 30), (int)(PlayerPosition.Y), (int)(Width * attackingScale), (int)(Height * attackingScale));
+                }
+                else
+                {
+                    playerHitBox = new Rectangle((int)(PlayerPosition.X - 30), (int)(PlayerPosition.Y), (int)(Width * playerScale), (int)(Height * playerScale));
+                }
 
-            if (energy <= 100)
-            {
-                energy = energy + 0.4; 
+                if (energy <= 100)
+                {
+                    energy = energy + 0.4;
+                }
+                walkingAnimation.Position = PlayerPosition;
+                walkingAnimation.Update(gameTime);
+                strikingAnimation.Position = PlayerPosition;
+                strikingAnimation.Update(gameTime);
+                deathAnimation.Position = PlayerPosition;
+                deathAnimation.Update(gameTime);
+                spellCastingAnimation.Position = PlayerPosition;
+                spellCastingAnimation.Update(gameTime);
+                Movement();
             }
-            walkingAnimation.Position = PlayerPosition;
-            walkingAnimation.Update(gameTime);
-            strikingAnimation.Position = PlayerPosition;
-            strikingAnimation.Update(gameTime);
-            spellCastingAnimation.Position = PlayerPosition;
-            spellCastingAnimation.Update(gameTime); 
-            Movement();
         }
 
         #region Drawing methods
@@ -206,24 +224,36 @@ namespace OdinsRevenge
             spriteBatch.Draw(borderLine, new Rectangle(playerHitBox.Left, playerHitBox.Top, playerHitBox.Width, bw), Color.Purple);
             spriteBatch.Draw(borderLine, new Rectangle(playerHitBox.Left, playerHitBox.Bottom, playerHitBox.Width, bw), Color.Purple);
 
-            if (playerHit == true)
+            if (dying == true)
             {
-                PlayerAttacked();
-                DrawStanding(spriteBatch, direction); 
+                DrawDeath(spriteBatch);
             }
             else
             {
-                if (attacking == false)
+                if (playerHit == true)
                 {
-                    CheckPlayerAction(spriteBatch);
+                    PlayerAttacked();
+                    DrawStanding(spriteBatch, direction);
                 }
                 else
                 {
-                    PlayerAttack(spriteBatch);
+                    if (attacking == false)
+                    {
+                        CheckPlayerAction(spriteBatch);
+                    }
+                    else
+                    {
+                        PlayerAttack(spriteBatch);
+                    }
                 }
             }
                
 
+        }
+
+        private void DrawDeath(SpriteBatch spriteBatch)
+        {
+            deathAnimation.Draw(spriteBatch); 
         }
 
         private void PlayerAttack(SpriteBatch spriteBatch)
