@@ -10,9 +10,9 @@ namespace OdinsRevenge
         protected Animation walkingAnimation = new Animation();
         
 
-        public override void Initialize(Texture2D Texture, Vector2 position, Animation AttackAnimation, Animation WalkingAnimation, OdinLevels LevelController)
+        public override void Initialize(Texture2D Texture, Vector2 Position, Animation AttackAnimation, Animation WalkingAnimation, OdinLevels LevelController)
         {
-            Position = position;
+            position = Position;
             levelController = LevelController;
             texture = Texture;
             attackAnimation = AttackAnimation;
@@ -22,12 +22,10 @@ namespace OdinsRevenge
         public override void Update(GameTime gameTime)
         {
 
-            
-
-            attackAnimation.Position = Position;
+            attackAnimation.Position = position;
             attackAnimation.Update(gameTime);
 
-            walkingAnimation.Position = Position;
+            walkingAnimation.Position = position;
             walkingAnimation.Update(gameTime);
 
             UpdateEnemy();

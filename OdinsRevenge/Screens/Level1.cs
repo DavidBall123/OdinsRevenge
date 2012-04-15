@@ -42,12 +42,13 @@ namespace OdinsRevenge
 
         #region Enemey Variables
 
-        DayEnemy1 dayEnemy1 = new DayEnemy1();
-        Animation dayEnemey1WalkingAnimation = new Animation();
-        Texture2D dayEnemey1WalkingTexture;
+        int day1EnemySpawner; 
+        DayEnemy1 dayEnemy1;
+        Random enemyTimer = new Random();
+        int nextSpawn; 
+        
+        List<DayEnemy1> dayEnemey1List = new List<DayEnemy1>(); 
 
-        Animation dayEnemy1AttackAnimation = new Animation();
-        Texture2D dayEnemey1AttackTexture; 
 
         #endregion
 
@@ -95,12 +96,8 @@ namespace OdinsRevenge
             position.X = 900;
             position.Y = 440;
 
-            dayEnemey1WalkingTexture = content.Load<Texture2D>("DayEnemy1\\DayEnemy1Walking");
-            dayEnemey1WalkingAnimation.Initialize(dayEnemey1WalkingTexture, Vector2.Zero, 49, 71, 4, 100, Color.White, 1f, true);
-
-            dayEnemey1AttackTexture = content.Load<Texture2D>("DayEnemy1\\DayEnemy1Attack");
-            dayEnemy1AttackAnimation.Initialize(dayEnemey1AttackTexture, Vector2.Zero, 83, 90, 6, 100, Color.White, 1f, true);
-            dayEnemy1.Initialize(dayEnemey1WalkingTexture, position, dayEnemy1AttackAnimation, dayEnemey1WalkingAnimation, this);
+            nextSpawn = enemyTimer.Next(200, 500); 
+            
             
         }
 
@@ -145,7 +142,9 @@ namespace OdinsRevenge
                 Player.Update(gameTime);
                 healthBar.Update(Player.health);
                 manaBar.Update(Player.mana);
-                dayEnemy1.Update(gameTime); 
+                UpdateDayEnemy1(gameTime);
+               
+               
             }
         }
 
@@ -174,9 +173,12 @@ namespace OdinsRevenge
             DrawClouds(spriteBatch);
             boat.Draw(spriteBatch);
             Player.Draw(spriteBatch);
-            dayEnemy1.Draw(spriteBatch); 
             healthBar.Draw(spriteBatch);
-            manaBar.Draw(spriteBatch); 
+            manaBar.Draw(spriteBatch);
+            foreach (DayEnemy1 e in dayEnemey1List)
+            {
+                e.Draw(spriteBatch);
+            }
             spriteBatch.End();
 
             // If the game is transitioning on or off, fade it out to black.
@@ -186,6 +188,50 @@ namespace OdinsRevenge
 
                 ScreenManager.FadeBackBufferToBlack(alpha);
             }
+        }
+
+        private void UpdateDayEnemy1(GameTime gameTime)
+        {
+            day1EnemySpawner++;
+            if (day1EnemySpawner == nextSpawn)
+            {
+                Animation dayEnemey1WalkingAnimation = new Animation();
+                Texture2D dayEnemey1WalkingTexture;
+
+                Animation dayEnemy1AttackAnimation = new Animation();
+                Texture2D dayEnemey1AttackTexture;
+
+                dayEnemey1WalkingTexture = content.Load<Texture2D>("DayEnemy1\\DayEnemy1Walking");
+                dayEnemey1WalkingAnimation.Initialize(dayEnemey1WalkingTexture, Vector2.Zero, 49, 71, 4, 100, Color.White, 1f, true);
+
+                dayEnemey1AttackTexture = content.Load<Texture2D>("DayEnemy1\\DayEnemy1Attack");
+                dayEnemy1AttackAnimation.Initialize(dayEnemey1AttackTexture, Vector2.Zero, 83, 90, 6, 100, Color.White, 1f, true);
+
+
+                dayEnemy1 = new DayEnemy1(); 
+                dayEnemy1.Initialize(dayEnemey1WalkingTexture, position, dayEnemy1AttackAnimation, dayEnemey1WalkingAnimation, this);
+                dayEnemey1List.Add(dayEnemy1);
+                day1EnemySpawner = 0;
+                nextSpawn = enemyTimer.Next(200, 500); 
+                
+            }
+
+            
+
+            foreach (DayEnemy1 e in dayEnemey1List)
+            {
+                e.Update(gameTime);
+            }
+
+            for (int i = 0; i < dayEnemey1List.Count; i++)
+            {
+                if (dayEnemey1List[i].Position.X < -200)
+                {
+                    dayEnemey1List.RemoveAt(i);
+                }
+            }
+
+           
         }
 
 
