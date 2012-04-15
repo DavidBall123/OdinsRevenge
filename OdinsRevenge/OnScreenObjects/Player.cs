@@ -22,6 +22,12 @@ namespace OdinsRevenge
         private Dictionary<string, Texture2D> spells;
         private bool attacking;
         private int attackCounter;
+        private Rectangle playerHitBox;
+        private Texture2D playerHitBoxTexture;
+        float playerScale = 0.8f;
+        float attackingScale = 1.3f; 
+        private int bw = 2; // Border width
+        Texture2D borderLine;
 
         // Position of the Player relative to the upper left side of the screen
         public Vector2 PlayerPosition;
@@ -114,10 +120,26 @@ namespace OdinsRevenge
             mana = 50; 
 
             energy = 100;
+
+            // load the players hitbox
+            playerHitBoxTexture = new Texture2D(levelController.ScreenManager.GraphicsDevice, 1, 1);
+            playerHitBoxTexture.SetData(new Color[] { Color.Transparent });
+
+            borderLine = new Texture2D(levelController.ScreenManager.GraphicsDevice, 1, 1);
+            borderLine.SetData(new[] { Color.White });
         }
 
         public void Update(GameTime gameTime)
         {
+            if (action == PlayerActions.Striking)
+            {
+                playerHitBox = new Rectangle((int)(PlayerPosition.X - 30), (int)(PlayerPosition.Y), (int)(Width * attackingScale), (int)(Height * attackingScale));
+            }
+            else
+            {
+                playerHitBox = new Rectangle((int)(PlayerPosition.X - 30), (int)(PlayerPosition.Y), (int)(Width * playerScale), (int)(Height * playerScale));
+            }
+
             if (energy <= 100)
             {
                 energy = energy + 0.4; 
@@ -143,6 +165,12 @@ namespace OdinsRevenge
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            spriteBatch.Draw(playerHitBoxTexture, playerHitBox, Color.Green);
+            spriteBatch.Draw(borderLine, new Rectangle(playerHitBox.Left, playerHitBox.Top, bw, playerHitBox.Height), Color.Purple);
+            spriteBatch.Draw(borderLine, new Rectangle(playerHitBox.Right, playerHitBox.Top, bw, playerHitBox.Height), Color.Purple);
+            spriteBatch.Draw(borderLine, new Rectangle(playerHitBox.Left, playerHitBox.Top, playerHitBox.Width, bw), Color.Purple);
+            spriteBatch.Draw(borderLine, new Rectangle(playerHitBox.Left, playerHitBox.Bottom, playerHitBox.Width, bw), Color.Purple);
+
             if (attacking == false)
             {
                 switch (action)
