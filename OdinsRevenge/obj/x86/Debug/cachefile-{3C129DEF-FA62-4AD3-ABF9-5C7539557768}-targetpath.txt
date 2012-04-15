@@ -30,3 +30,4 @@ Content\Hero\HealthBar.xnb
 Content\Hero\ManaBar.xnb
 Content\DayEnemy1\DayEnemy1Walking.xnb
 Content\DayEnemy1\DayEnemy1Attack.xnb
+Content\Hero\EnergyBar.xnb

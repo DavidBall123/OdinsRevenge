@@ -89,6 +89,7 @@
     <Compile Include="OnScreenObjects\Cloud.cs" />
     <Compile Include="OnScreenObjects\DayEnemy1.cs" />
     <Compile Include="OnScreenObjects\Enemies.cs" />
+    <Compile Include="OnScreenObjects\EnergyBar.cs" />
     <Compile Include="OnScreenObjects\HealthBar.cs" />
     <Compile Include="OnScreenObjects\ManaBar.cs" />
     <Compile Include="OnScreenObjects\StatusBar.cs" />

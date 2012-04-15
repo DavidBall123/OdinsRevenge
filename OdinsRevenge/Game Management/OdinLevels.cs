@@ -14,8 +14,6 @@ namespace OdinsRevenge
 
         private Player player = new Player();
 
-       
-
         protected PlayerAnimation walkingAnimation = new PlayerAnimation();
         protected PlayerAnimation strikingAnimation = new PlayerAnimation();
         protected PlayerAnimation spellCastingAnimation = new PlayerAnimation(); 
@@ -29,11 +27,11 @@ namespace OdinsRevenge
 
         protected HealthBar healthBar = new HealthBar();
         protected ManaBar manaBar = new ManaBar();
+        protected EnergyBar energyBar = new EnergyBar(); 
+
 
         protected Vector2 playerPostion;
         
-        
-
         #endregion
 
         #region background & graphic variables
@@ -106,9 +104,6 @@ namespace OdinsRevenge
             set { player = value; }
         }
         
-
-
-
         #endregion
 
         #region Methods
@@ -152,12 +147,13 @@ namespace OdinsRevenge
 
             Vector2 manaBarPosition = new Vector2(20, 80);
             manaBar.Initialize(content.Load<Texture2D>("Hero\\Bar"), content.Load<Texture2D>("Hero\\ManaBar"), manaBarPosition);
+
+            Vector2 eneryBarPosition = new Vector2(20, 120);
+            energyBar.Initialize(content.Load<Texture2D>("Hero\\Bar"), content.Load<Texture2D>("Hero\\EnergyBar"), manaBarPosition);
             
 
             player.Direction = Direction.Right;
             player.Action = PlayerActions.Standing;
-
-
 
             LoadClouds();
 

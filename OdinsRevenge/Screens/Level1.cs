@@ -142,6 +142,7 @@ namespace OdinsRevenge
                 Player.Update(gameTime);
                 healthBar.Update(Player.health);
                 manaBar.Update(Player.mana);
+                energyBar.Update(Player.energy); 
                 UpdateDayEnemy1(gameTime);
                
                
@@ -175,6 +176,7 @@ namespace OdinsRevenge
             Player.Draw(spriteBatch);
             healthBar.Draw(spriteBatch);
             manaBar.Draw(spriteBatch);
+            energyBar.Draw(spriteBatch); 
             foreach (DayEnemy1 e in dayEnemey1List)
             {
                 e.Draw(spriteBatch);
