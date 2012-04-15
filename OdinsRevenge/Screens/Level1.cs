@@ -144,6 +144,7 @@ namespace OdinsRevenge
                 manaBar.Update(Player.mana);
                 energyBar.Update(Player.energy); 
                 UpdateDayEnemy1(gameTime);
+                DetectCollision(); 
                
                
             }
@@ -203,19 +204,23 @@ namespace OdinsRevenge
                 Animation dayEnemy1AttackAnimation = new Animation();
                 Texture2D dayEnemey1AttackTexture;
 
+                Animation dayEnemey1DeathAnimation = new Animation();
+                Texture2D dayEnemey1DeathTexture; 
+
                 dayEnemey1WalkingTexture = content.Load<Texture2D>("DayEnemy1\\DayEnemy1Walking");
                 dayEnemey1WalkingAnimation.Initialize(dayEnemey1WalkingTexture, Vector2.Zero, 49, 71, 4, 100, Color.White, 1f, true);
 
                 dayEnemey1AttackTexture = content.Load<Texture2D>("DayEnemy1\\DayEnemy1Attack");
                 dayEnemy1AttackAnimation.Initialize(dayEnemey1AttackTexture, Vector2.Zero, 83, 90, 6, 100, Color.White, 1f, true);
 
-
+                dayEnemey1DeathTexture = content.Load<Texture2D>("DayEnemy1\\DayEnemy1Death");
+                dayEnemey1DeathAnimation.Initialize(dayEnemey1DeathTexture, Vector2.Zero, 86, 90, 3, 400, Color.White, 1f, true);
+                
                 dayEnemy1 = new DayEnemy1(); 
-                dayEnemy1.Initialize(dayEnemey1WalkingTexture, position, dayEnemy1AttackAnimation, dayEnemey1WalkingAnimation, this);
+                dayEnemy1.Initialize(dayEnemey1WalkingTexture, position, dayEnemy1AttackAnimation, dayEnemey1WalkingAnimation, dayEnemey1DeathAnimation, this);
                 dayEnemey1List.Add(dayEnemy1);
                 day1EnemySpawner = 0;
                 nextSpawn = enemyTimer.Next(200, 500); 
-                
             }
 
             
@@ -257,6 +262,26 @@ namespace OdinsRevenge
                     e.Position.Y = rand1.Next(0, 300);
                 }
             }
+        }
+
+        /// <summary>
+        /// Method checks to see if the players hit box & the bugs hit box are intersecting 
+        /// </summary>
+
+        private void DetectCollision()
+        {
+            for (int i = 0; i < dayEnemey1List.Count; i++)
+            {
+                if (player.HitBox.Intersects(dayEnemey1List[i].HitBox))
+                {
+                    if (player.Action == PlayerActions.Striking)
+                    {
+                        dayEnemey1List[i].Health = 0; 
+                    }
+                }
+                    
+            }
+
         }
 
 

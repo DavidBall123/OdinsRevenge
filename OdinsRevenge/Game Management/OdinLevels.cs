@@ -12,7 +12,7 @@ namespace OdinsRevenge
     {
         #region Player variables
 
-        private Player player = new Player();
+        protected Player player = new Player();
 
         protected PlayerAnimation walkingAnimation = new PlayerAnimation();
         protected PlayerAnimation strikingAnimation = new PlayerAnimation();

@@ -296,7 +296,16 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Hero\EnergyBar.xnb</Output>
-      <Time>2012-04-15T11:02:30.041+10:00</Time>
+      <Time>2012-04-15T14:37:18.057+10:00</Time>
+    </Item>
+    <Item>
+      <Source>DayEnemy1\DayEnemy1Death.png</Source>
+      <Name>DayEnemy1\DayEnemy1Death</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\DayEnemy1\DayEnemy1Death.xnb</Output>
+      <Time>2012-04-15T16:11:34.885+10:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

@@ -67,7 +67,7 @@ namespace OdinsRevenge
             // Set the object health
         }
 
-        public virtual void Initialize(Texture2D Texture, Vector2 postion, Animation AttackAnimation, Animation WalkingAnimation, OdinLevels LevelController) 
+        public virtual void Initialize(Texture2D Texture, Vector2 postion, Animation AttackAnimation, Animation WalkingAnimation, Animation DeathAnimation, OdinLevels LevelController) 
         {
         }
 

@@ -45,6 +45,13 @@ namespace OdinsRevenge
 
         public double energy;
 
+        // Gets the hitbox
+
+        public Rectangle HitBox
+        {
+            get { return playerHitBox; }
+        }
+
         // Get the width of the player 
         public int Width
         {
