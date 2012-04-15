@@ -19,7 +19,9 @@ namespace OdinsRevenge
         private bool jumpInMotion;
         private Jumping jump = new Jumping();
         private OdinLevels levelController; 
-        private Dictionary<string, Texture2D> spells; 
+        private Dictionary<string, Texture2D> spells;
+        private bool attacking;
+        private int attackCounter;
 
         // Position of the Player relative to the upper left side of the screen
         public Vector2 PlayerPosition;
@@ -35,7 +37,7 @@ namespace OdinsRevenge
 
         public int mana;
 
-        public int energy;
+        public double energy;
 
         // Get the width of the player 
         public int Width
@@ -116,6 +118,10 @@ namespace OdinsRevenge
 
         public void Update(GameTime gameTime)
         {
+            if (energy <= 100)
+            {
+                energy = energy + 0.4; 
+            }
             walkingAnimation.Position = PlayerPosition;
             walkingAnimation.Update(gameTime);
             strikingAnimation.Position = PlayerPosition;
@@ -137,21 +143,49 @@ namespace OdinsRevenge
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            switch (action)
+            if (attacking == false)
             {
-                case PlayerActions.Standing:
-                    DrawStanding(spriteBatch, direction);
-                    break;
-                case PlayerActions.Walking:
-                    DrawAnimation(spriteBatch);
-                    break;
-                case PlayerActions.Striking:
-                    DrawStriking(spriteBatch);
-                    break;
-                case PlayerActions.SpellCasting:
-                    DrawSpellCasting(spriteBatch);
-                    break;
+                switch (action)
+                {
+                    case PlayerActions.Standing:
+                        DrawStanding(spriteBatch, direction);
+                        break;
+                    case PlayerActions.Walking:
+                        DrawAnimation(spriteBatch);
+                        break;
+                    case PlayerActions.Striking:
+                        if (energy >= 100)
+                        {
+                            attacking = true;
+                            DrawStriking(spriteBatch);
+                            energy = 0;
+
+                        }
+                        else
+                        {
+                            DrawStanding(spriteBatch, direction);
+                        }
+                        break;
+                    case PlayerActions.SpellCasting:
+                        DrawSpellCasting(spriteBatch);
+                        break;
+                }
             }
+            else
+            {
+                if (attackCounter < 60)
+                {
+                    DrawStriking(spriteBatch);
+                    attackCounter++;
+                }
+                else
+                {
+                    attackCounter = 0;
+                    attacking = false; 
+                }
+
+            }
+               
 
         }
 

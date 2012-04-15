@@ -6,7 +6,7 @@ namespace OdinsRevenge
 {
     class StatusBar 
     {
-        protected int barNumber;
+        protected double barNumber;
         protected Texture2D firstTexture;
         protected Texture2D secondTexture;
         // Position of the object relative to the upper left side of the screen
@@ -26,7 +26,7 @@ namespace OdinsRevenge
 
         /// </summary>
         /// <param name="health"></param>
-        public void Update(int BarNumber)
+        public void Update(double BarNumber)
         {
             this.barNumber = BarNumber; 
         }
