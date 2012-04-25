@@ -90,10 +90,12 @@
     <Compile Include="OnScreenObjects\DayEnemy1.cs" />
     <Compile Include="OnScreenObjects\Enemies.cs" />
     <Compile Include="OnScreenObjects\EnergyBar.cs" />
-    <Compile Include="OnScreenObjects\HealthBar.cs" />
-    <Compile Include="OnScreenObjects\ManaBar.cs" />
-    <Compile Include="OnScreenObjects\StatusBar.cs" />
-    <Compile Include="OnScreenObjects\Player.cs" />
+    <Compile Include="OnScreenObjects\Player\HealthBar.cs" />
+    <Compile Include="OnScreenObjects\Player\ManaBar.cs" />
+    <Compile Include="OnScreenObjects\Player\PlayerAnimationController.cs" />
+    <Compile Include="OnScreenObjects\Player\PlayerResourceController.cs" />
+    <Compile Include="OnScreenObjects\Player\StatusBar.cs" />
+    <Compile Include="OnScreenObjects\Player\PlayerController.cs" />
     <Compile Include="Game Management\GameEnums.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screens\BackgroundScreen.cs" />

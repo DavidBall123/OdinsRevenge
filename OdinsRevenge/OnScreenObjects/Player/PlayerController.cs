@@ -6,20 +6,14 @@ using Microsoft.Xna.Framework.Input;
 
 namespace OdinsRevenge
 {
-    class Player
+    class PlayerController
     {
 
         #region variables and properites 
 
-        private const int MANA_REDUCTION = 20; // the amount of mana that should be reduced each time a spell is cast.
-
-
-
-        private Texture2D playerTexture;
-        private PlayerAnimation walkingAnimation;
-        private PlayerAnimation strikingAnimation;
-        private PlayerAnimation spellCastingAnimation;
-        private PlayerAnimation deathAnimation; 
+        PlayerAnimationController playerAnimationController;
+        
+        
         private Direction direction;
         private PlayerActions action;
         private bool jumpInMotion;
@@ -34,15 +28,12 @@ namespace OdinsRevenge
        
         private int attackCounter;
         private int spellCounter; 
-        private Rectangle playerHitBox;
-        private Texture2D playerHitBoxTexture;
+        
         float playerScale = 0.8f;
         float attackingScale = 1.3f; 
-        private int bw = 2; // Border width
-        Texture2D borderLine;
+        
         private bool playerHit;
 
-       
 
         // Position of the Player relative to the upper left side of the screen
         public Vector2 PlayerPosition;
@@ -53,63 +44,13 @@ namespace OdinsRevenge
         // State of the player
         //bool active;
 
-        // Amount of hit points that player has
-        private int health;
+        PlayerResourceController playerResources;
 
-        public int Health
+        internal PlayerResourceController PlayerResources
         {
-            get { return health; }
-            set { health = value; }
-        }
-
-        private int mana;
-
-        public int Mana
-        {
-            get { return mana; }
-            set { mana = value; }
-        }
-
-        private double energy;
-
-        public double Energy
-        {
-            get { return energy; }
-            set { energy = value; }
-        }
-
-        // Gets the hitbox
-
-        public Rectangle HitBox
-        {
-            get { return playerHitBox; }
-        }
-
-        // Get the width of the player 
-        public int Width
-        {
-            get { return playerTexture.Width; }
-        }
-
-        // Height of the  object
-        public int Height
-        {
-            get { return playerTexture.Height; }
-        }
-
-
-        // Get the width of the player 
-        public int WalkingAnimationWidth
-        {
-            get { return walkingAnimation.FrameWidth; }
-        }
-
-        // Get the height of the player
-        public int WalkingAnimationHeight
-        {
-            get { return walkingAnimation.FrameHeight; }
-        }
-
+            get { return playerResources; }
+            set { playerResources = value; }
+        } 
 
         // Stores the direction the player is facing 
         public Direction Direction
@@ -152,17 +93,23 @@ namespace OdinsRevenge
             get { return casting; }
             set { casting = value; }
         }
+
+        internal PlayerAnimationController PlayerAnimationController
+        {
+            get { return playerAnimationController; }
+            set { playerAnimationController = value; }
+        } 
         
 
 #endregion 
 
-        public void Initialize(Texture2D texture, Vector2 position, PlayerAnimation walkingAnimate, PlayerAnimation strikingAnimate, PlayerAnimation spellAnimate, PlayerAnimation deathAnimate, Dictionary<string, Texture2D> spellsDict, OdinLevels LevelController)
+        public void Initialize(Vector2 position, Dictionary<string, Texture2D> spellsDict, OdinLevels LevelController)
         {
-            playerTexture = texture;
-            walkingAnimation = walkingAnimate;
-            strikingAnimation = strikingAnimate;
-            spellCastingAnimation = spellAnimate;
-            deathAnimation = deathAnimate;
+
+            playerResources = new PlayerResourceController();
+            playerAnimationController = new PlayerAnimationController(); 
+            
+            
             levelController = LevelController; 
             spells = spellsDict; 
 
@@ -172,23 +119,20 @@ namespace OdinsRevenge
             // Set the player to be active
             //active = true;
 
-            // Set the player attributes
-            health = 10;
-            playerHit = false; 
-            mana = 100; 
-            energy = 100;
+            playerHit = false;
 
             // load the players hitbox
-            playerHitBoxTexture = new Texture2D(levelController.ScreenManager.GraphicsDevice, 1, 1);
-            playerHitBoxTexture.SetData(new Color[] { Color.Transparent });
+            playerAnimationController.PlayerHitBoxTexture = new Texture2D(levelController.ScreenManager.GraphicsDevice, 1, 1);
+            playerAnimationController.PlayerHitBoxTexture.SetData(new Color[] { Color.Transparent });
 
-            borderLine = new Texture2D(levelController.ScreenManager.GraphicsDevice, 1, 1);
-            borderLine.SetData(new[] { Color.White });
+            playerAnimationController.BorderLine = new Texture2D(levelController.ScreenManager.GraphicsDevice, 1, 1);
+            playerAnimationController.BorderLine.SetData(new[] { Color.White });
         }
 
         public void Update(GameTime gameTime)
         {
-            if (health <= 0)
+
+            if (playerResources.Health <= 0)
             {
                 dying = true; 
             }
@@ -196,25 +140,18 @@ namespace OdinsRevenge
             {
                 if (attacking == true)
                 {
-                    playerHitBox = new Rectangle((int)(PlayerPosition.X - 30), (int)(PlayerPosition.Y), (int)(Width * attackingScale), (int)(Height * attackingScale));
+                    playerAnimationController.PlayerHitBox = new Rectangle((int)(PlayerPosition.X - 30), (int)(PlayerPosition.Y), (int)(playerAnimationController.Width * attackingScale), (int)(playerAnimationController.Height * attackingScale));
                 }
                 else
                 {
-                    playerHitBox = new Rectangle((int)(PlayerPosition.X - 30), (int)(PlayerPosition.Y), (int)(Width * playerScale), (int)(Height * playerScale));
+                    playerAnimationController.PlayerHitBox = new Rectangle((int)(PlayerPosition.X - 30), (int)(PlayerPosition.Y), (int)(playerAnimationController.Width * playerScale), (int)(playerAnimationController.Height * playerScale));
                 }
 
-                if (energy <= 100)
+                if (playerResources.Energy <= 100)
                 {
-                    energy = energy + 0.4;
+                    playerResources.EnergyRecharge(); 
                 }
-                walkingAnimation.Position = PlayerPosition;
-                walkingAnimation.Update(gameTime);
-                strikingAnimation.Position = PlayerPosition;
-                strikingAnimation.Update(gameTime);
-                deathAnimation.Position = PlayerPosition;
-                deathAnimation.Update(gameTime);
-                spellCastingAnimation.Position = PlayerPosition;
-                spellCastingAnimation.Update(gameTime);
+                playerAnimationController.Update(gameTime, PlayerPosition);
                 Movement();
             }
         }
@@ -231,22 +168,18 @@ namespace OdinsRevenge
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(playerHitBoxTexture, playerHitBox, Color.Green);
-            spriteBatch.Draw(borderLine, new Rectangle(playerHitBox.Left, playerHitBox.Top, bw, playerHitBox.Height), Color.Purple);
-            spriteBatch.Draw(borderLine, new Rectangle(playerHitBox.Right, playerHitBox.Top, bw, playerHitBox.Height), Color.Purple);
-            spriteBatch.Draw(borderLine, new Rectangle(playerHitBox.Left, playerHitBox.Top, playerHitBox.Width, bw), Color.Purple);
-            spriteBatch.Draw(borderLine, new Rectangle(playerHitBox.Left, playerHitBox.Bottom, playerHitBox.Width, bw), Color.Purple);
+            playerAnimationController.Draw(spriteBatch); 
 
             if (dying == true)
             {
-                DrawDeath(spriteBatch);
+                playerAnimationController.DrawDeath(spriteBatch);
             }
             else
             {
                 if (playerHit == true)
                 {
                     PlayerAttacked();
-                    DrawStanding(spriteBatch, direction);
+                    playerAnimationController.DrawStanding(spriteBatch, direction, PlayerPosition);
                 }
                 else
                 {
@@ -263,21 +196,15 @@ namespace OdinsRevenge
                         PlayerCasting(spriteBatch);
                     }
                 }
-            }
-               
-
+            }  
         }
-
-        private void DrawDeath(SpriteBatch spriteBatch)
-        {
-            deathAnimation.Draw(spriteBatch); 
-        }
+       
 
         private void PlayerAttack(SpriteBatch spriteBatch)
         {
             if (attackCounter < 60)
             {
-                DrawStriking(spriteBatch);
+                playerAnimationController.DrawStriking(spriteBatch, direction);
                 attackCounter++;
             }
             else
@@ -291,7 +218,7 @@ namespace OdinsRevenge
         {
             if (spellCounter < 30)
             {
-                DrawSpellCasting(spriteBatch); 
+                playerAnimationController.DrawSpellCasting(spriteBatch, direction, spells); 
                 spellCounter++;
             }
             else
@@ -301,96 +228,46 @@ namespace OdinsRevenge
             }
         }
 
-           
 
         private void CheckPlayerAction(SpriteBatch spriteBatch)
         {
             switch (action)
             {
                 case PlayerActions.Standing:
-                    DrawStanding(spriteBatch, direction);
+                    playerAnimationController.DrawStanding(spriteBatch, direction, PlayerPosition);
                     break;
                 case PlayerActions.Walking:
-                    DrawAnimation(spriteBatch);
+                    playerAnimationController.DrawAnimation(spriteBatch, direction);
                     break;
                 case PlayerActions.Striking:
-                    if (energy >= 100)
+                    if (playerResources.Energy >= 100)
                     {
                         attacking = true;
-                        DrawStriking(spriteBatch);
-                        energy = 0;
+                        playerAnimationController.DrawStriking(spriteBatch, direction);
+                        playerResources.Energy = 0;
                     }
                     else
                     {
-                        DrawStanding(spriteBatch, direction);
+                        playerAnimationController.DrawStanding(spriteBatch, direction, PlayerPosition);
                     }
                     break;
                 case PlayerActions.SpellCasting:
-                    if (mana > 0)
+                    if (playerResources.Mana > 0)
                     {
                         casting = true;
-                        DrawSpellCasting(spriteBatch);
-                        mana = mana - MANA_REDUCTION; 
+                        playerAnimationController.DrawSpellCasting(spriteBatch, direction, spells); 
+                        playerResources.ReduceMana(); 
+                        
                     }
                     break;
             }
         }
 
-        /// <summary>
-        /// Draws the player casting a spell
-        /// </summary>
-        /// <param name="spriteBatch"></param>
+   
 
-        private void DrawSpellCasting(SpriteBatch spriteBatch)
-        {
-        
+       
 
-            spellCastingAnimation.Draw(spriteBatch, direction);
-            spriteBatch.Draw(spells["Power of Thor"], new Vector2(0, 0), Color.White); 
-            
-
-        }
-
-        /// <summary>
-        /// Draws the striking animation
-        /// </summary>
-        /// <param name="spriteBatch"></param>
-
-        private void DrawStriking(SpriteBatch spriteBatch)
-        {
-            strikingAnimation.Draw(spriteBatch, direction);
-        }
-
-        /// <summary>
-        /// Draws the player walking 
-        /// </summary>
-        /// <param name="spriteBatch"></param>
-
-        private void DrawAnimation(SpriteBatch spriteBatch)
-        {
-            walkingAnimation.Draw(spriteBatch, direction);
-        }
-
-
-
-        /// <summary>
-        /// The draw method for when the player is standing still 
-        /// </summary>
-        /// <param name="spriteBatch"></param>
-        /// <param name="direction"></param>
-
-        private void DrawStanding(SpriteBatch spriteBatch, Direction direction)
-        {
-            if (direction == Direction.Right)
-            {
-                spriteBatch.Draw(playerTexture, PlayerPosition, null, Color.White, 0f, Vector2.Zero, 0.8f, SpriteEffects.None, 0f);
-            }
-            else
-            {
-                spriteBatch.Draw(playerTexture, PlayerPosition, null, Color.White, 0f, Vector2.Zero, 0.8f, SpriteEffects.FlipHorizontally, 0f);
-            }
-        }
-
+ 
 
         #endregion
 

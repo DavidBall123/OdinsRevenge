@@ -12,7 +12,7 @@ namespace OdinsRevenge
     {
         #region Player variables
 
-        protected Player player = new Player();
+        protected PlayerController player = new PlayerController();
 
         protected PlayerAnimation walkingAnimation = new PlayerAnimation();
         protected PlayerAnimation strikingAnimation = new PlayerAnimation();
@@ -101,7 +101,7 @@ namespace OdinsRevenge
             get { return previousKeyBoardState; }
         }
 
-        public Player Player
+        public PlayerController Player
         {
             get { return player; }
             set { player = value; }
@@ -145,6 +145,8 @@ namespace OdinsRevenge
             spellCastingAnimation.Initialize(spellCastingTexture, Vector2.Zero, 85, 131, 2, 250, Color.White, 0.8f, true);
             deathAnimation.Initialize(deathTexture, Vector2.Zero, 91, 100, 5, 250, Color.White, 0.8f, true);
 
+            player.Initialize(playerPostion, spells, this);
+            player.PlayerAnimationController.Intialize(content.Load<Texture2D>("Hero\\Hero"), walkingAnimation, strikingAnimation, spellCastingAnimation, deathAnimation);
             LevelSpecificContent(); 
 
             Vector2 healthBarPosition = new Vector2(20,20);
