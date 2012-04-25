@@ -10,6 +10,11 @@ namespace OdinsRevenge
     {
 
         #region variables and properites 
+
+        private const int MANA_REDUCTION = 20; // the amount of mana that should be reduced each time a spell is cast.
+
+
+
         private Texture2D playerTexture;
         private PlayerAnimation walkingAnimation;
         private PlayerAnimation strikingAnimation;
@@ -22,11 +27,13 @@ namespace OdinsRevenge
         private OdinLevels levelController; 
         private Dictionary<string, Texture2D> spells;
         private bool attacking;
+        private bool casting;
         private bool dying = false;
         private bool dead = false; 
 
        
         private int attackCounter;
+        private int spellCounter; 
         private Rectangle playerHitBox;
         private Texture2D playerHitBoxTexture;
         float playerScale = 0.8f;
@@ -139,6 +146,12 @@ namespace OdinsRevenge
             get { return attacking; }
             set { attacking = value; }
         }
+
+        public bool Casting
+        {
+            get { return casting; }
+            set { casting = value; }
+        }
         
 
 #endregion 
@@ -237,13 +250,17 @@ namespace OdinsRevenge
                 }
                 else
                 {
-                    if (attacking == false)
+                    if (attacking == false && casting == false)
                     {
                         CheckPlayerAction(spriteBatch);
                     }
-                    else
+                    else if (attacking == true)
                     {
                         PlayerAttack(spriteBatch);
+                    }
+                    else if (casting == true)
+                    {
+                        PlayerCasting(spriteBatch);
                     }
                 }
             }
@@ -270,6 +287,22 @@ namespace OdinsRevenge
             }
         }
 
+         private void PlayerCasting(SpriteBatch spriteBatch)
+        {
+            if (spellCounter < 30)
+            {
+                DrawSpellCasting(spriteBatch); 
+                spellCounter++;
+            }
+            else
+            {
+                spellCounter = 0;
+                casting = false;
+            }
+        }
+
+           
+
         private void CheckPlayerAction(SpriteBatch spriteBatch)
         {
             switch (action)
@@ -293,7 +326,12 @@ namespace OdinsRevenge
                     }
                     break;
                 case PlayerActions.SpellCasting:
-                    DrawSpellCasting(spriteBatch);
+                    if (mana > 0)
+                    {
+                        casting = true;
+                        DrawSpellCasting(spriteBatch);
+                        mana = mana - MANA_REDUCTION; 
+                    }
                     break;
             }
         }
@@ -305,9 +343,11 @@ namespace OdinsRevenge
 
         private void DrawSpellCasting(SpriteBatch spriteBatch)
         {
-            
+        
+
             spellCastingAnimation.Draw(spriteBatch, direction);
-            spriteBatch.Draw(spells["Power of Thor"], new Vector2(0,0), Color.White); 
+            spriteBatch.Draw(spells["Power of Thor"], new Vector2(0, 0), Color.White); 
+            
 
         }
 
