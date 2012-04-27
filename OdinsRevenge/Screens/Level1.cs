@@ -40,30 +40,7 @@ namespace OdinsRevenge
 
         #endregion
 
-        #region Enemey Variables
-
-        int enemy1Spawner; 
-        Enemy1 enemy1;
-        Random enemy1Timer = new Random();
-        int next1Spawn; 
-        
-        List<Enemy1> dayEnemey1List = new List<Enemy1>();
-
-        int enemy2Spawner;
-        Enemy2 enemy2;
-        Random enemy2Timer = new Random();
-        int next2Spawn;
-
-        List<Enemy2> dayEnemey2List = new List<Enemy2>();
-
-
-        #endregion
-
-        #region Properties
-
-      
-
-        #endregion
+     
 
         #region Initialization
 
@@ -198,11 +175,11 @@ namespace OdinsRevenge
             healthBar.Draw(spriteBatch);
             manaBar.Draw(spriteBatch);
             energyBar.Draw(spriteBatch);
-            foreach (Enemy1 e in dayEnemey1List)
+            foreach (Enemy1 e in enemey1List)
             {
                 e.Draw(spriteBatch);
             }
-            foreach (Enemy2 e in dayEnemey2List)
+            foreach (Enemy2 e in enemey2List)
             {
                 e.Draw(spriteBatch);
             }
@@ -242,26 +219,26 @@ namespace OdinsRevenge
 
                 enemy1 = new Enemy1();
                 enemy1.Initialize(dayEnemey1WalkingTexture, position, dayEnemy1AttackAnimation, dayEnemey1WalkingAnimation, dayEnemey1DeathAnimation, this);
-                dayEnemey1List.Add(enemy1);
+                enemey1List.Add(enemy1);
                 enemy1Spawner = 0;
                 next1Spawn = enemy1Timer.Next(200, 500);
             }
 
 
-            foreach (Enemy1 e in dayEnemey1List)
+            foreach (Enemy1 e in enemey1List)
             {
                 e.Update(gameTime);
             }
 
-            for (int i = 0; i < dayEnemey1List.Count; i++)
+            for (int i = 0; i < enemey1List.Count; i++)
             {
-                if (dayEnemey1List[i].Position.X < -200)
+                if (enemey1List[i].Position.X < -200)
                 {
-                    dayEnemey1List.RemoveAt(i);
+                    enemey1List.RemoveAt(i);
                 }
-                else if (dayEnemey1List[i].Death == true)
+                else if (enemey1List[i].Death == true)
                 {
-                    dayEnemey1List.RemoveAt(i);
+                    enemey1List.RemoveAt(i);
                 }
             }
         }
@@ -295,26 +272,26 @@ namespace OdinsRevenge
 
                 enemy2 = new Enemy2();
                 enemy2.Initialize(dayEnemey2WalkingTexture, startPosition, dayEnemy2AttackAnimation, dayEnemey2WalkingAnimation, dayEnemey2DeathAnimation, this);
-                dayEnemey2List.Add(enemy2);
+                enemey2List.Add(enemy2);
                 enemy2Spawner = 0;
                 next2Spawn = enemy2Timer.Next(200, 500);
             }
 
 
-            foreach (Enemy2 e in dayEnemey2List)
+            foreach (Enemy2 e in enemey2List)
             {
                 e.Update(gameTime);
             }
 
-            for (int i = 0; i < dayEnemey2List.Count; i++)
+            for (int i = 0; i < enemey2List.Count; i++)
             {
-                if (dayEnemey2List[i].Position.X > 900)
+                if (enemey2List[i].Position.X > 900)
                 {
-                    dayEnemey2List.RemoveAt(i);
+                    enemey2List.RemoveAt(i);
                 }
-                else if (dayEnemey2List[i].Death == true)
+                else if (enemey2List[i].Death == true)
                 {
-                    dayEnemey2List.RemoveAt(i);
+                    enemey2List.RemoveAt(i);
                 }
             }
         }
@@ -348,15 +325,15 @@ namespace OdinsRevenge
 
         private void DetectCollision()
         {
-            for (int i = 0; i < dayEnemey1List.Count; i++)
+            for (int i = 0; i < enemey1List.Count; i++)
             {
-                if (player.PlayerAnimationController.HitBox.Intersects(dayEnemey1List[i].HitBox))
+                if (player.PlayerAnimationController.HitBox.Intersects(enemey1List[i].HitBox))
                 {
                     if (player.Attacking == true)
                     {
-                        dayEnemey1List[i].Health = 0;
+                        enemey1List[i].Health = 0;
                     }
-                    else if (dayEnemey1List[i].Dying == false && dayEnemey1List[i].Attacking == true || dayEnemey1List[i].Death == false && dayEnemey1List[i].Attacking == true)
+                    else if (enemey1List[i].Dying == false && enemey1List[i].Attacking == true || enemey1List[i].Death == false && enemey1List[i].Attacking == true)
                     {
                         if (playerHit == 0)
                         {
@@ -367,15 +344,15 @@ namespace OdinsRevenge
                 }
             }
 
-            for (int i = 0; i < dayEnemey2List.Count; i++)
+            for (int i = 0; i < enemey2List.Count; i++)
             {
-                if (player.PlayerAnimationController.HitBox.Intersects(dayEnemey2List[i].HitBox))
+                if (player.PlayerAnimationController.HitBox.Intersects(enemey2List[i].HitBox))
                 {
                     if (player.Attacking == true)
                     {
-                        dayEnemey2List[i].Health = 0;
+                        enemey2List[i].Health = 0;
                     }
-                    else if (dayEnemey2List[i].Dying == false && dayEnemey2List[i].Attacking == true || dayEnemey2List[i].Death == false && dayEnemey2List[i].Attacking == true) 
+                    else if (enemey2List[i].Dying == false && enemey2List[i].Attacking == true || enemey2List[i].Death == false && enemey2List[i].Attacking == true) 
                     {
                         if (playerHit == 0)
                         {

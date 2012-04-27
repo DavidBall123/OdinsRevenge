@@ -73,6 +73,26 @@ namespace OdinsRevenge
 
         #endregion
 
+        #region EnemyVariables
+
+        protected int enemy1Spawner;
+        protected Enemy1 enemy1;
+        protected Random enemy1Timer = new Random();
+        protected int next1Spawn;
+
+        protected List<Enemy1> enemey1List = new List<Enemy1>();
+
+        protected int enemy2Spawner;
+        protected Enemy2 enemy2;
+        protected Random enemy2Timer = new Random();
+        protected int next2Spawn;
+
+
+        protected List<Enemy2> enemey2List = new List<Enemy2>();
+
+
+        #endregion
+
         #region Properties
 
         public float GroundLevel
@@ -106,6 +126,18 @@ namespace OdinsRevenge
         {
             get { return player; }
             set { player = value; }
+        }
+
+        internal List<Enemy1> Enemey1List
+        {
+            get { return enemey1List; }
+            set { enemey1List = value; }
+        }
+
+        internal List<Enemy2> Enemey2List
+        {
+            get { return enemey2List; }
+            set { enemey2List = value; }
         }
         
         #endregion

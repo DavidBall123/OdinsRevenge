@@ -139,8 +139,6 @@ namespace OdinsRevenge
                
             }
 
-
-
             if (playerResources.Health <= 0)
             {
                 dying = true;
@@ -241,8 +239,17 @@ namespace OdinsRevenge
         {
             if (spellCounter < 30)
             {
+                foreach (Enemy1 e in levelController.Enemey1List)
+                {
+                    e.Death = true; 
+                }
+                foreach (Enemy2 e in levelController.Enemey2List)
+                {
+                    e.Death = true;
+                }
                 playerAnimationController.DrawSpellCasting(spriteBatch, direction, spells); 
                 spellCounter++;
+                
             }
             else
             {
