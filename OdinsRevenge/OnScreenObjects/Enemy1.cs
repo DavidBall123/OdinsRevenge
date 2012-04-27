@@ -1,9 +1,10 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+
 namespace OdinsRevenge
 {
-    class DayEnemy1 : Enemies
+    class Enemy1 : Enemies
     {
         private const int ATTACK = -100;
         private const int TOO_FAR = 100;

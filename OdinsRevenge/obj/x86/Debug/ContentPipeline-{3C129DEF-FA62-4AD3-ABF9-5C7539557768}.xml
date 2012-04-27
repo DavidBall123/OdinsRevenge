@@ -316,6 +316,33 @@
       <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Hero\HeroDeath.xnb</Output>
       <Time>2012-04-15T19:50:06.019+10:00</Time>
     </Item>
+    <Item>
+      <Source>Enemy2\Walking.png</Source>
+      <Name>Enemy2\Walking</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Enemy2\Walking.xnb</Output>
+      <Time>2012-04-28T07:20:59.761+10:00</Time>
+    </Item>
+    <Item>
+      <Source>Enemy2\Attacking.png</Source>
+      <Name>Enemy2\Attacking</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Enemy2\Attacking.xnb</Output>
+      <Time>2012-04-28T08:09:24.3686+10:00</Time>
+    </Item>
+    <Item>
+      <Source>Enemy2\Dying.png</Source>
+      <Name>Enemy2\Dying</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Enemy2\Dying.xnb</Output>
+      <Time>2012-04-28T08:12:59.5412+10:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{3C129DEF-FA62-4AD3-ABF9-5C7539557768}</ContentProjectGUID>

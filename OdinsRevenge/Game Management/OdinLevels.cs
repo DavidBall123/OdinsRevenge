@@ -33,7 +33,8 @@ namespace OdinsRevenge
 
         protected Vector2 playerPostion;
 
-        protected int playerHit = 0; 
+        protected int playerHit = 0;
+        private int gameOverCounter = 0;
         
         #endregion
 
@@ -121,44 +122,16 @@ namespace OdinsRevenge
 
             gameFont = content.Load<SpriteFont>("gamefont");
 
-            sun.Initialize(content.Load<Texture2D>("Backgrounds\\Sun"));
-
-            middayLevel1 = content.Load<Texture2D>("Backgrounds\\Midday");
-            sunSetLevel1 = content.Load<Texture2D>("Backgrounds\\Sunset");
-            nightLevel1 = content.Load<Texture2D>("Backgrounds\\Night");
-
-            ground = new BackGround(content, "Backgrounds\\Level1");
-            stars = new BackGround(content, "Backgrounds\\Stars");
+            LoadBackGrounds();
+            LoadAnimations();
 
             playerPostion = new Vector2(300, 435);
 
-            walkingTexture = content.Load<Texture2D>("Hero\\Walking");
-            strikingTexture = content.Load<Texture2D>("Hero\\HeroStriking");
-            spellCastingTexture = content.Load<Texture2D>("Hero\\HeroSpellCasting");
-            deathTexture = content.Load<Texture2D>("Hero\\HeroDeath");
-
-            powerOfThorTexture = content.Load<Texture2D>("Spells\\LightningSix");
-            spells.Add("Power of Thor", powerOfThorTexture);
-
-            walkingAnimation.Initialize(walkingTexture, Vector2.Zero, 86, 109, 4, 100, Color.White, 0.8f, true);
-            strikingAnimation.Initialize(strikingTexture, Vector2.Zero, 150, 150, 6, 100, Color.White, 0.8f, true);
-            spellCastingAnimation.Initialize(spellCastingTexture, Vector2.Zero, 85, 131, 2, 250, Color.White, 0.8f, true);
-            deathAnimation.Initialize(deathTexture, Vector2.Zero, 91, 100, 5, 250, Color.White, 0.8f, true);
-
             player.Initialize(playerPostion, spells, this);
             player.PlayerAnimationController.Intialize(content.Load<Texture2D>("Hero\\Hero"), walkingAnimation, strikingAnimation, spellCastingAnimation, deathAnimation);
-            LevelSpecificContent(); 
+            LevelSpecificContent();
 
-            Vector2 healthBarPosition = new Vector2(20,20);
-            healthBar.Initialize(content.Load<Texture2D>("Hero\\Bar"), content.Load<Texture2D>("Hero\\HealthBar"), healthBarPosition);
-
-            Vector2 manaBarPosition = new Vector2(20, 60);
-            manaBar.Initialize(content.Load<Texture2D>("Hero\\Bar"), content.Load<Texture2D>("Hero\\ManaBar"), manaBarPosition);
-
-            Vector2 eneryBarPosition = new Vector2(20, 100);
-            energyBar.Initialize(content.Load<Texture2D>("Hero\\Bar"), content.Load<Texture2D>("Hero\\EnergyBar"), manaBarPosition);
-            
-
+            LoadStatusBars();
             player.Direction = Direction.Right;
             player.Action = PlayerActions.Standing;
 
@@ -168,6 +141,43 @@ namespace OdinsRevenge
             // timing mechanism that we have just finished a very long frame, and that
             // it should not try to catch up.
             ScreenManager.Game.ResetElapsedTime();
+        }
+
+        private void LoadStatusBars()
+        {
+            Vector2 healthBarPosition = new Vector2(20, 20);
+            healthBar.Initialize(content.Load<Texture2D>("Hero\\Bar"), content.Load<Texture2D>("Hero\\HealthBar"), healthBarPosition);
+
+            Vector2 manaBarPosition = new Vector2(20, 60);
+            manaBar.Initialize(content.Load<Texture2D>("Hero\\Bar"), content.Load<Texture2D>("Hero\\ManaBar"), manaBarPosition);
+
+            Vector2 eneryBarPosition = new Vector2(20, 100);
+            energyBar.Initialize(content.Load<Texture2D>("Hero\\Bar"), content.Load<Texture2D>("Hero\\EnergyBar"), manaBarPosition);
+        }
+
+        private void LoadAnimations()
+        {
+            walkingTexture = content.Load<Texture2D>("Hero\\Walking");
+            strikingTexture = content.Load<Texture2D>("Hero\\HeroStriking");
+            spellCastingTexture = content.Load<Texture2D>("Hero\\HeroSpellCasting");
+            deathTexture = content.Load<Texture2D>("Hero\\HeroDeath");
+            powerOfThorTexture = content.Load<Texture2D>("Spells\\LightningSix");
+            spells.Add("Power of Thor", powerOfThorTexture);
+
+            walkingAnimation.Initialize(walkingTexture, Vector2.Zero, 86, 109, 4, 100, Color.White, 0.8f, true);
+            strikingAnimation.Initialize(strikingTexture, Vector2.Zero, 150, 150, 6, 100, Color.White, 0.8f, true);
+            spellCastingAnimation.Initialize(spellCastingTexture, Vector2.Zero, 85, 131, 2, 250, Color.White, 0.8f, true);
+            deathAnimation.Initialize(deathTexture, Vector2.Zero, 91, 100, 5, 250, Color.White, 0.8f, true);
+        }
+
+        private void LoadBackGrounds()
+        {
+            sun.Initialize(content.Load<Texture2D>("Backgrounds\\Sun"));
+            middayLevel1 = content.Load<Texture2D>("Backgrounds\\Midday");
+            sunSetLevel1 = content.Load<Texture2D>("Backgrounds\\Sunset");
+            nightLevel1 = content.Load<Texture2D>("Backgrounds\\Night");
+            ground = new BackGround(content, "Backgrounds\\Level1");
+            stars = new BackGround(content, "Backgrounds\\Stars");
         }
 
         protected abstract void LevelSpecificContent(); 
@@ -290,6 +300,21 @@ namespace OdinsRevenge
                 }
                 previousKeyBoardState = currentKeyboardState; 
             }
+        }
+
+        public void EndGame(SpriteBatch spriteBatch)
+        {
+            
+            Vector2 textPosition = new Vector2(300,335);
+            spriteBatch.DrawString(gameFont, "GAME OVER", textPosition, Color.Red);
+            gameOverCounter++;
+            ScreenManager.AddScreen(new MainMenuScreen(), null); 
+            if (gameOverCounter == 100)
+            {
+                
+                LoadingScreen.Load(ScreenManager, true, null, new MainMenuScreen());
+            }
+            
         }
 
     }

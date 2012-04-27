@@ -87,8 +87,9 @@
     <Compile Include="OnScreenObjects\Bird.cs" />
     <Compile Include="OnScreenObjects\Boat.cs" />
     <Compile Include="OnScreenObjects\Cloud.cs" />
-    <Compile Include="OnScreenObjects\DayEnemy1.cs" />
+    <Compile Include="OnScreenObjects\Enemy1.cs" />
     <Compile Include="OnScreenObjects\Enemies.cs" />
+    <Compile Include="OnScreenObjects\Enemy2.cs" />
     <Compile Include="OnScreenObjects\EnergyBar.cs" />
     <Compile Include="OnScreenObjects\Player\HealthBar.cs" />
     <Compile Include="OnScreenObjects\Player\ManaBar.cs" />

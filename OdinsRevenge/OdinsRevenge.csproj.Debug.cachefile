@@ -33,3 +33,6 @@ Content\DayEnemy1\DayEnemy1Attack.xnb
 Content\Hero\EnergyBar.xnb
 Content\DayEnemy1\DayEnemy1Death.xnb
 Content\Hero\HeroDeath.xnb
+Content\Enemy2\Walking.xnb
+Content\Enemy2\Attacking.xnb
+Content\Enemy2\Dying.xnb

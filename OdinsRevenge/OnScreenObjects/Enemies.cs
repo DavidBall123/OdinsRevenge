@@ -92,7 +92,7 @@ namespace OdinsRevenge
             UpdateEnemy();
         }
 
-        protected virtual void UpdateEnemy()
+        public virtual void UpdateEnemy()
         {
 
             if (levelController.Player.Direction == Direction.Left && levelController.Player.Action == PlayerActions.Walking || levelController.Player.Direction == Direction.Right && levelController.Player.PlayerHit == true)

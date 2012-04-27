@@ -42,12 +42,19 @@ namespace OdinsRevenge
 
         #region Enemey Variables
 
-        int day1EnemySpawner; 
-        DayEnemy1 dayEnemy1;
-        Random enemyTimer = new Random();
-        int nextSpawn; 
+        int enemy1Spawner; 
+        Enemy1 enemy1;
+        Random enemy1Timer = new Random();
+        int next1Spawn; 
         
-        List<DayEnemy1> dayEnemey1List = new List<DayEnemy1>(); 
+        List<Enemy1> dayEnemey1List = new List<Enemy1>();
+
+        int enemy2Spawner;
+        Enemy2 enemy2;
+        Random enemy2Timer = new Random();
+        int next2Spawn;
+
+        List<Enemy2> dayEnemey2List = new List<Enemy2>();
 
 
         #endregion
@@ -96,7 +103,8 @@ namespace OdinsRevenge
             position.X = 900;
             position.Y = 440;
 
-            nextSpawn = enemyTimer.Next(200, 500); 
+            next1Spawn = enemy1Timer.Next(200, 500);
+            next2Spawn = enemy2Timer.Next(100, 300); 
             
             
         }
@@ -143,7 +151,8 @@ namespace OdinsRevenge
                 healthBar.Update(Player.PlayerResources.Health);
                 manaBar.Update(Player.PlayerResources.Mana);
                 energyBar.Update(Player.PlayerResources.Energy); 
-                UpdateDayEnemy1(gameTime);
+                UpdateEnemy1(gameTime);
+                UpdateEnemy2(gameTime);
                 DetectCollision();
                 if (playerHit > 0)
                 {
@@ -158,6 +167,8 @@ namespace OdinsRevenge
                
             }
         }
+
+     
 
         /// <summary>
         /// Draws the gameplay screen.
@@ -186,8 +197,12 @@ namespace OdinsRevenge
             Player.Draw(spriteBatch);
             healthBar.Draw(spriteBatch);
             manaBar.Draw(spriteBatch);
-            energyBar.Draw(spriteBatch); 
-            foreach (DayEnemy1 e in dayEnemey1List)
+            energyBar.Draw(spriteBatch);
+            foreach (Enemy1 e in dayEnemey1List)
+            {
+                e.Draw(spriteBatch);
+            }
+            foreach (Enemy2 e in dayEnemey2List)
             {
                 e.Draw(spriteBatch);
             }
@@ -202,10 +217,10 @@ namespace OdinsRevenge
             }
         }
 
-        private void UpdateDayEnemy1(GameTime gameTime)
+        private void UpdateEnemy1(GameTime gameTime)
         {
-            day1EnemySpawner++;
-            if (day1EnemySpawner == nextSpawn)
+            enemy1Spawner++;
+            if (enemy1Spawner == next1Spawn)
             {
                 Animation dayEnemey1WalkingAnimation = new Animation();
                 Texture2D dayEnemey1WalkingTexture;
@@ -214,7 +229,7 @@ namespace OdinsRevenge
                 Texture2D dayEnemey1AttackTexture;
 
                 Animation dayEnemey1DeathAnimation = new Animation();
-                Texture2D dayEnemey1DeathTexture; 
+                Texture2D dayEnemey1DeathTexture;
 
                 dayEnemey1WalkingTexture = content.Load<Texture2D>("DayEnemy1\\DayEnemy1Walking");
                 dayEnemey1WalkingAnimation.Initialize(dayEnemey1WalkingTexture, Vector2.Zero, 49, 71, 4, 100, Color.White, 1f, true);
@@ -224,17 +239,16 @@ namespace OdinsRevenge
 
                 dayEnemey1DeathTexture = content.Load<Texture2D>("DayEnemy1\\DayEnemy1Death");
                 dayEnemey1DeathAnimation.Initialize(dayEnemey1DeathTexture, Vector2.Zero, 86, 90, 3, 400, Color.White, 1f, true);
-                
-                dayEnemy1 = new DayEnemy1(); 
-                dayEnemy1.Initialize(dayEnemey1WalkingTexture, position, dayEnemy1AttackAnimation, dayEnemey1WalkingAnimation, dayEnemey1DeathAnimation, this);
-                dayEnemey1List.Add(dayEnemy1);
-                day1EnemySpawner = 0;
-                nextSpawn = enemyTimer.Next(200, 500); 
+
+                enemy1 = new Enemy1();
+                enemy1.Initialize(dayEnemey1WalkingTexture, position, dayEnemy1AttackAnimation, dayEnemey1WalkingAnimation, dayEnemey1DeathAnimation, this);
+                dayEnemey1List.Add(enemy1);
+                enemy1Spawner = 0;
+                next1Spawn = enemy1Timer.Next(200, 500);
             }
 
-            
 
-            foreach (DayEnemy1 e in dayEnemey1List)
+            foreach (Enemy1 e in dayEnemey1List)
             {
                 e.Update(gameTime);
             }
@@ -245,9 +259,64 @@ namespace OdinsRevenge
                 {
                     dayEnemey1List.RemoveAt(i);
                 }
+                else if (dayEnemey1List[i].Death == true)
+                {
+                    dayEnemey1List.RemoveAt(i);
+                }
+            }
+        }
+
+        private void UpdateEnemy2(GameTime gameTime)
+        {
+            enemy2Spawner++;
+            if (enemy2Spawner == next2Spawn)
+            {
+                Animation dayEnemey2WalkingAnimation = new Animation();
+                Texture2D dayEnemey2WalkingTexture;
+
+                Animation dayEnemy2AttackAnimation = new Animation();
+                Texture2D dayEnemey2AttackTexture;
+
+                Animation dayEnemey2DeathAnimation = new Animation();
+                Texture2D dayEnemey2DeathTexture;
+
+                dayEnemey2WalkingTexture = content.Load<Texture2D>("Enemy2\\Walking");
+                dayEnemey2WalkingAnimation.Initialize(dayEnemey2WalkingTexture, Vector2.Zero, 52, 79, 4, 100, Color.White, 1f, true);
+
+                dayEnemey2AttackTexture = content.Load<Texture2D>("Enemy2\\Attacking");
+                dayEnemy2AttackAnimation.Initialize(dayEnemey2AttackTexture, Vector2.Zero, 71, 81, 6, 100, Color.White, 1f, true);
+
+                dayEnemey2DeathTexture = content.Load<Texture2D>("Enemy2\\Dying");
+                dayEnemey2DeathAnimation.Initialize(dayEnemey2DeathTexture, Vector2.Zero, 104, 84, 6, 200, Color.White, 1f, true);
+
+                Vector2 startPosition = new Vector2();
+                startPosition.X = -50;
+                startPosition.Y = 440; 
+
+                enemy2 = new Enemy2();
+                enemy2.Initialize(dayEnemey2WalkingTexture, startPosition, dayEnemy2AttackAnimation, dayEnemey2WalkingAnimation, dayEnemey2DeathAnimation, this);
+                dayEnemey2List.Add(enemy2);
+                enemy2Spawner = 0;
+                next2Spawn = enemy2Timer.Next(200, 500);
             }
 
-           
+
+            foreach (Enemy2 e in dayEnemey2List)
+            {
+                e.Update(gameTime);
+            }
+
+            for (int i = 0; i < dayEnemey2List.Count; i++)
+            {
+                if (dayEnemey2List[i].Position.X > 900)
+                {
+                    dayEnemey2List.RemoveAt(i);
+                }
+                else if (dayEnemey2List[i].Death == true)
+                {
+                    dayEnemey2List.RemoveAt(i);
+                }
+            }
         }
 
 
@@ -287,7 +356,26 @@ namespace OdinsRevenge
                     {
                         dayEnemey1List[i].Health = 0;
                     }
-                    else if (dayEnemey1List[i].Dying == false && dayEnemey1List[i].Attacking == true || dayEnemey1List[i].Death == false && dayEnemey1List[i].Attacking == true) 
+                    else if (dayEnemey1List[i].Dying == false && dayEnemey1List[i].Attacking == true || dayEnemey1List[i].Death == false && dayEnemey1List[i].Attacking == true)
+                    {
+                        if (playerHit == 0)
+                        {
+                            player.PlayerResources.ReduceHealth();
+                            playerHit = 80;
+                        }
+                    }
+                }
+            }
+
+            for (int i = 0; i < dayEnemey2List.Count; i++)
+            {
+                if (player.PlayerAnimationController.HitBox.Intersects(dayEnemey2List[i].HitBox))
+                {
+                    if (player.Attacking == true)
+                    {
+                        dayEnemey2List[i].Health = 0;
+                    }
+                    else if (dayEnemey2List[i].Dying == false && dayEnemey2List[i].Attacking == true || dayEnemey2List[i].Death == false && dayEnemey2List[i].Attacking == true) 
                     {
                         if (playerHit == 0)
                         {

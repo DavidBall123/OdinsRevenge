@@ -24,10 +24,13 @@ namespace OdinsRevenge
         private bool casting;
         private bool dying = false;
         private bool dead = false; 
+        
 
        
         private int attackCounter;
-        private int spellCounter; 
+        private int spellCounter;
+        private int deathCounter;
+        private int dyingCounter;
         
         float playerScale = 0.8f;
         float attackingScale = 1.3f; 
@@ -105,11 +108,10 @@ namespace OdinsRevenge
 
         public void Initialize(Vector2 position, Dictionary<string, Texture2D> spellsDict, OdinLevels LevelController)
         {
-
+            deathCounter = 0;
+            dyingCounter = 0; 
             playerResources = new PlayerResourceController();
             playerAnimationController = new PlayerAnimationController(); 
-            
-            
             levelController = LevelController; 
             spells = spellsDict; 
 
@@ -131,10 +133,22 @@ namespace OdinsRevenge
 
         public void Update(GameTime gameTime)
         {
+            if (dead == true)
+            {
+                deathCounter++;
+               
+            }
+
+
 
             if (playerResources.Health <= 0)
             {
-                dying = true; 
+                dying = true;
+                dyingCounter++;
+                if (dyingCounter == 60)
+                {
+                    dead = true;
+                }
             }
             if (dead == false || dying == false)
             {
@@ -154,6 +168,11 @@ namespace OdinsRevenge
                 playerAnimationController.Update(gameTime, PlayerPosition);
                 Movement();
             }
+        }
+
+        private void EndGame()
+        {
+            throw new NotImplementedException();
         }
 
         #region Drawing methods
@@ -196,7 +215,11 @@ namespace OdinsRevenge
                         PlayerCasting(spriteBatch);
                     }
                 }
-            }  
+            }
+            if (deathCounter >= 60)
+            {
+                levelController.EndGame(spriteBatch);
+            }
         }
        
 
@@ -264,11 +287,6 @@ namespace OdinsRevenge
         }
 
    
-
-       
-
- 
-
         #endregion
 
 
