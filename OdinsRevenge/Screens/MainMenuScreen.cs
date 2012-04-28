@@ -44,7 +44,7 @@ namespace OdinsRevenge
         void PlayGameMenuEntrySelected(object sender, PlayerIndexEventArgs e)
         {
             LoadingScreen.Load(ScreenManager, true, e.PlayerIndex,
-                               new Level2());
+                               new Level1());
         }
 
 

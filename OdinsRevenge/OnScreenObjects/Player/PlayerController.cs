@@ -24,8 +24,6 @@ namespace OdinsRevenge
         private bool casting;
         private bool dying = false;
         private bool dead = false; 
-        
-
        
         private int attackCounter;
         private int spellCounter;
@@ -136,7 +134,6 @@ namespace OdinsRevenge
             if (dead == true)
             {
                 deathCounter++;
-               
             }
 
             if (playerResources.Health <= 0)
@@ -244,10 +241,12 @@ namespace OdinsRevenge
                 foreach (Enemy1 e in levelController.Enemey1List)
                 {
                     e.Death = true;
+                    levelController.Score = levelController.Score + 1;
                 }
                 foreach (Enemy2 e in levelController.Enemey2List)
                 {
                     e.Death = true;
+                    levelController.Score = levelController.Score + 1;
                 }
                 spellCounter++;
                 
@@ -408,7 +407,11 @@ namespace OdinsRevenge
             {
                 levelController.Ground.GroundOffset = levelController.Ground.GroundOffset + 1;
                 levelController.Stars.GroundOffset = levelController.Stars.GroundOffset + 1;
-                levelController.Snow.GroundOffset = levelController.Snow.GroundOffset + 1;
+
+                if (levelController.LevelNumber == 2)
+                {
+                    levelController.Snow.GroundOffset = levelController.Snow.GroundOffset + 1;
+                }
                  
                 
                 if (jumpInMotion == true && jump != Jumping.Falling)
@@ -429,7 +432,12 @@ namespace OdinsRevenge
             {
                 levelController.Ground.GroundOffset = levelController.Ground.GroundOffset - 1;
                 levelController.Stars.GroundOffset = levelController.Stars.GroundOffset - 1;
-                levelController.Snow.GroundOffset = levelController.Snow.GroundOffset - 1;
+
+                if (levelController.LevelNumber == 2)
+                {
+                    levelController.Snow.GroundOffset = levelController.Snow.GroundOffset - 1;
+                }
+
                 if (jumpInMotion == true && jump != Jumping.Falling)
                 {
                     PlayerJump();

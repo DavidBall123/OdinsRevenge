@@ -43,10 +43,7 @@ namespace OdinsRevenge
 
         #endregion
 
-     
-
         #region Initialization
-
 
         /// <summary>
         /// Constructor.
@@ -106,7 +103,6 @@ namespace OdinsRevenge
         #endregion
 
         #region Update and Draw
-
 
         /// <summary>
         /// Updates the state of the game. This method checks the GameScreen.IsActive
@@ -196,6 +192,8 @@ namespace OdinsRevenge
             }
 
             spriteBatch.DrawString(statsFont, "Distance: " + distanceToTravel, new Vector2(600, 25), Color.White);
+            spriteBatch.DrawString(statsFont, "Score: " + Score, new Vector2(600, 45), Color.White);
+
             if (level1StartCounter > 0)
             {
                 spriteBatch.DrawString(gameFont, "Level 1", new Vector2(325, 250), Color.White);
@@ -218,176 +216,14 @@ namespace OdinsRevenge
             }
         }
 
-        private void UpdateEnemy1(GameTime gameTime)
-        {
-            enemy1Spawner++;
-            if (enemy1Spawner == next1Spawn)
-            {
-                Animation dayEnemey1WalkingAnimation = new Animation();
-                Texture2D dayEnemey1WalkingTexture;
+     
 
-                Animation dayEnemy1AttackAnimation = new Animation();
-                Texture2D dayEnemey1AttackTexture;
-
-                Animation dayEnemey1DeathAnimation = new Animation();
-                Texture2D dayEnemey1DeathTexture;
-
-                dayEnemey1WalkingTexture = content.Load<Texture2D>("DayEnemy1\\DayEnemy1Walking");
-                dayEnemey1WalkingAnimation.Initialize(dayEnemey1WalkingTexture, Vector2.Zero, 49, 71, 4, 100, Color.White, 1f, true);
-
-                dayEnemey1AttackTexture = content.Load<Texture2D>("DayEnemy1\\DayEnemy1Attack");
-                dayEnemy1AttackAnimation.Initialize(dayEnemey1AttackTexture, Vector2.Zero, 83, 90, 6, 100, Color.White, 1f, true);
-
-                dayEnemey1DeathTexture = content.Load<Texture2D>("DayEnemy1\\DayEnemy1Death");
-                dayEnemey1DeathAnimation.Initialize(dayEnemey1DeathTexture, Vector2.Zero, 86, 90, 3, 400, Color.White, 1f, true);
-
-                enemy1 = new Enemy1();
-                enemy1.Initialize(dayEnemey1WalkingTexture, position, dayEnemy1AttackAnimation, dayEnemey1WalkingAnimation, dayEnemey1DeathAnimation, this);
-                enemey1List.Add(enemy1);
-                enemy1Spawner = 0;
-                next1Spawn = enemy1Timer.Next(200, 500);
-            }
+     
 
 
-            foreach (Enemy1 e in enemey1List)
-            {
-                e.Update(gameTime);
-            }
+      
 
-            for (int i = 0; i < enemey1List.Count; i++)
-            {
-                if (enemey1List[i].Position.X < -200)
-                {
-                    enemey1List.RemoveAt(i);
-                }
-                else if (enemey1List[i].Death == true)
-                {
-                    enemey1List.RemoveAt(i);
-                }
-            }
-        }
-
-        private void UpdateEnemy2(GameTime gameTime)
-        {
-            enemy2Spawner++;
-            if (enemy2Spawner == next2Spawn)
-            {
-                Animation dayEnemey2WalkingAnimation = new Animation();
-                Texture2D dayEnemey2WalkingTexture;
-
-                Animation dayEnemy2AttackAnimation = new Animation();
-                Texture2D dayEnemey2AttackTexture;
-
-                Animation dayEnemey2DeathAnimation = new Animation();
-                Texture2D dayEnemey2DeathTexture;
-
-                dayEnemey2WalkingTexture = content.Load<Texture2D>("Enemy2\\Walking");
-                dayEnemey2WalkingAnimation.Initialize(dayEnemey2WalkingTexture, Vector2.Zero, 52, 79, 4, 100, Color.White, 1f, true);
-
-                dayEnemey2AttackTexture = content.Load<Texture2D>("Enemy2\\Attacking");
-                dayEnemy2AttackAnimation.Initialize(dayEnemey2AttackTexture, Vector2.Zero, 71, 81, 6, 100, Color.White, 1f, true);
-
-                dayEnemey2DeathTexture = content.Load<Texture2D>("Enemy2\\Dying");
-                dayEnemey2DeathAnimation.Initialize(dayEnemey2DeathTexture, Vector2.Zero, 104, 84, 6, 200, Color.White, 1f, true);
-
-                Vector2 startPosition = new Vector2();
-                startPosition.X = -50;
-                startPosition.Y = 440; 
-
-                enemy2 = new Enemy2();
-                enemy2.Initialize(dayEnemey2WalkingTexture, startPosition, dayEnemy2AttackAnimation, dayEnemey2WalkingAnimation, dayEnemey2DeathAnimation, this);
-                enemey2List.Add(enemy2);
-                enemy2Spawner = 0;
-                next2Spawn = enemy2Timer.Next(200, 500);
-            }
-
-
-            foreach (Enemy2 e in enemey2List)
-            {
-                e.Update(gameTime);
-            }
-
-            for (int i = 0; i < enemey2List.Count; i++)
-            {
-                if (enemey2List[i].Position.X > 900)
-                {
-                    enemey2List.RemoveAt(i);
-                }
-                else if (enemey2List[i].Death == true)
-                {
-                    enemey2List.RemoveAt(i);
-                }
-            }
-        }
-
-
-        /// <summary>
-        /// Draws the coulds
-        /// </summary>
-
-        private void DrawClouds(SpriteBatch spriteBatch)
-        {
-            foreach (BaseStaticOnScreenObjects e in cloudList)
-            {
-                if (e.Position.X >= -150)
-                {
-                    e.Position.X--;
-                    e.Draw(spriteBatch);
-                }
-                else
-                {
-                    Random rand1 = new Random();
-                    e.Position.X = rand1.Next(800, 2000);
-                    e.Position.Y = rand1.Next(0, 300);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Method checks to see if the players hit box & the bugs hit box are intersecting 
-        /// </summary>
-
-        private void DetectCollision()
-        {
-            for (int i = 0; i < enemey1List.Count; i++)
-            {
-                if (player.PlayerAnimationController.HitBox.Intersects(enemey1List[i].HitBox))
-                {
-                    if (player.Attacking == true)
-                    {
-                        enemey1List[i].Health = 0;
-                    }
-                    else if (enemey1List[i].Dying == false && enemey1List[i].Attacking == true || enemey1List[i].Death == false && enemey1List[i].Attacking == true)
-                    {
-                        if (playerHit == 0)
-                        {
-                            player.PlayerResources.ReduceHealth();
-                            playerHit = 80;
-                        }
-                    }
-                }
-            }
-
-            for (int i = 0; i < enemey2List.Count; i++)
-            {
-                if (player.PlayerAnimationController.HitBox.Intersects(enemey2List[i].HitBox))
-                {
-                    if (player.Attacking == true)
-                    {
-                        enemey2List[i].Health = 0;
-                    }
-                    else if (enemey2List[i].Dying == false && enemey2List[i].Attacking == true || enemey2List[i].Death == false && enemey2List[i].Attacking == true) 
-                    {
-                        if (playerHit == 0)
-                        {
-                            player.PlayerResources.ReduceHealth();  
-                            playerHit = 80;
-                        }
-                    }
-                }   
-            }
-
-        }
+    
 
 
         #endregion
