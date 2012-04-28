@@ -239,15 +239,16 @@ namespace OdinsRevenge
         {
             if (spellCounter < 30)
             {
+              
+                playerAnimationController.DrawSpellCasting(spriteBatch, direction, spells, levelController.Enemey1List, levelController.Enemey2List);
                 foreach (Enemy1 e in levelController.Enemey1List)
                 {
-                    e.Death = true; 
+                    e.Death = true;
                 }
                 foreach (Enemy2 e in levelController.Enemey2List)
                 {
                     e.Death = true;
                 }
-                playerAnimationController.DrawSpellCasting(spriteBatch, direction, spells); 
                 spellCounter++;
                 
             }
@@ -285,7 +286,7 @@ namespace OdinsRevenge
                     if (playerResources.Mana > 0)
                     {
                         casting = true;
-                        playerAnimationController.DrawSpellCasting(spriteBatch, direction, spells); 
+                        playerAnimationController.DrawSpellCasting(spriteBatch, direction, spells, levelController.Enemey1List, levelController.Enemey2List); 
                         playerResources.ReduceMana(); 
                         
                     }

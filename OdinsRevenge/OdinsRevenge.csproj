@@ -109,6 +109,10 @@
     <Compile Include="Screens\MessageBoxScreen.cs" />
     <Compile Include="Screens\OptionsMenuScreen.cs" />
     <Compile Include="Screens\PlayerIndexEventArgs.cs" />
+    <Compile Include="UCFramework\LineBatch.cs" />
+    <Compile Include="UCFramework\Particle.cs" />
+    <Compile Include="UCFramework\Renderable.cs" />
+    <Compile Include="UCFramework\Utils2.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

@@ -17,6 +17,13 @@ namespace OdinsRevenge
         private Texture2D playerHitBoxTexture;
         private int bw = 2; // Border width
         Texture2D borderLine;
+        private Texture2D smoke;
+        private List<ParticleSystem> particleList;
+        private int partCounter = 0; 
+
+        WayPointList wl = null;
+        Rectangle rectangle = new Rectangle(0, 0, 800, 600);
+
 
         public int Bw
         {
@@ -106,13 +113,15 @@ namespace OdinsRevenge
             get { return playerHitBox; }
         }
 
-        public void Intialize(Texture2D texture, PlayerAnimation walkingAnimate, PlayerAnimation strikingAnimate, PlayerAnimation spellAnimate, PlayerAnimation deathAnimate)
+        public void Intialize(Texture2D texture, PlayerAnimation walkingAnimate, PlayerAnimation strikingAnimate, PlayerAnimation spellAnimate, PlayerAnimation deathAnimate, Texture2D Smoke)
         {
+            particleList = new List<ParticleSystem>(); 
             playerTexture = texture;
             walkingAnimation = walkingAnimate;
             strikingAnimation = strikingAnimate;
             spellCastingAnimation = spellAnimate;
             deathAnimation = deathAnimate;
+            smoke = Smoke; 
         }
 
         public void Update(GameTime gameTime, Vector2 PlayerPosition)
@@ -125,6 +134,11 @@ namespace OdinsRevenge
             deathAnimation.Update(gameTime);
             spellCastingAnimation.Position = PlayerPosition;
             spellCastingAnimation.Update(gameTime);
+
+            foreach (ParticleSystem p in particleList)
+            {
+                p.Update(gameTime); 
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -134,6 +148,19 @@ namespace OdinsRevenge
             spriteBatch.Draw(borderLine, new Rectangle(playerHitBox.Right, playerHitBox.Top, bw, playerHitBox.Height), Color.Purple);
             spriteBatch.Draw(borderLine, new Rectangle(playerHitBox.Left, playerHitBox.Top, playerHitBox.Width, bw), Color.Purple);
             spriteBatch.Draw(borderLine, new Rectangle(playerHitBox.Left, playerHitBox.Bottom, playerHitBox.Width, bw), Color.Purple);
+
+            if (partCounter < 0)
+            {
+                particleList.Clear(); 
+            }
+
+            foreach (ParticleSystem p in particleList)
+            {
+                partCounter--; 
+                p.Draw(spriteBatch);
+            }
+
+
         }
 
         public void DrawDeath(SpriteBatch spriteBatch)
@@ -174,9 +201,47 @@ namespace OdinsRevenge
         /// </summary>
         /// <param name="spriteBatch"></param>
 
-        public void DrawSpellCasting(SpriteBatch spriteBatch, Direction direction, Dictionary<string, Texture2D> spells)
+        public void DrawSpellCasting(SpriteBatch spriteBatch, Direction direction, Dictionary<string, Texture2D> spells, List<Enemy1> enemey1List, List<Enemy2> enemey2List)
         {
+            partCounter = 250;
 
+            foreach (Enemy1 e in enemey1List)
+            {
+                Vector2 particlePos = new Vector2(e.Position.X, (e.Position.Y + 50));
+                ParticleSystem p = new ParticleSystem(particlePos, 40, 999);
+                p.tex = smoke;
+                p.setMandatory1(smoke, new Vector2(5, 5), new Vector2(32, 32), Color.Black, Color.White);
+                p.setMandatory2(-1, 1, 1, 5, 0);
+                rectangle = new Rectangle(0, 0, 800, 600);
+                p.setMandatory3(120, rectangle);
+                p.setMandatory4(new Vector2(0, 0), new Vector2(1, 0), new Vector2(0, 0));
+                p.randomDelta = new Vector2(0.1f, 0.1f);
+                p.moveTowards = 3;
+                p.moveTowardsPos = new Vector2(50, 50);
+                p.moveToDrift = 0.1f;
+                p.activate();
+                wl = null;
+                particleList.Add(p); 
+            }
+
+            foreach (Enemy2 e in enemey2List)
+            {
+                Vector2 particlePos = new Vector2(e.Position.X, (e.Position.Y + 50));
+                ParticleSystem p = new ParticleSystem(particlePos, 40, 999);
+                p.tex = smoke;
+                p.setMandatory1(smoke, new Vector2(5, 5), new Vector2(32, 32), Color.Black, Color.White);
+                p.setMandatory2(-1, 1, 1, 5, 0);
+                rectangle = new Rectangle(0, 0, 800, 600);
+                p.setMandatory3(120, rectangle);
+                p.setMandatory4(new Vector2(0, 0), new Vector2(1, 0), new Vector2(0, 0));
+                p.randomDelta = new Vector2(0.1f, 0.1f);
+                p.moveTowards = 3;
+                p.moveTowardsPos = new Vector2(50, 50);
+                p.moveToDrift = 0.1f;
+                p.activate();
+                wl = null;
+                particleList.Add(p); 
+            }
 
             spellCastingAnimation.Draw(spriteBatch, direction);
             spriteBatch.Draw(spells["Power of Thor"], new Vector2(0, 0), Color.White);

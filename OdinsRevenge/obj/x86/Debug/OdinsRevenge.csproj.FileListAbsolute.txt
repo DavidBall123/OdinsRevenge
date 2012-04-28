@@ -42,3 +42,4 @@ C:\Users\David\Documents\school\Game Program & design\OdinsRevenge\OdinsRevenge\
 C:\Users\David\Documents\school\Game Program & design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Enemy2\Walking.xnb
 C:\Users\David\Documents\school\Game Program & design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Enemy2\Attacking.xnb
 C:\Users\David\Documents\school\Game Program & design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Enemy2\Dying.xnb
+C:\Users\David\Documents\school\Game Program & design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Cloud8.xnb

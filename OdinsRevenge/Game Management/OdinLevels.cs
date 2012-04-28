@@ -68,6 +68,7 @@ namespace OdinsRevenge
         protected Texture2D middayLevel1;
         protected Texture2D sunSetLevel1;
         protected Texture2D nightLevel1;
+        protected Texture2D smoke; 
 
         private KeyboardState previousKeyBoardState; 
 
@@ -153,6 +154,7 @@ namespace OdinsRevenge
                 content = new ContentManager(ScreenManager.Game.Services, "Content");
 
             gameFont = content.Load<SpriteFont>("gamefont");
+            smoke = content.Load<Texture2D>("Cloud8"); 
 
             LoadBackGrounds();
             LoadAnimations();
@@ -160,7 +162,7 @@ namespace OdinsRevenge
             playerPostion = new Vector2(300, 435);
 
             player.Initialize(playerPostion, spells, this);
-            player.PlayerAnimationController.Intialize(content.Load<Texture2D>("Hero\\Hero"), walkingAnimation, strikingAnimation, spellCastingAnimation, deathAnimation);
+            player.PlayerAnimationController.Intialize(content.Load<Texture2D>("Hero\\Hero"), walkingAnimation, strikingAnimation, spellCastingAnimation, deathAnimation, smoke);
             LevelSpecificContent();
 
             LoadStatusBars();

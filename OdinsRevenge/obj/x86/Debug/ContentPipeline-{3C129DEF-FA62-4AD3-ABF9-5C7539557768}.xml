@@ -343,6 +343,15 @@
       <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Enemy2\Dying.xnb</Output>
       <Time>2012-04-28T08:15:39.817+10:00</Time>
     </Item>
+    <Item>
+      <Source>Cloud8.png</Source>
+      <Name>Cloud8</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Cloud8.xnb</Output>
+      <Time>2012-04-28T10:07:56.345+10:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{3C129DEF-FA62-4AD3-ABF9-5C7539557768}</ContentProjectGUID>
