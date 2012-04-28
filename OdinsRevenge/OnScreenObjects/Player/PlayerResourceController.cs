@@ -15,7 +15,7 @@ namespace OdinsRevenge
         private const double ENERGY_RECHARGE_RATE = 0.4;
         private const int STARTING_MANA = 100;
         private const int STARTING_ENERGY = 100;
-        private const int STARTING_HEALTH = 100;
+        private const int STARTING_HEALTH = 10;
 
         // Amount of hit points that player has
         private int health;

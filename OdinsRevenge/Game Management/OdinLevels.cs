@@ -59,6 +59,7 @@ namespace OdinsRevenge
 
 
         protected Random random = new Random();
+        bool endCall = false;
 
         protected float pauseAlpha;
 
@@ -154,8 +155,7 @@ namespace OdinsRevenge
                 content = new ContentManager(ScreenManager.Game.Services, "Content");
 
             gameFont = content.Load<SpriteFont>("gamefont");
-            smoke = content.Load<Texture2D>("Cloud8"); 
-
+            smoke = content.Load<Texture2D>("Cloud8");
             LoadBackGrounds();
             LoadAnimations();
 
@@ -295,12 +295,20 @@ namespace OdinsRevenge
             // whether a gamepad was ever plugged in, because we don't want to pause
             // on PC if they are playing with a keyboard and have no gamepad at all!
 
+            if (gameOverCounter == 100)
+            {
+
+                LoadingScreen.Load(ScreenManager, false, null, new BackgroundScreen(),
+                                                          new MainMenuScreen());
+            }
+
             if (input.IsPauseGame(ControllingPlayer))
             {
-                // ScreenManager.AddScreen(new PauseMenuScreen(), ControllingPlayer);
+                ScreenManager.AddScreen(new PauseMenuScreen(), ControllingPlayer);
             }
             else
             {
+                
                 // add my keyboard stuff here 
                 if (currentKeyboardState.IsKeyDown(Keys.Left))
                 {
@@ -342,12 +350,6 @@ namespace OdinsRevenge
             Vector2 textPosition = new Vector2(300,335);
             spriteBatch.DrawString(gameFont, "GAME OVER", textPosition, Color.Red);
             gameOverCounter++;
-            ScreenManager.AddScreen(new MainMenuScreen(), null); 
-            if (gameOverCounter == 100)
-            {
-                
-                LoadingScreen.Load(ScreenManager, true, null, new MainMenuScreen());
-            }
             
         }
 
