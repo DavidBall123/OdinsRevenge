@@ -46,3 +46,4 @@ C:\Users\David\Documents\school\Game Program & design\OdinsRevenge\OdinsRevenge\
 C:\Users\David\Documents\school\Game Program & design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Odin.xnb
 C:\Users\David\Documents\school\Game Program & design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\statsFont.xnb
 C:\Users\David\Documents\school\Game Program & design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Backgrounds\Snow.xnb
+C:\Users\David\Documents\school\Game Program & design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\SoundEffects\PlayerAttack.xnb

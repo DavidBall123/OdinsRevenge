@@ -66,16 +66,16 @@ namespace OdinsRevenge
         {                       
             
             
-            ocean1 = new BackGround(content, "Backgrounds\\Ocean1");
+            ocean1 = new BackGround(Content, "Backgrounds\\Ocean1");
 
-            birdTexture = content.Load<Texture2D>("Backgrounds\\GreyBirdFly");
+            birdTexture = Content.Load<Texture2D>("Backgrounds\\GreyBirdFly");
             birdAnimation.Initialize(birdTexture, Vector2.Zero, 33, 29, 4, 100, Color.White, 0.8f, true);
             bird.Initialize(birdTexture, position, birdAnimation, this);
 
             position.X = -150;
             position.Y = 350;
 
-            boatTexture = content.Load<Texture2D>("Backgrounds\\Boat");
+            boatTexture = Content.Load<Texture2D>("Backgrounds\\Boat");
             boatAnimation.Initialize(boatTexture, Vector2.Zero, 63, 69, 4, 100, Color.White, 0.8f, true);
             boat.Initialize(boatTexture, position, boatAnimation, this);
 
@@ -96,7 +96,7 @@ namespace OdinsRevenge
         /// </summary>
         public override void UnloadContent()
         {
-            content.Unload();
+            Content.Unload();
         }
 
 

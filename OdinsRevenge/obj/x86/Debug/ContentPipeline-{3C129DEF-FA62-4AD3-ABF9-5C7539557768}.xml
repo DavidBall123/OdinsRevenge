@@ -379,6 +379,15 @@
       <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Backgrounds\Snow.xnb</Output>
       <Time>2012-04-28T14:48:03.39+10:00</Time>
     </Item>
+    <Item>
+      <Source>SoundEffects\PlayerAttack.wav</Source>
+      <Name>SoundEffects\PlayerAttack</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\SoundEffects\PlayerAttack.xnb</Output>
+      <Time>2012-04-28T20:10:38.2622+10:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{3C129DEF-FA62-4AD3-ABF9-5C7539557768}</ContentProjectGUID>

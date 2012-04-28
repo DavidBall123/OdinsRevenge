@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 
 namespace OdinsRevenge
 {
@@ -24,7 +25,7 @@ namespace OdinsRevenge
         protected PlayerAnimation walkingAnimation = new PlayerAnimation();
         protected PlayerAnimation strikingAnimation = new PlayerAnimation();
         protected PlayerAnimation spellCastingAnimation = new PlayerAnimation();
-        protected PlayerAnimation deathAnimation = new PlayerAnimation(); 
+        protected PlayerAnimation deathAnimation = new PlayerAnimation();
         
         protected Texture2D walkingTexture;
         protected Texture2D strikingTexture;
@@ -63,7 +64,9 @@ namespace OdinsRevenge
 
         #region background & graphic variables
 
-        protected ContentManager content;
+        private ContentManager content;
+
+     
         protected SpriteFont gameFont;
         protected SpriteFont statsFont; 
 
@@ -122,6 +125,12 @@ namespace OdinsRevenge
         #endregion
 
         #region Properties
+
+        public ContentManager Content
+        {
+            get { return content; }
+            set { content = value; }
+        }
 
         public int Score
         {
@@ -188,7 +197,7 @@ namespace OdinsRevenge
         
         #endregion
 
-        #region Methods
+        #region Load Content Methods
 
         /// <summary>
         /// Load graphics content for the game.
@@ -291,6 +300,11 @@ namespace OdinsRevenge
             cloudList.Add(cloud3);
 
         }
+
+#endregion
+
+        #region background control methods
+
         /// <summary>
         /// method controls what background to draw based on the position of the sun
         /// 
@@ -320,6 +334,10 @@ namespace OdinsRevenge
 
         }
 
+#endregion
+
+        #region input methods
+
         /// <summary>
         /// Lets the game respond to player input. Unlike the Update method,
         /// this will only be called when the gameplay screen is active.
@@ -348,7 +366,6 @@ namespace OdinsRevenge
 
             if (gameOverCounter == 100)
             {
-
                 LoadingScreen.Load(ScreenManager, false, null, new BackgroundScreen(),
                                                           new MainMenuScreen());
             }
@@ -356,6 +373,10 @@ namespace OdinsRevenge
             if (input.IsPauseGame(ControllingPlayer))
             {
                 ScreenManager.AddScreen(new PauseMenuScreen(), ControllingPlayer);
+            }
+            else if (currentKeyboardState.IsKeyDown(Keys.F1))
+            {
+                   ScreenManager.AddScreen(new HelpScreen(), ControllingPlayer);
             }
             else
             {
@@ -396,6 +417,10 @@ namespace OdinsRevenge
                 previousKeyBoardState = currentKeyboardState; 
             }
         }
+
+#endregion
+
+        #region comman game logic
 
         public void EndGame(SpriteBatch spriteBatch)
         {

@@ -1,8 +1,12 @@
 ﻿using System;
-using System.Collections.Generic; 
+using System.Collections.Generic;
+using System.Threading;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
+
 
 namespace OdinsRevenge
 {
@@ -12,8 +16,8 @@ namespace OdinsRevenge
         #region variables and properites 
 
         PlayerAnimationController playerAnimationController;
-        
-        
+
+        SoundEffect attack; 
         private Direction direction;
         private PlayerActions action;
         private bool jumpInMotion;
@@ -34,6 +38,8 @@ namespace OdinsRevenge
         float attackingScale = 1.3f; 
         
         private bool playerHit;
+
+        
 
 
         // Position of the Player relative to the upper left side of the screen
@@ -112,6 +118,7 @@ namespace OdinsRevenge
             playerAnimationController = new PlayerAnimationController(); 
             levelController = LevelController; 
             spells = spellsDict; 
+            attack = LevelController.Content.Load<SoundEffect>("Soundeffects\\PlayerAttack"); 
 
             // Set the starting position of the player around the middle of the screen and to the back
             PlayerPosition = position;
@@ -272,6 +279,7 @@ namespace OdinsRevenge
                 case PlayerActions.Striking:
                     if (playerResources.Energy >= 100)
                     {
+                        attack.Play(); 
                         attacking = true;
                         playerAnimationController.DrawStriking(spriteBatch, direction);
                         playerResources.Energy = 0;

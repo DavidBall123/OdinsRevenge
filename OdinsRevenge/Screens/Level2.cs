@@ -61,9 +61,9 @@ namespace OdinsRevenge
         {                       
             
             
-            Snow = new BackGround(content, "Backgrounds\\Snow");
+            Snow = new BackGround(Content, "Backgrounds\\Snow");
 
-            birdTexture = content.Load<Texture2D>("Backgrounds\\GreyBirdFly");
+            birdTexture = Content.Load<Texture2D>("Backgrounds\\GreyBirdFly");
             birdAnimation.Initialize(birdTexture, Vector2.Zero, 33, 29, 4, 100, Color.White, 0.8f, true);
             bird.Initialize(birdTexture, position, birdAnimation, this);
 
@@ -89,7 +89,7 @@ namespace OdinsRevenge
         /// </summary>
         public override void UnloadContent()
         {
-            content.Unload();
+            Content.Unload();
         }
 
 
