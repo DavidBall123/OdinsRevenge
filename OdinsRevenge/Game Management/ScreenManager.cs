@@ -303,6 +303,15 @@ namespace OdinsRevenge
             spriteBatch.End();
         }
 
+        public void ExitGame()
+        {
+            foreach (GameScreen e in screens)
+            {
+                e.ExitScreen(); 
+            }
+            
+        }
+
 
         #endregion
     }

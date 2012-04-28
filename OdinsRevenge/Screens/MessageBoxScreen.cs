@@ -26,6 +26,7 @@ namespace OdinsRevenge
 
         string message;
         Texture2D gradientTexture;
+        SpriteFont confirmFont;
 
         #endregion
 
@@ -54,8 +55,8 @@ namespace OdinsRevenge
         /// </summary>
         public MessageBoxScreen(string message, bool includeUsageText)
         {
-            const string usageText = "\nA button, Space, Enter = ok" +
-                                     "\nB button, Esc = cancel";
+            const string usageText = "\n Space, Enter = ok" +
+                                     "\n Esc = cancel";
 
             if (includeUsageText)
                 this.message = message + usageText;
@@ -80,6 +81,7 @@ namespace OdinsRevenge
             ContentManager content = ScreenManager.Game.Content;
 
             gradientTexture = content.Load<Texture2D>("gradient");
+            confirmFont = content.Load<SpriteFont>("statsFont"); 
         }
 
 
@@ -103,9 +105,8 @@ namespace OdinsRevenge
             if (input.IsMenuSelect(ControllingPlayer, out playerIndex))
             {
                 // Raise the accepted event, then exit the message box.
-                if (Accepted != null)
-                    Accepted(this, new PlayerIndexEventArgs(playerIndex));
-
+                
+                ScreenManager.AddScreen(new ClosingScreen(), 0);
                 ExitScreen();
             }
             else if (input.IsMenuCancel(ControllingPlayer, out playerIndex))
@@ -139,7 +140,7 @@ namespace OdinsRevenge
             Viewport viewport = ScreenManager.GraphicsDevice.Viewport;
             Vector2 viewportSize = new Vector2(viewport.Width, viewport.Height);
             Vector2 textSize = font.MeasureString(message);
-            Vector2 textPosition = (viewportSize - textSize) / 2;
+            Vector2 textPosition = new Vector2(50, 100);
 
             // The background includes a border somewhat larger than the text itself.
             const int hPad = 32;
@@ -159,7 +160,7 @@ namespace OdinsRevenge
             spriteBatch.Draw(gradientTexture, backgroundRectangle, color);
 
             // Draw the message box text.
-            spriteBatch.DrawString(font, message, textPosition, color);
+            spriteBatch.DrawString(confirmFont, message, textPosition, color);
 
             spriteBatch.End();
         }
