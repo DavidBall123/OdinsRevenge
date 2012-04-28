@@ -408,6 +408,7 @@ namespace OdinsRevenge
             {
                 levelController.Ground.GroundOffset = levelController.Ground.GroundOffset + 1;
                 levelController.Stars.GroundOffset = levelController.Stars.GroundOffset + 1;
+                levelController.Snow.GroundOffset = levelController.Snow.GroundOffset + 1;
                  
                 
                 if (jumpInMotion == true && jump != Jumping.Falling)
@@ -428,6 +429,7 @@ namespace OdinsRevenge
             {
                 levelController.Ground.GroundOffset = levelController.Ground.GroundOffset - 1;
                 levelController.Stars.GroundOffset = levelController.Stars.GroundOffset - 1;
+                levelController.Snow.GroundOffset = levelController.Snow.GroundOffset - 1;
                 if (jumpInMotion == true && jump != Jumping.Falling)
                 {
                     PlayerJump();

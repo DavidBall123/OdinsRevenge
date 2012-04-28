@@ -36,6 +36,9 @@ namespace OdinsRevenge
         Animation boatAnimation = new Animation();
         Texture2D boatTexture;
 
+        private int level1StartCounter = 150;
+        
+
         BackGround ocean1;
 
         #endregion
@@ -50,6 +53,8 @@ namespace OdinsRevenge
         /// </summary>
         public Level1()
         {
+            base.LevelNumber = 1; 
+            levelEndCounter = 100; 
             TransitionOnTime = TimeSpan.FromSeconds(1.5);
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
             
@@ -112,6 +117,7 @@ namespace OdinsRevenge
                                                        bool coveredByOtherScreen)
         {
             base.Update(gameTime, otherScreenHasFocus, false);
+            level1StartCounter--;
 
             // Gradually fade in or out depending on whether we are covered by the pause screen.
             if (coveredByOtherScreen)
@@ -127,7 +133,12 @@ namespace OdinsRevenge
                 Player.Update(gameTime);
                 healthBar.Update(Player.PlayerResources.Health);
                 manaBar.Update(Player.PlayerResources.Mana);
-                energyBar.Update(Player.PlayerResources.Energy); 
+                energyBar.Update(Player.PlayerResources.Energy);
+                if (distanceToTravel < 0)
+                {
+                    enemey1List.Clear();
+                    enemey2List.Clear(); 
+                }
                 UpdateEnemy1(gameTime);
                 UpdateEnemy2(gameTime);
                 DetectCollision();
@@ -183,6 +194,19 @@ namespace OdinsRevenge
             {
                 e.Draw(spriteBatch);
             }
+
+            spriteBatch.DrawString(statsFont, "Distance: " + distanceToTravel, new Vector2(600, 25), Color.White);
+            if (level1StartCounter > 0)
+            {
+                spriteBatch.DrawString(gameFont, "Level 1", new Vector2(325, 250), Color.White);
+            }
+
+            if (distanceToTravel < 0)
+            {
+                levelEndCounter--; 
+                spriteBatch.DrawString(gameFont, "Level 1 Complete, Onwards to the tunrda" , new Vector2(100, 200), Color.White);
+            }
+
             spriteBatch.End();
 
             // If the game is transitioning on or off, fade it out to black.

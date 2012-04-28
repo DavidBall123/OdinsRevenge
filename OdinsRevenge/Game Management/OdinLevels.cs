@@ -10,6 +10,14 @@ namespace OdinsRevenge
 {
     abstract class  OdinLevels : GameScreen
     {
+
+        #region constants
+
+        protected const int distanceToTravel = 1000;
+
+        #endregion
+
+        
         #region Player variables
 
         protected PlayerController player = new PlayerController();
@@ -36,12 +44,19 @@ namespace OdinsRevenge
         protected int playerHit = 0;
         private int gameOverCounter = 0;
         
+        protected int levelEndCounter;
+        private int levelNumber;
+
+     
+        
         #endregion
 
         #region background & graphic variables
 
         protected ContentManager content;
         protected SpriteFont gameFont;
+        protected SpriteFont statsFont; 
+
 
         protected Vector2 position = new Vector2(800, 200);
 
@@ -51,6 +66,7 @@ namespace OdinsRevenge
 
         protected BackGround ground;
         protected BackGround stars;
+        private BackGround snow;
 
         protected Cloud cloud1 = new Cloud();
         protected Cloud cloud2 = new Cloud();
@@ -59,7 +75,7 @@ namespace OdinsRevenge
 
 
         protected Random random = new Random();
-        bool endCall = false;
+        
 
         protected float pauseAlpha;
 
@@ -96,6 +112,12 @@ namespace OdinsRevenge
         #endregion
 
         #region Properties
+
+        public BackGround Snow
+        {
+            get { return snow; }
+            set { snow = value; }
+        }
 
         public float GroundLevel
         {
@@ -155,6 +177,7 @@ namespace OdinsRevenge
                 content = new ContentManager(ScreenManager.Game.Services, "Content");
 
             gameFont = content.Load<SpriteFont>("gamefont");
+            statsFont = content.Load<SpriteFont>("statsFont"); 
             smoke = content.Load<Texture2D>("Cloud8");
             LoadBackGrounds();
             LoadAnimations();
@@ -295,6 +318,12 @@ namespace OdinsRevenge
             // whether a gamepad was ever plugged in, because we don't want to pause
             // on PC if they are playing with a keyboard and have no gamepad at all!
 
+            if (levelEndCounter < 0)
+            {
+                LoadingScreen.Load(ScreenManager, true, 0,
+                               new Level2());
+            }
+
             if (gameOverCounter == 100)
             {
 
@@ -314,6 +343,7 @@ namespace OdinsRevenge
                 {
                     player.Direction = Direction.Left;
                     player.Action = PlayerActions.Walking;
+                    distanceToTravel++;
                     
 
                 }
@@ -321,6 +351,7 @@ namespace OdinsRevenge
                 {
                     player.Direction = Direction.Right;
                     player.Action = PlayerActions.Walking;
+                    distanceToTravel--;
                 }
                 else
                 {
