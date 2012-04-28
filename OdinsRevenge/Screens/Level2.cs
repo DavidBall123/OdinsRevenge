@@ -209,5 +209,67 @@ namespace OdinsRevenge
 
 
         #endregion
+
+        #region Game logic
+
+        protected override void FirstEnemy()
+        {
+
+            Animation dayEnemey1WalkingAnimation = new Animation();
+            Texture2D dayEnemey1WalkingTexture;
+
+            Animation dayEnemy1AttackAnimation = new Animation();
+            Texture2D dayEnemey1AttackTexture;
+
+            Animation dayEnemey1DeathAnimation = new Animation();
+            Texture2D dayEnemey1DeathTexture;
+
+            dayEnemey1WalkingTexture = content.Load<Texture2D>("Level2Enemy1\\Level2Enemy1Walking");
+            dayEnemey1WalkingAnimation.Initialize(dayEnemey1WalkingTexture, Vector2.Zero, 62, 104, 4, 100, Color.White, 1f, true);
+
+            dayEnemey1AttackTexture = content.Load<Texture2D>("Level2Enemy1\\Level2Enemy1Attacking");
+            dayEnemy1AttackAnimation.Initialize(dayEnemey1AttackTexture, Vector2.Zero, 142, 97, 3, 100, Color.White, 1f, true);
+
+            dayEnemey1DeathTexture = content.Load<Texture2D>("Level2Enemy1\\Level2Enemy1Death");
+            dayEnemey1DeathAnimation.Initialize(dayEnemey1DeathTexture, Vector2.Zero, 98, 83, 4, 450, Color.White, 1f, true);
+
+            enemy1 = new Enemy1();
+            enemy1.Initialize(dayEnemey1WalkingTexture, position, dayEnemy1AttackAnimation, dayEnemey1WalkingAnimation, dayEnemey1DeathAnimation, this);
+            enemey1List.Add(enemy1);
+
+         
+        }
+
+        protected override void SecondEnemy()
+        {
+
+            Animation dayEnemey2WalkingAnimation = new Animation();
+            Texture2D dayEnemey2WalkingTexture;
+
+            Animation dayEnemy2AttackAnimation = new Animation();
+            Texture2D dayEnemey2AttackTexture;
+
+            Animation dayEnemey2DeathAnimation = new Animation();
+            Texture2D dayEnemey2DeathTexture;
+
+            dayEnemey2WalkingTexture = content.Load<Texture2D>("Level2Enemy2\\Level2Enemy2Walking");
+            dayEnemey2WalkingAnimation.Initialize(dayEnemey2WalkingTexture, Vector2.Zero, 60, 69, 4, 100, Color.White, 1f, true);
+
+            dayEnemey2AttackTexture = content.Load<Texture2D>("Level2Enemy2\\Level2Enemy2Attacking");
+            dayEnemy2AttackAnimation.Initialize(dayEnemey2AttackTexture, Vector2.Zero, 83, 72, 5, 100, Color.White, 1f, true);
+
+            dayEnemey2DeathTexture = content.Load<Texture2D>("Level2Enemy2\\Level2Enemy2Death");
+            dayEnemey2DeathAnimation.Initialize(dayEnemey2DeathTexture, Vector2.Zero, 85, 86, 6, 400, Color.White, 1f, true);
+
+            Vector2 startPosition = new Vector2();
+            startPosition.X = -50;
+            startPosition.Y = 440;
+
+            enemy2 = new Enemy2();
+            enemy2.Initialize(dayEnemey2WalkingTexture, startPosition, dayEnemy2AttackAnimation, dayEnemey2WalkingAnimation, dayEnemey2DeathAnimation, this);
+            enemey2List.Add(enemy2);
+        }
+
+        #endregion
     }
 }

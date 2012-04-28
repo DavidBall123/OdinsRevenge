@@ -47,3 +47,9 @@ C:\Users\David\Documents\school\Game Program & design\OdinsRevenge\OdinsRevenge\
 C:\Users\David\Documents\school\Game Program & design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\statsFont.xnb
 C:\Users\David\Documents\school\Game Program & design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Backgrounds\Snow.xnb
 C:\Users\David\Documents\school\Game Program & design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\SoundEffects\PlayerAttack.xnb
+C:\Users\David\Documents\school\Game Program & design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Level2Enemy1\Level2Enemy1Walking.xnb
+C:\Users\David\Documents\school\Game Program & design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Level2Enemy1\Level2Enemy1Attacking.xnb
+C:\Users\David\Documents\school\Game Program & design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Level2Enemy1\Level2Enemy1Death.xnb
+C:\Users\David\Documents\school\Game Program & design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Level2Enemy2\Level2Enemy2Walking.xnb
+C:\Users\David\Documents\school\Game Program & design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Level2Enemy2\Level2Enemy2Attacking.xnb
+C:\Users\David\Documents\school\Game Program & design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Level2Enemy2\Level2Enemy2Death.xnb

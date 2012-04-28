@@ -388,6 +388,60 @@
       <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\SoundEffects\PlayerAttack.xnb</Output>
       <Time>2012-04-29T06:50:28.115+10:00</Time>
     </Item>
+    <Item>
+      <Source>Level2Enemy1\Level2Enemy1Walking.png</Source>
+      <Name>Level2Enemy1\Level2Enemy1Walking</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Level2Enemy1\Level2Enemy1Walking.xnb</Output>
+      <Time>2012-04-29T08:05:06.8544+10:00</Time>
+    </Item>
+    <Item>
+      <Source>Level2Enemy1\Level2Enemy1Attacking.png</Source>
+      <Name>Level2Enemy1\Level2Enemy1Attacking</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Level2Enemy1\Level2Enemy1Attacking.xnb</Output>
+      <Time>2012-04-29T08:40:14.9024+10:00</Time>
+    </Item>
+    <Item>
+      <Source>Level2Enemy1\Level2Enemy1Death.png</Source>
+      <Name>Level2Enemy1\Level2Enemy1Death</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Level2Enemy1\Level2Enemy1Death.xnb</Output>
+      <Time>2012-04-29T08:52:48.5804+10:00</Time>
+    </Item>
+    <Item>
+      <Source>Level2Enemy2\Level2Enemy2Walking.png</Source>
+      <Name>Level2Enemy2\Level2Enemy2Walking</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Level2Enemy2\Level2Enemy2Walking.xnb</Output>
+      <Time>2012-04-29T08:59:47.3224+10:00</Time>
+    </Item>
+    <Item>
+      <Source>Level2Enemy2\Level2Enemy2Attacking.png</Source>
+      <Name>Level2Enemy2\Level2Enemy2Attacking</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Level2Enemy2\Level2Enemy2Attacking.xnb</Output>
+      <Time>2012-04-29T09:17:08.4814+10:00</Time>
+    </Item>
+    <Item>
+      <Source>Level2Enemy2\Level2Enemy2Death.png</Source>
+      <Name>Level2Enemy2\Level2Enemy2Death</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Level2Enemy2\Level2Enemy2Death.xnb</Output>
+      <Time>2012-04-29T09:23:53.6594+10:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{3C129DEF-FA62-4AD3-ABF9-5C7539557768}</ContentProjectGUID>

@@ -64,7 +64,7 @@ namespace OdinsRevenge
 
         #region background & graphic variables
 
-        private ContentManager content;
+        protected  ContentManager content;
 
      
         protected SpriteFont gameFont;
@@ -301,7 +301,7 @@ namespace OdinsRevenge
 
         }
 
-#endregion
+    #endregion
 
         #region background control methods
 
@@ -505,27 +505,7 @@ namespace OdinsRevenge
             enemy1Spawner++;
             if (enemy1Spawner == next1Spawn)
             {
-                Animation dayEnemey1WalkingAnimation = new Animation();
-                Texture2D dayEnemey1WalkingTexture;
-
-                Animation dayEnemy1AttackAnimation = new Animation();
-                Texture2D dayEnemey1AttackTexture;
-
-                Animation dayEnemey1DeathAnimation = new Animation();
-                Texture2D dayEnemey1DeathTexture;
-
-                dayEnemey1WalkingTexture = content.Load<Texture2D>("DayEnemy1\\DayEnemy1Walking");
-                dayEnemey1WalkingAnimation.Initialize(dayEnemey1WalkingTexture, Vector2.Zero, 49, 71, 4, 100, Color.White, 1f, true);
-
-                dayEnemey1AttackTexture = content.Load<Texture2D>("DayEnemy1\\DayEnemy1Attack");
-                dayEnemy1AttackAnimation.Initialize(dayEnemey1AttackTexture, Vector2.Zero, 83, 90, 6, 100, Color.White, 1f, true);
-
-                dayEnemey1DeathTexture = content.Load<Texture2D>("DayEnemy1\\DayEnemy1Death");
-                dayEnemey1DeathAnimation.Initialize(dayEnemey1DeathTexture, Vector2.Zero, 86, 90, 3, 400, Color.White, 1f, true);
-
-                enemy1 = new Enemy1();
-                enemy1.Initialize(dayEnemey1WalkingTexture, position, dayEnemy1AttackAnimation, dayEnemey1WalkingAnimation, dayEnemey1DeathAnimation, this);
-                enemey1List.Add(enemy1);
+                FirstEnemy(); 
                 enemy1Spawner = 0;
                 next1Spawn = enemy1Timer.Next(200, 500);
             }
@@ -550,36 +530,14 @@ namespace OdinsRevenge
             }
         }
 
+        protected abstract void FirstEnemy(); 
+
         protected void UpdateEnemy2(GameTime gameTime)
         {
             enemy2Spawner++;
             if (enemy2Spawner == next2Spawn)
             {
-                Animation dayEnemey2WalkingAnimation = new Animation();
-                Texture2D dayEnemey2WalkingTexture;
-
-                Animation dayEnemy2AttackAnimation = new Animation();
-                Texture2D dayEnemey2AttackTexture;
-
-                Animation dayEnemey2DeathAnimation = new Animation();
-                Texture2D dayEnemey2DeathTexture;
-
-                dayEnemey2WalkingTexture = content.Load<Texture2D>("Enemy2\\Walking");
-                dayEnemey2WalkingAnimation.Initialize(dayEnemey2WalkingTexture, Vector2.Zero, 52, 79, 4, 100, Color.White, 1f, true);
-
-                dayEnemey2AttackTexture = content.Load<Texture2D>("Enemy2\\Attacking");
-                dayEnemy2AttackAnimation.Initialize(dayEnemey2AttackTexture, Vector2.Zero, 71, 81, 6, 100, Color.White, 1f, true);
-
-                dayEnemey2DeathTexture = content.Load<Texture2D>("Enemy2\\Dying");
-                dayEnemey2DeathAnimation.Initialize(dayEnemey2DeathTexture, Vector2.Zero, 104, 84, 6, 200, Color.White, 1f, true);
-
-                Vector2 startPosition = new Vector2();
-                startPosition.X = -50;
-                startPosition.Y = 440;
-
-                enemy2 = new Enemy2();
-                enemy2.Initialize(dayEnemey2WalkingTexture, startPosition, dayEnemy2AttackAnimation, dayEnemey2WalkingAnimation, dayEnemey2DeathAnimation, this);
-                enemey2List.Add(enemy2);
+                SecondEnemy(); 
                 enemy2Spawner = 0;
                 next2Spawn = enemy2Timer.Next(200, 500);
             }
@@ -603,6 +561,8 @@ namespace OdinsRevenge
                 }
             }
         }
+
+        protected abstract void SecondEnemy(); 
 
     }
 #endregion
