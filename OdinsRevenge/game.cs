@@ -53,6 +53,7 @@ namespace OdinsRevenge
             Components.Add(screenManager);
 
             // Activate the first screens.
+            screenManager.AddScreen(new SplashScreen(), null); 
             screenManager.AddScreen(new BackgroundScreen(), null);
             screenManager.AddScreen(new MainMenuScreen(), null);
         }

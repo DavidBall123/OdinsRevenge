@@ -26,6 +26,7 @@ namespace OdinsRevenge
         List<GameScreen> screensToUpdate = new List<GameScreen>();
 
         InputState input = new InputState();
+        private int splashCounter = 150; 
 
         SpriteBatch spriteBatch;
         SpriteFont font;
@@ -209,12 +210,22 @@ namespace OdinsRevenge
         /// </summary>
         public override void Draw(GameTime gameTime)
         {
-            foreach (GameScreen screen in screens)
-            { 
-                if (screen.ScreenState == ScreenState.Hidden)
-                    continue;
+            if (splashCounter > 0)
+            {
+                splashCounter--;
+                screens[0].Draw(gameTime);
+            }
+         
 
-                screen.Draw(gameTime);
+            if (splashCounter <= 0)
+            {
+                foreach (GameScreen screen in screens)
+                {
+                    if (screen.ScreenState == ScreenState.Hidden)
+                        continue;
+
+                    screen.Draw(gameTime);
+                }
             }
         }
 

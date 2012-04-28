@@ -24,7 +24,7 @@ namespace OdinsRevenge
     /// It draws a background image that remains fixed in place regardless
     /// of whatever transitions the screens on top of it may be doing.
     /// </summary>
-    class BackgroundScreen : GameScreen
+    class SplashScreen : GameScreen
     {
         #region Fields
 
@@ -39,7 +39,7 @@ namespace OdinsRevenge
         /// <summary>
         /// Constructor.
         /// </summary>
-        public BackgroundScreen()
+        public SplashScreen()
         {
             TransitionOnTime = TimeSpan.FromSeconds(0.5);
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
@@ -103,6 +103,8 @@ namespace OdinsRevenge
 
             spriteBatch.Draw(backgroundTexture, fullscreen,
                              new Color(TransitionAlpha, TransitionAlpha, TransitionAlpha));
+            spriteBatch.DrawString(ScreenManager.Font, "Odins Revenge", new Vector2(250, 100), Color.Red);
+            spriteBatch.DrawString(ScreenManager.Font, "By David Ball", new Vector2(250, 150), Color.Red); 
 
             spriteBatch.End();
         }
