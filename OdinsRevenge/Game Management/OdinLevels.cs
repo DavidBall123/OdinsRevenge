@@ -366,8 +366,7 @@ namespace OdinsRevenge
 
             if (gameOverCounter == 100)
             {
-                LoadingScreen.Load(ScreenManager, false, null, new BackgroundScreen(),
-                                                          new MainMenuScreen());
+                ScreenManager.AddScreen(new EnterNameScreen(score), ControllingPlayer);
             }
 
             if (input.IsPauseGame(ControllingPlayer))

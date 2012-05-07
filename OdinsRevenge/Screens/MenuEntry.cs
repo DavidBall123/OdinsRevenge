@@ -135,7 +135,7 @@ namespace OdinsRevenge
         /// <summary>
         /// Draws the menu entry. This can be overridden to customize the appearance.
         /// </summary>
-        public virtual void Draw(MenuScreen screen, bool isSelected, GameTime gameTime)
+        public virtual void Draw(MenuScreen screen, bool isSelected, GameTime gameTime, bool HighScore)
         {
             // there is no such thing as a selected item on Windows Phone, so we always
             // force isSelected to be false
@@ -163,8 +163,16 @@ namespace OdinsRevenge
 
             Vector2 origin = new Vector2(0, font.LineSpacing / 2);
 
-            spriteBatch.DrawString(font, text, position, color, 0,
-                                   origin, scale, SpriteEffects.None, 0);
+            if (HighScore == false)
+            {
+                spriteBatch.DrawString(font, text, position, color, 0,
+                                       origin, scale, SpriteEffects.None, 0);
+            }
+            else
+            {
+                spriteBatch.DrawString(font, text, new Vector2(400,500), color, 0,
+                                       origin, scale, SpriteEffects.None, 0);
+            }
         }
 
 

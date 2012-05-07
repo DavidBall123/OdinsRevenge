@@ -29,7 +29,7 @@ namespace OdinsRevenge
         public int AgeInTicks;
         public int maxAgeInTicks;
 
-        float lerpVal; // for working storage
+//        float lerpVal; // for working storage
         public float displayAngle;
         public Vector2 oldPos; //position
         public Rectangle destRectangle;

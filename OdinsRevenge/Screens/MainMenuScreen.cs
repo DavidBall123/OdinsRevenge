@@ -21,14 +21,17 @@ namespace OdinsRevenge
         {
             // Create our menu entries.
             MenuEntry playGameMenuEntry = new MenuEntry("Play Game");
+            MenuEntry highScoreMenuEntry = new MenuEntry("High Score Table"); 
             MenuEntry exitMenuEntry = new MenuEntry("Exit");
 
             // Hook up menu event handlers.
             playGameMenuEntry.Selected += PlayGameMenuEntrySelected;
             exitMenuEntry.Selected += OnCancel;
+            highScoreMenuEntry.Selected += HighScoreMenuEntrySelected; 
 
             // Add entries to the menu.
             MenuEntries.Add(playGameMenuEntry);
+            MenuEntries.Add(highScoreMenuEntry);
             MenuEntries.Add(exitMenuEntry);
         }
 
@@ -44,9 +47,17 @@ namespace OdinsRevenge
         void PlayGameMenuEntrySelected(object sender, PlayerIndexEventArgs e)
         {
             LoadingScreen.Load(ScreenManager, true, e.PlayerIndex,
-                               new Level2(0));
+                               new Level1());
         }
 
+
+        /// <summary>
+        /// Event handler for when the Options menu entry is selected.
+        /// </summary>
+        void HighScoreMenuEntrySelected(object sender, PlayerIndexEventArgs e)
+        {
+            ScreenManager.AddScreen(new HighScoreScreen(), e.PlayerIndex);
+        }
 
         /// <summary>
         /// Event handler for when the Options menu entry is selected.
@@ -55,6 +66,7 @@ namespace OdinsRevenge
         {
             ScreenManager.AddScreen(new OptionsMenuScreen(), e.PlayerIndex);
         }
+
 
 
         /// <summary>

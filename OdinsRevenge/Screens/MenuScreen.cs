@@ -25,9 +25,9 @@ namespace OdinsRevenge
     {
         #region Fields
 
-        List<MenuEntry> menuEntries = new List<MenuEntry>();
-        int selectedEntry = 0;
-        string menuTitle;
+        protected List<MenuEntry> menuEntries = new List<MenuEntry>();
+        protected int selectedEntry = 0;
+        protected string menuTitle;
 
         #endregion
 
@@ -215,7 +215,7 @@ namespace OdinsRevenge
 
                 bool isSelected = IsActive && (i == selectedEntry);
 
-                menuEntry.Draw(this, isSelected, gameTime);
+                menuEntry.Draw(this, isSelected, gameTime, false);
             }
 
             // Make the menu slide into place during transitions, using a

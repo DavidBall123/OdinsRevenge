@@ -9,6 +9,7 @@
 
 #region Using Statements
 using System;
+using System.Collections.Generic; 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -24,33 +25,37 @@ namespace OdinsRevenge
     /// It draws a background image that remains fixed in place regardless
     /// of whatever transitions the screens on top of it may be doing.
     /// </summary>
-    class HighScoreScreen : GameScreen
+    class HighScoreScreen : MenuScreen
     {
         #region Fields
 
-        ContentManager content;
-        Texture2D backgroundTexture;
-        private int closingCounter = 150;
+        private ContentManager content;
+        private Texture2D backgroundTexture;
         private const int MAX = 1000;
-        
-        private string[] scores = new string[MAX];
+
+        private Dictionary<String, int> scores = new Dictionary<String, int>();
         ScoreManagement scoreManagement = new ScoreManagement();
 
         #endregion
 
-        
         #region Initialization
         
-
 
         /// <summary>
         /// Constructor.
         /// </summary>
-        public HighScoreScreen()
+        public HighScoreScreen() : base("High Score Table")
         {
             TransitionOnTime = TimeSpan.FromSeconds(0.5);
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
-            scores = scoreManagement.ReadScores(); 
+            scores = scoreManagement.ReadScores();
+
+            
+            MenuEntry back = new MenuEntry("Back");
+            back.Selected += OnCancel;
+            MenuEntries.Add(back);
+            
+            
         }
 
 
@@ -85,42 +90,80 @@ namespace OdinsRevenge
 
 
         /// <summary>
-        /// Updates the background screen. Unlike most screens, this should not
-        /// transition off even if it has been covered by another screen: it is
-        /// supposed to be covered, after all! This overload forces the
-        /// coveredByOtherScreen parameter to false in order to stop the base
-        /// Update method wanting to transition off.
+        /// Draws the menu.
         /// </summary>
-        public override void Update(GameTime gameTime, bool otherScreenHasFocus,
-                                                       bool coveredByOtherScreen)
+        public override void Draw(GameTime gameTime)
         {
-            base.Update(gameTime, otherScreenHasFocus, false);
-            closingCounter--;
-            if (closingCounter <= 0)
+            // make sure our entries are in the right place before we draw them
+            UpdateMenuEntryLocations();
+
+            GraphicsDevice graphics = ScreenManager.GraphicsDevice;
+            SpriteBatch spriteBatch = ScreenManager.SpriteBatch;
+            SpriteFont font = ScreenManager.Font;
+
+            spriteBatch.Begin();
+            DrawScores(spriteBatch);
+            // Draw each menu entry in turn.
+            for (int i = 0; i < menuEntries.Count; i++)
             {
-                ScreenManager.Game.Exit();
-                
+                MenuEntry menuEntry = menuEntries[i];
+
+                bool isSelected = IsActive && (i == selectedEntry);
+
+                menuEntry.Draw(this, isSelected, gameTime, true);
             }
+
+            // Make the menu slide into place during transitions, using a
+            // power curve to make things look more interesting (this makes
+            // the movement slow down as it nears the end).
+            float transitionOffset = (float)Math.Pow(TransitionPosition, 2);
+
+            // Draw the menu title centered on the screen
+            Vector2 titlePosition = new Vector2(graphics.Viewport.Width / 2, 80);
+            Vector2 titleOrigin = font.MeasureString(menuTitle) / 2;
+
+            float titleScale = 1.25f;
+
+            titlePosition.Y -= transitionOffset * 100;
+
+            spriteBatch.DrawString(font, menuTitle, titlePosition, Color.OrangeRed, 0,
+                                   titleOrigin, titleScale, SpriteEffects.None, 0);
+
+            spriteBatch.End();
         }
 
 
         /// <summary>
         /// Draws the background screen.
         /// </summary>
-        public override void Draw(GameTime gameTime)
+        public void DrawScores(SpriteBatch spriteBatch)
         {
-            SpriteBatch spriteBatch = ScreenManager.SpriteBatch;
+           
             Viewport viewport = ScreenManager.GraphicsDevice.Viewport;
             Rectangle fullscreen = new Rectangle(0, 0, viewport.Width, viewport.Height);
 
-            spriteBatch.Begin();
-
             spriteBatch.Draw(backgroundTexture, fullscreen,
                              new Color(TransitionAlpha, TransitionAlpha, TransitionAlpha));
-            spriteBatch.DrawString(ScreenManager.Font, "Thank you for playing Odins Revenge", new Vector2(10, 100), Color.Red);
-            spriteBatch.DrawString(ScreenManager.Font, "By David Ball", new Vector2(250, 150), Color.Red); 
+            int x = 250;
+            int xTwo = 500;
+            int y = 150;
+            spriteBatch.DrawString(ScreenManager.Font, "Name        Score", new Vector2(250, 100), Color.Red);
+            int count = 0;
+            foreach (KeyValuePair<string, int> pair in scores)
+            {
 
-            spriteBatch.End();
+                string key = pair.Key;
+                key = key.Remove(key.Length - 1, 1);
+                if (count < 5)
+                {
+                    spriteBatch.DrawString(ScreenManager.Font, key, new Vector2(x, y), Color.Red);
+                    spriteBatch.DrawString(ScreenManager.Font, pair.Value.ToString(), new Vector2(xTwo, y), Color.Red);
+                }
+                count++; 
+                y = y + 60;
+            }
+
+            
         }
 
        
