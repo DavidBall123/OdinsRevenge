@@ -50,6 +50,13 @@ namespace OdinsRevenge
             tempDic = scoreDic.OrderByDescending(x => x.Value).ToDictionary(pair => pair.Key, pair => pair.Value);
             return (Dictionary<String, int>)tempDic;
         }
+
+        public void WriteScore(string score)
+        {
+            StreamWriter swriter = File.AppendText("scores.txt");
+            swriter.WriteLine("\n" + score);
+            swriter.Close();
+        }
     }
 }
 
