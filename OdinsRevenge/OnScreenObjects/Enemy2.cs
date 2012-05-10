@@ -40,6 +40,7 @@ namespace OdinsRevenge
                 if (deathCounter <= 60)
                 {
                     deathAnimation.Draw(spriteBatch);
+                    DrawDeath(spriteBatch);
                 }
                 else
                 {

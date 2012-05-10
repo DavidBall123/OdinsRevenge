@@ -6,3 +6,5 @@ Sarah 14
 David 2
 
 Dub 2
+
+David 0

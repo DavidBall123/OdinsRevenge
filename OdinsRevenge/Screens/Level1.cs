@@ -170,7 +170,7 @@ namespace OdinsRevenge
             ground.Draw(spriteBatch);
             ocean1.Draw(spriteBatch);
             DrawBackground(spriteBatch);
-            sun.Draw(spriteBatch);
+            //sun.Draw(spriteBatch);
             if (night == true)
             {
                 stars.Draw(spriteBatch);

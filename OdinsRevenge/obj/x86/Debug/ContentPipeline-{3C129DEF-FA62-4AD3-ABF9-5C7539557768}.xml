@@ -386,7 +386,7 @@
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\SoundEffects\PlayerAttack.xnb</Output>
-      <Time>2012-04-29T06:50:28.115+10:00</Time>
+      <Time>2012-05-09T21:11:26.53+10:00</Time>
     </Item>
     <Item>
       <Source>Level2Enemy1\Level2Enemy1Walking.png</Source>
@@ -441,6 +441,51 @@
       <Options>None</Options>
       <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\Level2Enemy2\Level2Enemy2Death.xnb</Output>
       <Time>2012-04-29T09:46:49.6784+10:00</Time>
+    </Item>
+    <Item>
+      <Source>SoundEffects\heroWalking.wav</Source>
+      <Name>SoundEffects\heroWalking</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\SoundEffects\heroWalking.xnb</Output>
+      <Time>2012-05-10T18:44:37.673+10:00</Time>
+    </Item>
+    <Item>
+      <Source>SoundEffects\attackConnectSound.wav</Source>
+      <Name>SoundEffects\attackConnectSound</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\SoundEffects\attackConnectSound.xnb</Output>
+      <Time>2012-05-10T18:31:21.673+10:00</Time>
+    </Item>
+    <Item>
+      <Source>blood_splat.png</Source>
+      <Name>blood_splat</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\blood_splat.xnb</Output>
+      <Time>2012-05-10T18:53:56.39+10:00</Time>
+    </Item>
+    <Item>
+      <Source>SoundEffects\lightning.wav</Source>
+      <Name>SoundEffects\lightning</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\SoundEffects\lightning.xnb</Output>
+      <Time>2012-05-10T19:06:06.217+10:00</Time>
+    </Item>
+    <Item>
+      <Source>SoundEffects\heroDying.wav</Source>
+      <Name>SoundEffects\heroDying</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\David\Documents\school\Game Program &amp; design\OdinsRevenge\OdinsRevenge\OdinsRevenge\bin\x86\Debug\Content\SoundEffects\heroDying.xnb</Output>
+      <Time>2012-05-10T19:10:17.799+10:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

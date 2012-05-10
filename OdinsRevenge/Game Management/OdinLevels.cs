@@ -41,6 +41,9 @@ namespace OdinsRevenge
 
         protected Vector2 playerPostion;
 
+        protected SoundEffect attackSuccsefulSound;
+        protected int attackSuccsefulSoundCounter = 0; 
+
         
         #endregion
 
@@ -224,6 +227,8 @@ namespace OdinsRevenge
             player.Action = PlayerActions.Standing;
 
             LoadClouds();
+
+            attackSuccsefulSound = content.Load<SoundEffect>("SoundEffects\\attackConnectSound"); 
 
             // once the load has finished, we use ResetElapsedTime to tell the game's
             // timing mechanism that we have just finished a very long frame, and that
@@ -419,7 +424,7 @@ namespace OdinsRevenge
 
 #endregion
 
-        #region comman game logic
+        #region common game logic
 
         public void EndGame(SpriteBatch spriteBatch)
         {
@@ -443,6 +448,10 @@ namespace OdinsRevenge
                     if (player.Attacking == true)
                     {
                         enemey1List[i].Health = 0;
+                        if (!enemey1List[i].Death)
+                        {
+                            SuccsefulAttackSound(enemey1List[i]);
+                        }
                         
                     }
                     else if (enemey1List[i].Dying == false && enemey1List[i].Attacking == true || enemey1List[i].Death == false && enemey1List[i].Attacking == true)
@@ -462,7 +471,12 @@ namespace OdinsRevenge
                 {
                     if (player.Attacking == true)
                     {
+                        
                         enemey2List[i].Health = 0;
+                        if (!enemey1List[i].Death)
+                        {
+                            SuccsefulAttackSound(enemey2List[i]);
+                        }
                     }
                     else if (enemey2List[i].Dying == false && enemey2List[i].Attacking == true || enemey2List[i].Death == false && enemey2List[i].Attacking == true)
                     {
@@ -475,6 +489,17 @@ namespace OdinsRevenge
                 }
             }
 
+        }
+
+        private void SuccsefulAttackSound(Enemies enemey)
+        {
+            
+            if (enemey.attackSoundCounterSuccess <= 0)
+            {
+                enemey.attackSoundCounterSuccess = 50; 
+                attackSuccsefulSound.Play();
+                
+            }
         }
 
         /// <summary>

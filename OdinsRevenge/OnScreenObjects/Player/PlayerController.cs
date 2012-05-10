@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 
 
 namespace OdinsRevenge
@@ -17,7 +18,16 @@ namespace OdinsRevenge
 
         PlayerAnimationController playerAnimationController;
 
-        SoundEffect attack; 
+        SoundEffect playerAttackingSound;
+        SoundEffect heroWalkingSound;
+        SoundEffect lightningSound;
+        SoundEffect heroDying; 
+
+        int walkingSoundCounter = 0; 
+        
+        
+
+
         private Direction direction;
         private PlayerActions action;
         private bool jumpInMotion;
@@ -118,7 +128,13 @@ namespace OdinsRevenge
             playerAnimationController = new PlayerAnimationController(); 
             levelController = LevelController; 
             spells = spellsDict; 
-            attack = LevelController.Content.Load<SoundEffect>("Soundeffects\\PlayerAttack"); 
+
+            //sounds
+            
+            playerAttackingSound = LevelController.Content.Load<SoundEffect>("Soundeffects\\PlayerAttack");
+            heroWalkingSound = levelController.Content.Load<SoundEffect>("Soundeffects\\heroWalking");
+            lightningSound = levelController.Content.Load<SoundEffect>("Soundeffects\\lightning");
+            heroDying = levelController.Content.Load<SoundEffect>("Soundeffects\\heroDying"); 
 
             // Set the starting position of the player around the middle of the screen and to the back
             PlayerPosition = position;
@@ -145,6 +161,10 @@ namespace OdinsRevenge
 
             if (playerResources.Health <= 0)
             {
+                if (dying == false)
+                {
+                    heroDying.Play(); 
+                }
                 dying = true;
                 dyingCounter++;
                 if (dyingCounter == 60)
@@ -279,7 +299,7 @@ namespace OdinsRevenge
                 case PlayerActions.Striking:
                     if (playerResources.Energy >= 100)
                     {
-                        attack.Play(); 
+                        playerAttackingSound.Play(); 
                         attacking = true;
                         playerAnimationController.DrawStriking(spriteBatch, direction);
                         playerResources.Energy = 0;
@@ -293,6 +313,7 @@ namespace OdinsRevenge
                     if (playerResources.Mana > 0)
                     {
                         casting = true;
+                        lightningSound.Play(); 
                         playerAnimationController.DrawSpellCasting(spriteBatch, direction, spells, levelController.Enemey1List, levelController.Enemey2List); 
                         playerResources.ReduceMana(); 
                         
@@ -413,6 +434,7 @@ namespace OdinsRevenge
         {
             if (levelController.PreviousKeyboardState.IsKeyDown(Keys.Right))
             {
+                PlayWalkingSound();
                 levelController.Ground.GroundOffset = levelController.Ground.GroundOffset + 1;
                 levelController.Stars.GroundOffset = levelController.Stars.GroundOffset + 1;
 
@@ -420,15 +442,19 @@ namespace OdinsRevenge
                 {
                     levelController.Snow.GroundOffset = levelController.Snow.GroundOffset + 1;
                 }
-                 
-                
+
+
                 if (jumpInMotion == true && jump != Jumping.Falling)
                 {
                     PlayerJump();
                 }
             }
             
+            
+            
         }
+
+       
         /// <summary>
         /// moves the player to the left of the screen 
         /// </summary>
@@ -438,6 +464,7 @@ namespace OdinsRevenge
 
             if (levelController.PreviousKeyboardState.IsKeyDown(Keys.Left))
             {
+                PlayWalkingSound();
                 levelController.Ground.GroundOffset = levelController.Ground.GroundOffset - 1;
                 levelController.Stars.GroundOffset = levelController.Stars.GroundOffset - 1;
 
@@ -451,7 +478,19 @@ namespace OdinsRevenge
                     PlayerJump();
                 }
             }
+            
 
+            
+        }
+
+        private void PlayWalkingSound()
+        {
+            walkingSoundCounter--; 
+            if (walkingSoundCounter <= 0)
+            {
+                walkingSoundCounter = 15;
+                heroWalkingSound.Play();
+            }
             
         }
 

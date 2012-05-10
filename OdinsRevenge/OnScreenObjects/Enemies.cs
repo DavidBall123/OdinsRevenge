@@ -8,7 +8,9 @@ namespace OdinsRevenge
     {
         protected Animation attackAnimation = new Animation();
         protected Animation walkingAnimation = new Animation();
-        protected Animation deathAnimation = new Animation(); 
+        protected Animation deathAnimation = new Animation();
+
+        protected Texture2D bloodSplat; 
 
         protected Rectangle enemyHitBox;
         protected Texture2D enemyHitBoxTexture;
@@ -21,6 +23,8 @@ namespace OdinsRevenge
         private bool death;
         private bool dying;
         private bool attacking;
+
+        public int attackSoundCounterSuccess = 0; 
 
         public bool Attacking
         {
@@ -62,7 +66,9 @@ namespace OdinsRevenge
             texture = Texture;
             attackAnimation = AttackAnimation;
             walkingAnimation = WalkingAnimation;
-            deathAnimation = DeathAnimation; 
+            deathAnimation = DeathAnimation;
+
+            bloodSplat = LevelController.Content.Load<Texture2D>("blood_splat"); 
 
             // load the players hitbox
             enemyHitBoxTexture = new Texture2D(levelController.ScreenManager.GraphicsDevice, 1, 1);
@@ -125,11 +131,18 @@ namespace OdinsRevenge
 
         protected void DrawHitBox(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(enemyHitBoxTexture, enemyHitBox, Color.Green);
-            spriteBatch.Draw(borderLine, new Rectangle(enemyHitBox.Left, enemyHitBox.Top, bw, enemyHitBox.Height), Color.Red);
-            spriteBatch.Draw(borderLine, new Rectangle(enemyHitBox.Right, enemyHitBox.Top, bw, enemyHitBox.Height), Color.Red);
-            spriteBatch.Draw(borderLine, new Rectangle(enemyHitBox.Left, enemyHitBox.Top, enemyHitBox.Width, bw), Color.Red);
-            spriteBatch.Draw(borderLine, new Rectangle(enemyHitBox.Left, enemyHitBox.Bottom, enemyHitBox.Width, bw), Color.Red);
+            //spriteBatch.Draw(enemyHitBoxTexture, enemyHitBox, Color.Green);
+            //spriteBatch.Draw(borderLine, new Rectangle(enemyHitBox.Left, enemyHitBox.Top, bw, enemyHitBox.Height), Color.Red);
+            //spriteBatch.Draw(borderLine, new Rectangle(enemyHitBox.Right, enemyHitBox.Top, bw, enemyHitBox.Height), Color.Red);
+            //spriteBatch.Draw(borderLine, new Rectangle(enemyHitBox.Left, enemyHitBox.Top, enemyHitBox.Width, bw), Color.Red);
+            //spriteBatch.Draw(borderLine, new Rectangle(enemyHitBox.Left, enemyHitBox.Bottom, enemyHitBox.Width, bw), Color.Red);
+
+            //spriteBatch.Draw(bloodSplat, new Rectangle(enemyHitBox.Left, enemyHitBox.Top, bw, enemyHitBox.Height), Color.Red); 
+        }
+
+        protected void DrawDeath(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(bloodSplat, new Rectangle(enemyHitBox.Left, enemyHitBox.Top, bw, enemyHitBox.Height), Color.Red); 
         }
      
     }
