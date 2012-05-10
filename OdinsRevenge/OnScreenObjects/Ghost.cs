@@ -36,7 +36,7 @@ namespace OdinsRevenge
 
         public void Update(GameTime gameTime)
         {
-            enemyHitBox = new Rectangle((int)(Position.X - 30), (int)(Position.Y), (int)((Width - 130) * attackingScale), (int)(Height * attackingScale));
+            enemyHitBox = new Rectangle((int)(Position.X), (int)(Position.Y), 50, 50);
 
             switch (waypointCounter)
             {

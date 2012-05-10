@@ -131,13 +131,13 @@ namespace OdinsRevenge
 
         protected void DrawHitBox(SpriteBatch spriteBatch)
         {
-            //spriteBatch.Draw(enemyHitBoxTexture, enemyHitBox, Color.Green);
-            //spriteBatch.Draw(borderLine, new Rectangle(enemyHitBox.Left, enemyHitBox.Top, bw, enemyHitBox.Height), Color.Red);
-            //spriteBatch.Draw(borderLine, new Rectangle(enemyHitBox.Right, enemyHitBox.Top, bw, enemyHitBox.Height), Color.Red);
-            //spriteBatch.Draw(borderLine, new Rectangle(enemyHitBox.Left, enemyHitBox.Top, enemyHitBox.Width, bw), Color.Red);
-            //spriteBatch.Draw(borderLine, new Rectangle(enemyHitBox.Left, enemyHitBox.Bottom, enemyHitBox.Width, bw), Color.Red);
+            spriteBatch.Draw(enemyHitBoxTexture, enemyHitBox, Color.Green);
+            spriteBatch.Draw(borderLine, new Rectangle(enemyHitBox.Left, enemyHitBox.Top, bw, enemyHitBox.Height), Color.Red);
+            spriteBatch.Draw(borderLine, new Rectangle(enemyHitBox.Right, enemyHitBox.Top, bw, enemyHitBox.Height), Color.Red);
+            spriteBatch.Draw(borderLine, new Rectangle(enemyHitBox.Left, enemyHitBox.Top, enemyHitBox.Width, bw), Color.Red);
+            spriteBatch.Draw(borderLine, new Rectangle(enemyHitBox.Left, enemyHitBox.Bottom, enemyHitBox.Width, bw), Color.Red);
 
-            //spriteBatch.Draw(bloodSplat, new Rectangle(enemyHitBox.Left, enemyHitBox.Top, bw, enemyHitBox.Height), Color.Red); 
+            spriteBatch.Draw(bloodSplat, new Rectangle(enemyHitBox.Left, enemyHitBox.Top, bw, enemyHitBox.Height), Color.Red); 
         }
 
         protected void DrawDeath(SpriteBatch spriteBatch)

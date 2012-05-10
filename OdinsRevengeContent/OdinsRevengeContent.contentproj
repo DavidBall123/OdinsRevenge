@@ -345,20 +345,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Level2Enemy2\Level2Enemy2Attacking.png">
-      <Name>Level2Enemy2Attacking</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Level2Enemy2\Level2Enemy2Death.png">
-      <Name>Level2Enemy2Death</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="SoundEffects\PlayerAttack.wav">
       <Name>PlayerAttack</Name>
       <Importer>WavImporter</Importer>
@@ -403,6 +389,20 @@
   <ItemGroup>
     <Compile Include="Ghost.png">
       <Name>Ghost</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Level2Enemy2\Level2Enemy2Death.png">
+      <Name>Level2Enemy2Death</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Level2Enemy2\Level2Enemy2Attacking.png">
+      <Name>Level2Enemy2Attacking</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

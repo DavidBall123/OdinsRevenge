@@ -52,7 +52,7 @@ namespace OdinsRevenge
         protected int playerHit = 0;
         private int gameOverCounter = 0;
 
-        protected int distanceToTravel = 1000;
+        protected int distanceToTravel = 2000;
 
         private int score;
 
@@ -463,6 +463,7 @@ namespace OdinsRevenge
                         {
                             player.PlayerResources.ReduceHealth();
                             playerHit = 80;
+                            distanceToTravel = distanceToTravel + 100;
                         }
                     }
                 }
@@ -487,6 +488,7 @@ namespace OdinsRevenge
                         {
                             player.PlayerResources.ReduceHealth();
                             playerHit = 80;
+                            distanceToTravel = distanceToTravel + 100;
                         }
                     }
                 }

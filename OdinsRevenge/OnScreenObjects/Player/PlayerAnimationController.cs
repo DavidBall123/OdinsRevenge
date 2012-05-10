@@ -143,11 +143,11 @@ namespace OdinsRevenge
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(playerHitBoxTexture, playerHitBox, Color.Green);
-            spriteBatch.Draw(borderLine, new Rectangle(playerHitBox.Left, playerHitBox.Top, bw, playerHitBox.Height), Color.Purple);
-            spriteBatch.Draw(borderLine, new Rectangle(playerHitBox.Right, playerHitBox.Top, bw, playerHitBox.Height), Color.Purple);
-            spriteBatch.Draw(borderLine, new Rectangle(playerHitBox.Left, playerHitBox.Top, playerHitBox.Width, bw), Color.Purple);
-            spriteBatch.Draw(borderLine, new Rectangle(playerHitBox.Left, playerHitBox.Bottom, playerHitBox.Width, bw), Color.Purple);
+            //spriteBatch.Draw(playerHitBoxTexture, playerHitBox, Color.Green);
+            //spriteBatch.Draw(borderLine, new Rectangle(playerHitBox.Left, playerHitBox.Top, bw, playerHitBox.Height), Color.Purple);
+            //spriteBatch.Draw(borderLine, new Rectangle(playerHitBox.Right, playerHitBox.Top, bw, playerHitBox.Height), Color.Purple);
+            //spriteBatch.Draw(borderLine, new Rectangle(playerHitBox.Left, playerHitBox.Top, playerHitBox.Width, bw), Color.Purple);
+            //spriteBatch.Draw(borderLine, new Rectangle(playerHitBox.Left, playerHitBox.Bottom, playerHitBox.Width, bw), Color.Purple);
 
             if (partCounter < 0)
             {

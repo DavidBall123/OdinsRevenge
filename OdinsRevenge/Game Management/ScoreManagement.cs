@@ -53,8 +53,26 @@ namespace OdinsRevenge
 
         public void WriteScore(string score)
         {
-            StreamWriter swriter = File.AppendText("scores.txt");
-            swriter.WriteLine("\n" + score);
+            string[] file = new string[MAX];
+            string line;
+            int count = 0;
+            StreamReader filereader = new StreamReader("scores.txt");
+            line = filereader.ReadLine();
+
+            while (line != null)
+            {
+                file[count] = line;
+                count++;
+                line = filereader.ReadLine();
+            }
+            filereader.Close();
+            file[count] = score; 
+            StreamWriter swriter = new StreamWriter("scores.txt");
+            for (int i = 0; i < count + 1; i++)
+            {
+                swriter.WriteLine(file[i]);
+            }
+            
             swriter.Close();
         }
     }

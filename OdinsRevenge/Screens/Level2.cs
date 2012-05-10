@@ -73,8 +73,6 @@ namespace OdinsRevenge
             position.X = -150;
             position.Y = 350;
 
-        
-
             position.X = 900;
             position.Y = 440;
 
@@ -264,7 +262,7 @@ namespace OdinsRevenge
             dayEnemy2AttackAnimation.Initialize(dayEnemey2AttackTexture, Vector2.Zero, 83, 72, 5, 100, Color.White, 1f, true);
 
             dayEnemey2DeathTexture = content.Load<Texture2D>("Level2Enemy2\\Level2Enemy2Death");
-            dayEnemey2DeathAnimation.Initialize(dayEnemey2DeathTexture, Vector2.Zero, 85, 86, 6, 400, Color.White, 1f, true);
+            dayEnemey2DeathAnimation.Initialize(dayEnemey2DeathTexture, Vector2.Zero, 95, 78, 6, 350, Color.White, 1f, true);
 
             Vector2 startPosition = new Vector2();
             startPosition.X = -50;
