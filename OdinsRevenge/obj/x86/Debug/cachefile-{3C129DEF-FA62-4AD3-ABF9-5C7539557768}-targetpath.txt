@@ -52,3 +52,4 @@ Content\SoundEffects\attackConnectSound.xnb
 Content\blood_splat.xnb
 Content\SoundEffects\lightning.xnb
 Content\SoundEffects\heroDying.xnb
+Content\Ghost.xnb

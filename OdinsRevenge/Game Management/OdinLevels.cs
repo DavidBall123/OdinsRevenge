@@ -124,6 +124,8 @@ namespace OdinsRevenge
 
         protected List<Enemy2> enemey2List = new List<Enemy2>();
 
+        protected Ghost ghost = new Ghost(); 
+
 
         #endregion
 
@@ -217,6 +219,7 @@ namespace OdinsRevenge
             LoadAnimations();
 
             playerPostion = new Vector2(300, 435);
+            ghost.Initialize(content.Load<Texture2D>("Ghost"));
 
             player.Initialize(playerPostion, spells, this);
             player.PlayerAnimationController.Intialize(content.Load<Texture2D>("Hero\\Hero"), walkingAnimation, strikingAnimation, spellCastingAnimation, deathAnimation, smoke);
@@ -487,6 +490,12 @@ namespace OdinsRevenge
                         }
                     }
                 }
+            }
+
+            if (player.PlayerAnimationController.HitBox.Intersects(ghost.HitBox))
+            {
+                player.PlayerResources.ReduceHealth();
+                playerHit = 80;
             }
 
         }

@@ -92,6 +92,7 @@
     <Compile Include="OnScreenObjects\Enemies.cs" />
     <Compile Include="OnScreenObjects\Enemy2.cs" />
     <Compile Include="OnScreenObjects\EnergyBar.cs" />
+    <Compile Include="OnScreenObjects\Ghost.cs" />
     <Compile Include="OnScreenObjects\Player\HealthBar.cs" />
     <Compile Include="OnScreenObjects\Player\ManaBar.cs" />
     <Compile Include="OnScreenObjects\Player\PlayerAnimationController.cs" />

@@ -125,6 +125,7 @@ namespace OdinsRevenge
             {
                 bird.Update(gameTime, day);
                 sun.Update(gameTime);
+                ghost.Update(gameTime);
                 boat.Update(gameTime);
                 Player.Update(gameTime);
                 healthBar.Update(Player.PlayerResources.Health);
@@ -170,6 +171,7 @@ namespace OdinsRevenge
             ground.Draw(spriteBatch);
             ocean1.Draw(spriteBatch);
             DrawBackground(spriteBatch);
+            ghost.Draw(spriteBatch);
             //sun.Draw(spriteBatch);
             if (night == true)
             {

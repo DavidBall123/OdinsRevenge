@@ -49,6 +49,9 @@ namespace OdinsRevenge
             base.Score = score; 
             TransitionOnTime = TimeSpan.FromSeconds(1.5);
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
+            ghost.waypointCounter = 1;
+            ghost.Position.X = 850;
+            ghost.Position.Y = 250;
             
         }
 
@@ -118,6 +121,7 @@ namespace OdinsRevenge
             {
                 bird.Update(gameTime, day);
                 sun.Update(gameTime);
+                ghost.Update(gameTime);
                 
                 Player.Update(gameTime);
                 healthBar.Update(Player.PlayerResources.Health);
@@ -162,7 +166,8 @@ namespace OdinsRevenge
             spriteBatch.Begin();
             ground.Draw(spriteBatch);
             DrawBackground(spriteBatch);
-            sun.Draw(spriteBatch);
+            //sun.Draw(spriteBatch);
+            
             if (night == true)
             {
                 stars.Draw(spriteBatch);
@@ -195,7 +200,7 @@ namespace OdinsRevenge
             {
                 spriteBatch.DrawString(gameFont, "Level 2 Complete" , new Vector2(100, 200), Color.White);
             }
-
+            ghost.Draw(spriteBatch);
             spriteBatch.End();
 
             // If the game is transitioning on or off, fade it out to black.
